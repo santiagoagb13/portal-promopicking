@@ -1,0 +1,21 @@
+# Postgres 16 para desarrollo local. Puerto 5433 en el anfitrión para no chocar con otro Postgres.
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: portal
+      POSTGRES_PASSWORD: portal
+      POSTGRES_DB: portal
+    ports:
+      - '127.0.0.1:5433:5432'
+    volumes:
+      - portal-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U portal -d portal']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  portal-db:

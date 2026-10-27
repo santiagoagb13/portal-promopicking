@@ -14,3 +14,7 @@ coverage/
 .env.*
 !.env.example
 .DS_Store
+.mail/
+test-results/
+playwright-report/
+tests/e2e/.auth/

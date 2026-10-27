@@ -1,0 +1,14 @@
+package-lock.json
+.svelte-kit/
+.vercel/
+build/
+node_modules/
+src/lib/server/db/migrations/
+scripts/data/
+docs/propuestas/
+docs/PLAN-PORTAL-V2.md
+test-results/
+playwright-report/
+tests/e2e/capturas/
+.mail/
+static/

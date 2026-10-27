@@ -1,0 +1,5613 @@
+{
+	"today": "2026-10-22",
+	"users": [
+		{
+			"id": "alsea-fh",
+			"name": "Marta Ruiz",
+			"role": "Marketing Foster's Hollywood · Alsea"
+		},
+		{
+			"id": "alsea-vips",
+			"name": "Carlos Vega",
+			"role": "Marketing VIPS · Alsea"
+		},
+		{
+			"id": "alsea-ginos",
+			"name": "Laura Pons",
+			"role": "Marketing Ginos · Alsea"
+		},
+		{
+			"id": "promopicking",
+			"name": "Jorge Martín",
+			"role": "Operaciones · Promopicking"
+		},
+		{
+			"id": "rte",
+			"name": "Ana Soler",
+			"role": "Gerente · FH Plenilunio"
+		}
+	],
+	"brands": {
+		"FH": {
+			"name": "Foster's Hollywood",
+			"short": "FH",
+			"rtes": 205
+		},
+		"VIPS": {
+			"name": "VIPS / VIPS Smart",
+			"short": "VIPS",
+			"rtes": 170
+		},
+		"GINOS": {
+			"name": "Ginos",
+			"short": "Ginos",
+			"rtes": 114
+		}
+	},
+	"restaurants": [
+		{
+			"id": "FH-0147",
+			"brand": "FH",
+			"name": "FH Plenilunio",
+			"city": "Madrid",
+			"addr": "C.C. Plenilunio, Av. de Aragón 2, 28022 Madrid",
+			"tarifa": "C2",
+			"idioma": "SP",
+			"surtido": "ALL",
+			"fachada": "—",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "FH-0012",
+			"brand": "FH",
+			"name": "FH Gran Vía 48",
+			"city": "Madrid",
+			"addr": "Gran Vía 48, 28013 Madrid",
+			"tarifa": "C3+",
+			"idioma": "SP + EN",
+			"surtido": "ALL",
+			"fachada": "—",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "FH-0231",
+			"brand": "FH",
+			"name": "FH Diagonal Mar",
+			"city": "Barcelona",
+			"addr": "C.C. Diagonal Mar, Av. Diagonal 3, 08019 Barcelona",
+			"tarifa": "C3",
+			"idioma": "CAT",
+			"surtido": "ALL",
+			"fachada": "—",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "FH-0088",
+			"brand": "FH",
+			"name": "FH Nervión Plaza",
+			"city": "Sevilla",
+			"addr": "C.C. Nervión Plaza, 41005 Sevilla",
+			"tarifa": "C2",
+			"idioma": "SP",
+			"surtido": "ALL",
+			"fachada": "—",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "FH-0104",
+			"brand": "FH",
+			"name": "FH Méndez Álvaro",
+			"city": "Madrid",
+			"addr": "Estación Sur, Méndez Álvaro 83, 28045 Madrid",
+			"tarifa": "C2",
+			"idioma": "SP",
+			"surtido": "RED+",
+			"fachada": "—",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "FH-0177",
+			"brand": "FH",
+			"name": "FH Xanadú",
+			"city": "Arroyomolinos",
+			"addr": "C.C. Xanadú, 28939 Arroyomolinos",
+			"tarifa": "C3",
+			"idioma": "SP",
+			"surtido": "ALL",
+			"fachada": "—",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "FH-0199",
+			"brand": "FH",
+			"name": "FH Vigo Gran Vía",
+			"city": "Vigo",
+			"addr": "C.C. Gran Vía, 36204 Vigo",
+			"tarifa": "C2",
+			"idioma": "GALL",
+			"surtido": "ALL",
+			"fachada": "—",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "FH-0045",
+			"brand": "FH",
+			"name": "FH Parque Warner",
+			"city": "San Martín de la Vega",
+			"addr": "Parque Warner Madrid, 28330",
+			"tarifa": "WARNER",
+			"idioma": "SP + EN",
+			"surtido": "WAR",
+			"fachada": "—",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "FH-0203",
+			"brand": "FH",
+			"name": "FH Festival Park",
+			"city": "Marratxí (Mallorca)",
+			"addr": "Festival Park, 07141 Marratxí",
+			"tarifa": "C2",
+			"idioma": "SP",
+			"surtido": "ALL",
+			"fachada": "—",
+			"entrega": "Directo restaurante"
+		},
+		{
+			"id": "FH-0061",
+			"brand": "FH",
+			"name": "FH Aqua",
+			"city": "Valencia",
+			"addr": "C.C. Aqua, Menorca 19, 46023 Valencia",
+			"tarifa": "C3+",
+			"idioma": "SP + EN",
+			"surtido": "ALL",
+			"fachada": "—",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "VI-0023",
+			"brand": "VIPS",
+			"name": "VIPS Goya",
+			"city": "Madrid",
+			"addr": "Goya 5, 28001 Madrid",
+			"tarifa": "VIPS",
+			"idioma": "CAST",
+			"surtido": "Completa",
+			"fachada": "70×100",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "VI-0007",
+			"brand": "VIPS",
+			"name": "VIPS Castellana 90",
+			"city": "Madrid",
+			"addr": "Paseo de la Castellana 90, 28046 Madrid",
+			"tarifa": "VIPS",
+			"idioma": "CAST",
+			"surtido": "Completa",
+			"fachada": "70×100",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "VI-0120",
+			"brand": "VIPS",
+			"name": "VIPS Smart Las Rozas",
+			"city": "Las Rozas",
+			"addr": "C.C. Las Rozas Village, 28232",
+			"tarifa": "VSM",
+			"idioma": "CAST",
+			"surtido": "Smart",
+			"fachada": "70×100 VSM",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "VI-0098",
+			"brand": "VIPS",
+			"name": "VIPS Neptuno",
+			"city": "Madrid",
+			"addr": "Plaza de Neptuno, 28014 Madrid",
+			"tarifa": "VIPS",
+			"idioma": "CAST",
+			"surtido": "Completa",
+			"fachada": "79×111",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "VI-0141",
+			"brand": "VIPS",
+			"name": "VIPS Plenilunio",
+			"city": "Madrid",
+			"addr": "C.C. Plenilunio, 28022 Madrid",
+			"tarifa": "VIPS",
+			"idioma": "CAST",
+			"surtido": "Completa",
+			"fachada": "66×96",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "VI-0056",
+			"brand": "VIPS",
+			"name": "VIPS Diagonal",
+			"city": "Barcelona",
+			"addr": "Av. Diagonal 609, 08028 Barcelona",
+			"tarifa": "VIPS",
+			"idioma": "CAT",
+			"surtido": "Completa",
+			"fachada": "70×100 CAT",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "VI-0133",
+			"brand": "VIPS",
+			"name": "VIPS Smart Islazul",
+			"city": "Madrid",
+			"addr": "C.C. Islazul, 28054 Madrid",
+			"tarifa": "HÍB",
+			"idioma": "CAST",
+			"surtido": "Híbrido",
+			"fachada": "70×100 VSM",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "GI-0231",
+			"brand": "GINOS",
+			"name": "Ginos Alcalá 141",
+			"city": "Madrid",
+			"addr": "Alcalá 141, 28009 Madrid",
+			"tarifa": "M3",
+			"idioma": "CAST",
+			"surtido": "Completa",
+			"fachada": "50×70",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "GI-0045",
+			"brand": "GINOS",
+			"name": "Ginos La Maquinista",
+			"city": "Barcelona",
+			"addr": "C.C. La Maquinista, 08030 Barcelona",
+			"tarifa": "M3",
+			"idioma": "CAT",
+			"surtido": "Completa",
+			"fachada": "54×46",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "GI-0102",
+			"brand": "GINOS",
+			"name": "Ginos Puerto Banús",
+			"city": "Marbella",
+			"addr": "Puerto Banús, 29660 Marbella",
+			"tarifa": "M2",
+			"idioma": "ING turismo",
+			"surtido": "Completa",
+			"fachada": "50×70",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "GI-0066",
+			"brand": "GINOS",
+			"name": "Ginos Nuevo Centro",
+			"city": "Valencia",
+			"addr": "C.C. Nuevo Centro, 46009 Valencia",
+			"tarifa": "M4",
+			"idioma": "CAST",
+			"surtido": "Completa",
+			"fachada": "47×72",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "GI-0019",
+			"brand": "GINOS",
+			"name": "Ginos Nervión",
+			"city": "Sevilla",
+			"addr": "C.C. Nervión Plaza, 41005 Sevilla",
+			"tarifa": "M2",
+			"idioma": "Andalucía turismo",
+			"surtido": "Completa",
+			"fachada": "54×46",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "GI-0088",
+			"brand": "GINOS",
+			"name": "Ginos Puerto Venecia",
+			"city": "Zaragoza",
+			"addr": "C.C. Puerto Venecia, 50021 Zaragoza",
+			"tarifa": "M3",
+			"idioma": "CAST",
+			"surtido": "Completa",
+			"fachada": "50×70",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "GI-0110",
+			"brand": "GINOS",
+			"name": "Ginos Gran Vía 2",
+			"city": "L'Hospitalet",
+			"addr": "C.C. Gran Via 2, 08908 L'Hospitalet",
+			"tarifa": "M4",
+			"idioma": "CAT",
+			"surtido": "Completa",
+			"fachada": "50×70",
+			"entrega": "Plataforma Promopicking"
+		},
+		{
+			"id": "GI-0133",
+			"brand": "GINOS",
+			"name": "Ginos Plenilunio",
+			"city": "Madrid",
+			"addr": "C.C. Plenilunio, 28022 Madrid",
+			"tarifa": "M3",
+			"idioma": "CAST",
+			"surtido": "Completa",
+			"fachada": "59×117",
+			"entrega": "Plataforma Promopicking"
+		}
+	],
+	"campaigns": [
+		{
+			"id": "FH-26-06",
+			"brand": "FH",
+			"name": "Menú 2 platos octubre",
+			"enRte": "2026-10-19",
+			"rtes": 138,
+			"planned": false,
+			"materials": "Octavillas menú + láminas imantadas",
+			"resp": "Marta Ruiz",
+			"note": null,
+			"stage": 6,
+			"progress": 100,
+			"dates": {
+				"brief": "2026-09-09",
+				"af": "2026-09-23",
+				"aprob": "2026-09-30",
+				"prodIni": "2026-10-01",
+				"prodFin": "2026-10-09",
+				"kitting": "2026-10-10",
+				"exped": "2026-10-12",
+				"plataforma": "2026-10-14",
+				"rte": "2026-10-19"
+			},
+			"supports": [
+				{
+					"id": "FH-26-06-0",
+					"name": "Octavillas menú A5 (tarifas 13,95 / 14,95 / 15,95 / 16,95)",
+					"versions": 9,
+					"qty": 8000,
+					"kit": "20 uds/kit",
+					"stage": 6,
+					"resp": "Marta Ruiz · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "FH-26-06-1",
+					"name": "Lámina imantada 59×92",
+					"versions": 2,
+					"qty": 138,
+					"kit": "1 ud/kit",
+					"stage": 6,
+					"resp": "Marta Ruiz · Alsea",
+					"note": null,
+					"apr": null
+				}
+			],
+			"kitLines": [
+				{
+					"name": "Octavillas menú A5",
+					"ver": "{idioma} · 14,95",
+					"uds": 20
+				},
+				{
+					"name": "Lámina imantada 59×92",
+					"ver": "{idioma}",
+					"uds": 1
+				}
+			]
+		},
+		{
+			"id": "FH-26-07",
+			"brand": "FH",
+			"name": "Halloween FH",
+			"enRte": "2026-10-26",
+			"rtes": 205,
+			"planned": false,
+			"materials": "Encartes + láminas imantadas",
+			"resp": "Marta Ruiz",
+			"note": null,
+			"stage": 5,
+			"progress": 83,
+			"dates": {
+				"brief": "2026-09-16",
+				"af": "2026-09-30",
+				"aprob": "2026-10-07",
+				"prodIni": "2026-10-08",
+				"prodFin": "2026-10-16",
+				"kitting": "2026-10-17",
+				"exped": "2026-10-19",
+				"plataforma": "2026-10-21",
+				"rte": "2026-10-26"
+			},
+			"supports": [
+				{
+					"id": "FH-26-07-0",
+					"name": "Encarte Halloween 160×260",
+					"versions": 4,
+					"qty": 6000,
+					"kit": "10 uds/kit",
+					"stage": 5,
+					"resp": "Marta Ruiz · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "FH-26-07-1",
+					"name": "Lámina imantada 59×92",
+					"versions": 2,
+					"qty": 205,
+					"kit": "1 ud/kit",
+					"stage": 5,
+					"resp": "Marta Ruiz · Alsea",
+					"note": null,
+					"apr": null
+				}
+			],
+			"kitLines": [
+				{
+					"name": "Encarte Halloween 160×260",
+					"ver": "{tarifa} {idioma}",
+					"uds": 20
+				},
+				{
+					"name": "Lámina imantada 59×92",
+					"ver": "{idioma}",
+					"uds": 1
+				}
+			]
+		},
+		{
+			"id": "FH-26-03",
+			"brand": "FH",
+			"name": "Lanzamiento Burgers",
+			"enRte": "2026-11-12",
+			"rtes": 205,
+			"planned": false,
+			"materials": "Cartas generales, manteles, láminas imantadas, tarifarios, encarte infantil",
+			"resp": "Marta Ruiz",
+			"note": null,
+			"stage": 0,
+			"progress": 31,
+			"dates": {
+				"brief": "2026-10-03",
+				"af": "2026-10-17",
+				"aprob": "2026-10-24",
+				"prodIni": "2026-10-25",
+				"prodFin": "2026-11-02",
+				"kitting": "2026-11-03",
+				"exped": "2026-11-05",
+				"plataforma": "2026-11-07",
+				"rte": "2026-11-12"
+			},
+			"supports": [
+				{
+					"id": "fh-cs",
+					"name": "Carta surtido FH (tríptico 222×320)",
+					"versions": 17,
+					"qty": 16680,
+					"kit": "10 uds/kit",
+					"stage": 2,
+					"resp": "Marta Ruiz · Alsea",
+					"note": null,
+					"apr": "FH-CS"
+				},
+				{
+					"id": "fh-cp",
+					"name": "Carta postres FH (18×29)",
+					"versions": 20,
+					"qty": 10976,
+					"kit": "10 uds/kit",
+					"stage": 2,
+					"resp": "Marta Ruiz · Alsea",
+					"note": null,
+					"apr": "FH-CP"
+				},
+				{
+					"id": "fh-sg",
+					"name": "Carta sin gluten FH",
+					"versions": 13,
+					"qty": 474,
+					"kit": "1 ud/kit",
+					"stage": 1,
+					"resp": "Estudio de adaptación",
+					"note": "Pendiente del listado de alérgenos actualizado",
+					"apr": null
+				},
+				{
+					"id": "fh-tg",
+					"name": "Tarifario genérico 35×30",
+					"versions": 9,
+					"qty": 420,
+					"kit": "1 ud/kit",
+					"stage": 3,
+					"resp": "Producción digital",
+					"note": null,
+					"apr": "FH-TG"
+				},
+				{
+					"id": "fh-ci",
+					"name": "Cartel imantado 59×92 (CAST / CAT)",
+					"versions": 2,
+					"qty": 400,
+					"kit": "1 ud/kit · en tubo",
+					"stage": 3,
+					"resp": "Producción gran formato",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "fh-tt",
+					"name": "Table tops personalizados por restaurante",
+					"versions": 205,
+					"qty": 17500,
+					"kit": "80 uds/kit",
+					"stage": 1,
+					"resp": "Estudio · datos variables desde el maestro",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "fh-ma",
+					"name": "Manteles 30×40 (4 modelos intercalados)",
+					"versions": 4,
+					"qty": 218200,
+					"kit": "Paq. 1.000 · entrega en Conway",
+					"stage": 3,
+					"resp": "Producción offset",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "fh-ei",
+					"name": "Encarte infantil 160×260",
+					"versions": 2,
+					"qty": 6000,
+					"kit": "10 uds/kit",
+					"stage": 0,
+					"resp": "Alsea · brief de contenidos pendiente",
+					"note": null,
+					"apr": null
+				}
+			],
+			"kitLines": [
+				{
+					"name": "Carta surtido FH",
+					"ver": "{tarifa} {surtido} {idioma}",
+					"uds": 30
+				},
+				{
+					"name": "Carta postres FH",
+					"ver": "{tarifa} {surtido} {idioma}",
+					"uds": 20
+				},
+				{
+					"name": "Tarifario genérico 35×30",
+					"ver": "{tarifa} {idioma}",
+					"uds": 1
+				},
+				{
+					"name": "Cartel imantado 59×92",
+					"ver": "{idioma}",
+					"uds": 1
+				},
+				{
+					"name": "Table tops personalizados",
+					"ver": "{rte}",
+					"uds": 80
+				},
+				{
+					"name": "Encarte infantil",
+					"ver": "{idioma}",
+					"uds": 10
+				}
+			]
+		},
+		{
+			"id": "FH-26-09",
+			"brand": "FH",
+			"name": "Menú Navidad FH",
+			"enRte": "2026-12-01",
+			"rtes": 135,
+			"planned": false,
+			"materials": "Encartes + dípticos",
+			"resp": "Marta Ruiz",
+			"note": null,
+			"stage": 1,
+			"progress": 17,
+			"dates": {
+				"brief": "2026-10-22",
+				"af": "2026-11-05",
+				"aprob": "2026-11-12",
+				"prodIni": "2026-11-13",
+				"prodFin": "2026-11-21",
+				"kitting": "2026-11-22",
+				"exped": "2026-11-24",
+				"plataforma": "2026-11-26",
+				"rte": "2026-12-01"
+			},
+			"supports": [
+				{
+					"id": "FH-26-09-0",
+					"name": "Encarte menú Navidad 160×260",
+					"versions": 2,
+					"qty": 4000,
+					"kit": "10 uds/kit",
+					"stage": 1,
+					"resp": "Marta Ruiz · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "FH-26-09-1",
+					"name": "Díptico 120×120",
+					"versions": 2,
+					"qty": 60000,
+					"kit": "500 uds/kit",
+					"stage": 1,
+					"resp": "Marta Ruiz · Alsea",
+					"note": null,
+					"apr": null
+				}
+			],
+			"kitLines": [
+				{
+					"name": "Encarte menú Navidad",
+					"ver": "{idioma}",
+					"uds": 30
+				},
+				{
+					"name": "Díptico 120×120",
+					"ver": "{idioma}",
+					"uds": 500
+				}
+			]
+		},
+		{
+			"id": "FH-26-10",
+			"brand": "FH",
+			"name": "Campaña celíacos",
+			"enRte": "2027-01-15",
+			"rtes": 205,
+			"planned": false,
+			"materials": "Cartas sin gluten, tarifarios sin gluten",
+			"resp": "Marta Ruiz",
+			"note": null,
+			"stage": 0,
+			"progress": 0,
+			"dates": {
+				"brief": "2026-12-06",
+				"af": "2026-12-20",
+				"aprob": "2026-12-27",
+				"prodIni": "2026-12-28",
+				"prodFin": "2027-01-05",
+				"kitting": "2027-01-06",
+				"exped": "2027-01-08",
+				"plataforma": "2027-01-10",
+				"rte": "2027-01-15"
+			},
+			"supports": [
+				{
+					"id": "FH-26-10-0",
+					"name": "Carta sin gluten (tríptico 120×279)",
+					"versions": 13,
+					"qty": 474,
+					"kit": "1 ud/kit",
+					"stage": 0,
+					"resp": "Marta Ruiz · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "FH-26-10-1",
+					"name": "Tarifario sin gluten 24×30",
+					"versions": 12,
+					"qty": 242,
+					"kit": "1 ud/kit",
+					"stage": 0,
+					"resp": "Marta Ruiz · Alsea",
+					"note": null,
+					"apr": null
+				}
+			],
+			"kitLines": [
+				{
+					"name": "Carta sin gluten",
+					"ver": "Completo {tarifa} {idioma}",
+					"uds": 2
+				},
+				{
+					"name": "Tarifario sin gluten",
+					"ver": "Completo {tarifa} {idioma}",
+					"uds": 1
+				}
+			]
+		},
+		{
+			"id": "FH-26-11",
+			"brand": "FH",
+			"name": "2x1 estudiantes",
+			"enRte": "2027-01-12",
+			"rtes": 140,
+			"planned": true,
+			"materials": "Carteles imantados + tarjetas LSM",
+			"resp": "Marta Ruiz",
+			"note": null,
+			"stage": 0,
+			"progress": 0,
+			"dates": {
+				"brief": "2026-12-03",
+				"af": "2026-12-17",
+				"aprob": "2026-12-24",
+				"prodIni": "2026-12-25",
+				"prodFin": "2027-01-02",
+				"kitting": "2027-01-03",
+				"exped": "2027-01-05",
+				"plataforma": "2027-01-07",
+				"rte": "2027-01-12"
+			},
+			"supports": [
+				{
+					"id": "FH-26-11-0",
+					"name": "Cartel imantado 59×92",
+					"versions": 2,
+					"qty": 140,
+					"kit": "1 ud/kit",
+					"stage": 0,
+					"resp": "Marta Ruiz · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "FH-26-11-1",
+					"name": "Tarjetas 2x1 estudiantes 55×85 (LSM)",
+					"versions": 1,
+					"qty": 40000,
+					"kit": "4.000 uds/rte",
+					"stage": 0,
+					"resp": "Marta Ruiz · Alsea",
+					"note": null,
+					"apr": null
+				}
+			],
+			"kitLines": [
+				{
+					"name": "Cartel imantado 59×92",
+					"ver": "{idioma}",
+					"uds": 1
+				},
+				{
+					"name": "Tarjetas 2x1 estudiantes",
+					"ver": "{idioma}",
+					"uds": 4000
+				}
+			]
+		},
+		{
+			"id": "FH-27-01",
+			"brand": "FH",
+			"name": "Lanz. Pollo Nashville",
+			"enRte": "2027-02-09",
+			"rtes": 205,
+			"planned": true,
+			"materials": "Cartas generales, manteles, láminas imantadas, tarifarios, encarte infantil",
+			"resp": "Marta Ruiz",
+			"note": null,
+			"stage": 0,
+			"progress": 0,
+			"dates": {
+				"brief": "2026-12-31",
+				"af": "2027-01-14",
+				"aprob": "2027-01-21",
+				"prodIni": "2027-01-22",
+				"prodFin": "2027-01-30",
+				"kitting": "2027-01-31",
+				"exped": "2027-02-02",
+				"plataforma": "2027-02-04",
+				"rte": "2027-02-09"
+			},
+			"supports": [
+				{
+					"id": "FH-27-01-0",
+					"name": "Carta surtido FH",
+					"versions": 17,
+					"qty": 16680,
+					"kit": "10 uds/kit",
+					"stage": 0,
+					"resp": "Marta Ruiz · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "FH-27-01-1",
+					"name": "Carta postres FH",
+					"versions": 20,
+					"qty": 10976,
+					"kit": "10 uds/kit",
+					"stage": 0,
+					"resp": "Marta Ruiz · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "FH-27-01-2",
+					"name": "Tarifario genérico",
+					"versions": 9,
+					"qty": 420,
+					"kit": "1 ud/kit",
+					"stage": 0,
+					"resp": "Marta Ruiz · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "FH-27-01-3",
+					"name": "Cartel imantado 59×92",
+					"versions": 2,
+					"qty": 400,
+					"kit": "1 ud/kit",
+					"stage": 0,
+					"resp": "Marta Ruiz · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "FH-27-01-4",
+					"name": "Manteles 30×40",
+					"versions": 4,
+					"qty": 218200,
+					"kit": "Conway",
+					"stage": 0,
+					"resp": "Marta Ruiz · Alsea",
+					"note": null,
+					"apr": null
+				}
+			],
+			"kitLines": [
+				{
+					"name": "Carta surtido FH",
+					"ver": "{tarifa} {surtido} {idioma}",
+					"uds": 30
+				},
+				{
+					"name": "Carta postres FH",
+					"ver": "{tarifa} {surtido} {idioma}",
+					"uds": 20
+				},
+				{
+					"name": "Tarifario genérico",
+					"ver": "{tarifa} {idioma}",
+					"uds": 1
+				}
+			]
+		},
+		{
+			"id": "VI-26-03",
+			"brand": "VIPS",
+			"name": "Menú infantil VIPS",
+			"enRte": "2026-10-13",
+			"rtes": 167,
+			"planned": false,
+			"materials": "Cartas menú infantil",
+			"resp": "Carlos Vega",
+			"note": null,
+			"stage": 6,
+			"progress": 100,
+			"dates": {
+				"brief": "2026-09-03",
+				"af": "2026-09-17",
+				"aprob": "2026-09-24",
+				"prodIni": "2026-09-25",
+				"prodFin": "2026-10-03",
+				"kitting": "2026-10-04",
+				"exped": "2026-10-06",
+				"plataforma": "2026-10-08",
+				"rte": "2026-10-13"
+			},
+			"supports": [
+				{
+					"id": "VI-26-03-0",
+					"name": "Carta menú infantil",
+					"versions": 2,
+					"qty": 3340,
+					"kit": "20 uds/kit",
+					"stage": 6,
+					"resp": "Carlos Vega · Alsea",
+					"note": null,
+					"apr": null
+				}
+			],
+			"kitLines": [
+				{
+					"name": "Carta menú infantil",
+					"ver": "{idioma}",
+					"uds": 20
+				}
+			]
+		},
+		{
+			"id": "VI-26-03b",
+			"brand": "VIPS",
+			"name": "Encartes noche VIPS",
+			"enRte": "2026-10-20",
+			"rtes": 167,
+			"planned": false,
+			"materials": "Encartes menú noche 150×300",
+			"resp": "Carlos Vega",
+			"note": null,
+			"stage": 5,
+			"progress": 83,
+			"dates": {
+				"brief": "2026-09-10",
+				"af": "2026-09-24",
+				"aprob": "2026-10-01",
+				"prodIni": "2026-10-02",
+				"prodFin": "2026-10-10",
+				"kitting": "2026-10-11",
+				"exped": "2026-10-13",
+				"plataforma": "2026-10-15",
+				"rte": "2026-10-20"
+			},
+			"supports": [
+				{
+					"id": "VI-26-03b-0",
+					"name": "Encarte menú noche 150×300",
+					"versions": 2,
+					"qty": 21300,
+					"kit": "25 uds/paquete",
+					"stage": 5,
+					"resp": "Carlos Vega · Alsea",
+					"note": null,
+					"apr": null
+				}
+			],
+			"kitLines": [
+				{
+					"name": "Encarte menú noche 150×300",
+					"ver": "{idioma}",
+					"uds": 125
+				},
+				{
+					"name": "Cartel 50×70 menú noche",
+					"ver": "{idioma}",
+					"uds": 2
+				}
+			]
+		},
+		{
+			"id": "VI-26-02",
+			"brand": "VIPS",
+			"name": "Campaña desayunos VIPS",
+			"enRte": "2026-11-05",
+			"rtes": 167,
+			"planned": false,
+			"materials": "Carteles, imantados, encarte menú brunch, cartas calle, menú board, encartes VSM y cartas",
+			"resp": "Carlos Vega",
+			"note": null,
+			"stage": 3,
+			"progress": 55,
+			"dates": {
+				"brief": "2026-09-26",
+				"af": "2026-10-10",
+				"aprob": "2026-10-17",
+				"prodIni": "2026-10-18",
+				"prodFin": "2026-10-26",
+				"kitting": "2026-10-27",
+				"exped": "2026-10-29",
+				"plataforma": "2026-10-31",
+				"rte": "2026-11-05"
+			},
+			"supports": [
+				{
+					"id": "vi-ca",
+					"name": "Cartelería campaña papel (mupi / 50×70 / 70×100)",
+					"versions": 7,
+					"qty": 132,
+					"kit": "Por modelos",
+					"stage": 3,
+					"resp": "Producción gran formato",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "vi-fx",
+					"name": "Cartelería forex 5 mm 70×100 (VIPS / Smart / CAT)",
+					"versions": 3,
+					"qty": 155,
+					"kit": "Por modelos",
+					"stage": 3,
+					"resp": "Producción gran formato",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "vi-mb",
+					"name": "Menú board VSM imantado 595×895",
+					"versions": 1,
+					"qty": 10,
+					"kit": "1 ud/kit",
+					"stage": 4,
+					"resp": "Kitting",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "vi-eb",
+					"name": "Encarte menú brunch 150×300",
+					"versions": 2,
+					"qty": 21300,
+					"kit": "25 uds/paquete",
+					"stage": 3,
+					"resp": "Producción offset",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "vi-cc",
+					"name": "Cartas calle PVC 5 mm (25 modelos)",
+					"versions": 25,
+					"qty": 205,
+					"kit": "Por modelos",
+					"stage": 3,
+					"resp": "Producción gran formato",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "vi-ev",
+					"name": "Encartes VSM",
+					"versions": 2,
+					"qty": 8500,
+					"kit": "25 uds/paquete",
+					"stage": 4,
+					"resp": "Kitting",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "vi-cg",
+					"name": "Carta general VIPS (cubierta + 12 págs.)",
+					"versions": 5,
+					"qty": 4025,
+					"kit": "Entrega vía Conway",
+					"stage": 3,
+					"resp": "Producción offset",
+					"note": null,
+					"apr": null
+				}
+			],
+			"kitLines": [
+				{
+					"name": "Cartel campaña 70×100",
+					"ver": "{tarifa} {idioma}",
+					"uds": 1
+				},
+				{
+					"name": "Cartel forex 70×100",
+					"ver": "{tarifa} {idioma}",
+					"uds": 1
+				},
+				{
+					"name": "Encarte menú brunch",
+					"ver": "{idioma}",
+					"uds": 125
+				},
+				{
+					"name": "Carta calle PVC",
+					"ver": "{fachada}",
+					"uds": 1
+				},
+				{
+					"name": "Encartes VSM",
+					"ver": "{idioma}",
+					"uds": 50
+				}
+			]
+		},
+		{
+			"id": "VI-26-07",
+			"brand": "VIPS",
+			"name": "Menú del día invierno VIPS",
+			"enRte": "2026-11-17",
+			"rtes": 170,
+			"planned": false,
+			"materials": "Cartas, carta calle, menú board, encartes VSM, cartelería, encartes menú",
+			"resp": "Carlos Vega",
+			"note": null,
+			"stage": 1,
+			"progress": 22,
+			"dates": {
+				"brief": "2026-10-08",
+				"af": "2026-10-22",
+				"aprob": "2026-10-29",
+				"prodIni": "2026-10-30",
+				"prodFin": "2026-11-07",
+				"kitting": "2026-11-08",
+				"exped": "2026-11-10",
+				"plataforma": "2026-11-12",
+				"rte": "2026-11-17"
+			},
+			"supports": [
+				{
+					"id": "vi7-cg",
+					"name": "Carta general VIPS invierno",
+					"versions": 5,
+					"qty": 4025,
+					"kit": "Entrega vía Conway",
+					"stage": 2,
+					"resp": "Carlos Vega · Alsea",
+					"note": null,
+					"apr": "VI-CG"
+				},
+				{
+					"id": "vi7-em",
+					"name": "Encarte menús A5 (7 CAST + 1 CAT)",
+					"versions": 8,
+					"qty": 168,
+					"kit": "25 uds/paquete",
+					"stage": 2,
+					"resp": "Carlos Vega · Alsea",
+					"note": null,
+					"apr": "VI-EM"
+				},
+				{
+					"id": "vi7-cc",
+					"name": "Cartas calle PVC 5 mm",
+					"versions": 25,
+					"qty": 205,
+					"kit": "Por modelos",
+					"stage": 1,
+					"resp": "Estudio de adaptación",
+					"note": "Depende de la carta general aprobada",
+					"apr": null
+				},
+				{
+					"id": "vi7-mb",
+					"name": "Menú board VSM imantado",
+					"versions": 1,
+					"qty": 10,
+					"kit": "1 ud/kit",
+					"stage": 1,
+					"resp": "Estudio de adaptación",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "vi7-ev",
+					"name": "Encartes VSM",
+					"versions": 2,
+					"qty": 8500,
+					"kit": "25 uds/paquete",
+					"stage": 1,
+					"resp": "Estudio de adaptación",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "vi7-ca",
+					"name": "Cartelería campaña",
+					"versions": 5,
+					"qty": 100,
+					"kit": "Por modelos",
+					"stage": 1,
+					"resp": "Estudio de adaptación",
+					"note": null,
+					"apr": null
+				}
+			],
+			"kitLines": [
+				{
+					"name": "Carta general VIPS",
+					"ver": "{tarifa} {idioma}",
+					"uds": 25
+				},
+				{
+					"name": "Encarte menús A5",
+					"ver": "{idioma}",
+					"uds": 25
+				},
+				{
+					"name": "Carta calle PVC",
+					"ver": "{fachada}",
+					"uds": 1
+				}
+			]
+		},
+		{
+			"id": "VI-26-08",
+			"brand": "VIPS",
+			"name": "Campaña tortitas VIPS",
+			"enRte": "2026-12-02",
+			"rtes": 170,
+			"planned": false,
+			"materials": "Carteles campaña, encartes tortitas, table card, encartes menú de grupos",
+			"resp": "Carlos Vega",
+			"note": null,
+			"stage": 1,
+			"progress": 21,
+			"dates": {
+				"brief": "2026-10-23",
+				"af": "2026-11-06",
+				"aprob": "2026-11-13",
+				"prodIni": "2026-11-14",
+				"prodFin": "2026-11-22",
+				"kitting": "2026-11-23",
+				"exped": "2026-11-25",
+				"plataforma": "2026-11-27",
+				"rte": "2026-12-02"
+			},
+			"supports": [
+				{
+					"id": "VI-26-08-0",
+					"name": "Cartelería campaña",
+					"versions": 7,
+					"qty": 132,
+					"kit": "Por modelos",
+					"stage": 1,
+					"resp": "Carlos Vega · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "VI-26-08-1",
+					"name": "Encarte tortitas 150×300",
+					"versions": 2,
+					"qty": 21300,
+					"kit": "25 uds/paquete",
+					"stage": 1,
+					"resp": "Carlos Vega · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "VI-26-08-2",
+					"name": "Table card",
+					"versions": 2,
+					"qty": 15000,
+					"kit": "25 uds/paquete",
+					"stage": 2,
+					"resp": "Carlos Vega · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "VI-26-08-3",
+					"name": "Encarte menú de grupos",
+					"versions": 2,
+					"qty": 4000,
+					"kit": "25 uds/paquete",
+					"stage": 1,
+					"resp": "Carlos Vega · Alsea",
+					"note": null,
+					"apr": null
+				}
+			],
+			"kitLines": [
+				{
+					"name": "Cartel campaña 70×100",
+					"ver": "{idioma}",
+					"uds": 1
+				},
+				{
+					"name": "Encarte tortitas",
+					"ver": "{idioma}",
+					"uds": 125
+				},
+				{
+					"name": "Table card",
+					"ver": "{idioma}",
+					"uds": 75
+				}
+			]
+		},
+		{
+			"id": "GI-26-02",
+			"brand": "GINOS",
+			"name": "Pastas octubre Ginos",
+			"enRte": "2026-10-06",
+			"rtes": 114,
+			"planned": false,
+			"materials": "Carta general, cartas fachada, encarte novedad, tijera o cartelería papel",
+			"resp": "Laura Pons",
+			"note": null,
+			"stage": 6,
+			"progress": 100,
+			"dates": {
+				"brief": "2026-08-27",
+				"af": "2026-09-10",
+				"aprob": "2026-09-17",
+				"prodIni": "2026-09-18",
+				"prodFin": "2026-09-26",
+				"kitting": "2026-09-27",
+				"exped": "2026-09-29",
+				"plataforma": "2026-10-01",
+				"rte": "2026-10-06"
+			},
+			"supports": [
+				{
+					"id": "GI-26-02-0",
+					"name": "Carta general Ginos (11 modelos)",
+					"versions": 11,
+					"qty": 3680,
+					"kit": "10 uds/kit",
+					"stage": 6,
+					"resp": "Laura Pons · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "GI-26-02-1",
+					"name": "Cartas fachada poliéster (29 medidas)",
+					"versions": 29,
+					"qty": 205,
+					"kit": "1 ud/kit",
+					"stage": 6,
+					"resp": "Laura Pons · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "GI-26-02-2",
+					"name": "Encarte novedad 15×30",
+					"versions": 2,
+					"qty": 3660,
+					"kit": "30 uds/kit",
+					"stage": 6,
+					"resp": "Laura Pons · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "GI-26-02-3",
+					"name": "Tijera 70×99,7",
+					"versions": 2,
+					"qty": 117,
+					"kit": "1 ud/kit",
+					"stage": 6,
+					"resp": "Laura Pons · Alsea",
+					"note": null,
+					"apr": null
+				}
+			],
+			"kitLines": [
+				{
+					"name": "Carta general Ginos",
+					"ver": "{tarifa} {idioma}",
+					"uds": 30
+				},
+				{
+					"name": "Carta fachada",
+					"ver": "{fachada} {tarifa} {idioma}",
+					"uds": 2
+				},
+				{
+					"name": "Encarte novedad",
+					"ver": "{idioma}",
+					"uds": 30
+				},
+				{
+					"name": "Tijera 70×99,7",
+					"ver": "{idioma}",
+					"uds": 1
+				}
+			]
+		},
+		{
+			"id": "GI-26-07",
+			"brand": "GINOS",
+			"name": "Menú noches Ginos",
+			"enRte": "2026-11-10",
+			"rtes": 114,
+			"planned": false,
+			"materials": "Dípticos y tijeras (o cartelería en papel)",
+			"resp": "Laura Pons",
+			"note": null,
+			"stage": 4,
+			"progress": 70,
+			"dates": {
+				"brief": "2026-10-01",
+				"af": "2026-10-15",
+				"aprob": "2026-10-22",
+				"prodIni": "2026-10-23",
+				"prodFin": "2026-10-31",
+				"kitting": "2026-11-01",
+				"exped": "2026-11-03",
+				"plataforma": "2026-11-05",
+				"rte": "2026-11-10"
+			},
+			"supports": [
+				{
+					"id": "GI-26-07-0",
+					"name": "Díptico menú noches 30×30",
+					"versions": 4,
+					"qty": 3660,
+					"kit": "30 uds/kit",
+					"stage": 4,
+					"resp": "Laura Pons · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "GI-26-07-1",
+					"name": "Tijera 70×99,7 (CAST / CAT)",
+					"versions": 2,
+					"qty": 117,
+					"kit": "1 ud/kit",
+					"stage": 4,
+					"resp": "Laura Pons · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "GI-26-07-2",
+					"name": "Cartelería papel 50×70 / 70×100",
+					"versions": 4,
+					"qty": 40,
+					"kit": "Según restaurante",
+					"stage": 5,
+					"resp": "Laura Pons · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "GI-26-07-3",
+					"name": "Table tent 12×17,7",
+					"versions": 6,
+					"qty": 2850,
+					"kit": "25 uds/kit",
+					"stage": 4,
+					"resp": "Laura Pons · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "GI-26-07-4",
+					"name": "Flyers A5",
+					"versions": 2,
+					"qty": 11400,
+					"kit": "100 uds/kit",
+					"stage": 4,
+					"resp": "Laura Pons · Alsea",
+					"note": null,
+					"apr": null
+				}
+			],
+			"kitLines": [
+				{
+					"name": "Díptico menú noches 30×30",
+					"ver": "{tarifa} {idioma}",
+					"uds": 30
+				},
+				{
+					"name": "Tijera 70×99,7",
+					"ver": "{idioma}",
+					"uds": 1
+				},
+				{
+					"name": "Cartelería papel 50×70",
+					"ver": "{idioma}",
+					"uds": 2
+				},
+				{
+					"name": "Table tent 12×17,7",
+					"ver": "Menú noches {idioma}",
+					"uds": 25
+				},
+				{
+					"name": "Flyers A5",
+					"ver": "{idioma}",
+					"uds": 100
+				}
+			]
+		},
+		{
+			"id": "GI-26-09",
+			"brand": "GINOS",
+			"name": "Navidad Ginos",
+			"enRte": "2026-11-24",
+			"rtes": 114,
+			"planned": false,
+			"materials": "Tríptico menús, tijera o cartelería en papel, table tent y flyers",
+			"resp": "Laura Pons",
+			"note": null,
+			"stage": 3,
+			"progress": 53,
+			"dates": {
+				"brief": "2026-10-15",
+				"af": "2026-10-29",
+				"aprob": "2026-11-05",
+				"prodIni": "2026-11-06",
+				"prodFin": "2026-11-14",
+				"kitting": "2026-11-15",
+				"exped": "2026-11-17",
+				"plataforma": "2026-11-19",
+				"rte": "2026-11-24"
+			},
+			"supports": [
+				{
+					"id": "gi-tm",
+					"name": "Tríptico menús Navidad 45×30",
+					"versions": 8,
+					"qty": 3660,
+					"kit": "30 uds/kit",
+					"stage": 3,
+					"resp": "Producción offset",
+					"note": null,
+					"apr": "GI-NAV"
+				},
+				{
+					"id": "gi-ti",
+					"name": "Tijera 70×99,7 (CAST / CAT)",
+					"versions": 2,
+					"qty": 117,
+					"kit": "1 ud/kit",
+					"stage": 3,
+					"resp": "Producción gran formato",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "gi-cp",
+					"name": "Cartelería papel 50×70 / 70×100",
+					"versions": 4,
+					"qty": 40,
+					"kit": "Según restaurante",
+					"stage": 3,
+					"resp": "Producción digital",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "gi-tt",
+					"name": "Table tent 12×17,7 (6 modelos)",
+					"versions": 6,
+					"qty": 15700,
+					"kit": "25 uds/kit",
+					"stage": 4,
+					"resp": "Kitting",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "gi-fl",
+					"name": "Flyers Navidad A5",
+					"versions": 2,
+					"qty": 11400,
+					"kit": "100 uds/kit",
+					"stage": 3,
+					"resp": "Producción digital",
+					"note": null,
+					"apr": null
+				}
+			],
+			"kitLines": [
+				{
+					"name": "Tríptico menús Navidad",
+					"ver": "{tarifa} {idioma}",
+					"uds": 30
+				},
+				{
+					"name": "Tijera 70×99,7",
+					"ver": "{idioma}",
+					"uds": 1
+				},
+				{
+					"name": "Table tent",
+					"ver": "Navidad {idioma}",
+					"uds": 25
+				},
+				{
+					"name": "Flyers Navidad A5",
+					"ver": "{idioma}",
+					"uds": 100
+				}
+			]
+		},
+		{
+			"id": "GI-27-01",
+			"brand": "GINOS",
+			"name": "Pizzas febrero Ginos",
+			"enRte": "2027-02-09",
+			"rtes": 114,
+			"planned": false,
+			"materials": "Carta general, carta sin gluten, cartas fachada, encarte novedad, tijera o cartelería papel",
+			"resp": "Laura Pons",
+			"note": "Costes y envío unificados con Carnaval",
+			"stage": 0,
+			"progress": 3,
+			"dates": {
+				"brief": "2026-12-31",
+				"af": "2027-01-14",
+				"aprob": "2027-01-21",
+				"prodIni": "2027-01-22",
+				"prodFin": "2027-01-30",
+				"kitting": "2027-01-31",
+				"exped": "2027-02-02",
+				"plataforma": "2027-02-04",
+				"rte": "2027-02-09"
+			},
+			"supports": [
+				{
+					"id": "GI-27-01-0",
+					"name": "Carta general Ginos (11 modelos)",
+					"versions": 11,
+					"qty": 3680,
+					"kit": "10 uds/kit",
+					"stage": 0,
+					"resp": "Laura Pons · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "GI-27-01-1",
+					"name": "Carta celíacos (5 modelos)",
+					"versions": 5,
+					"qty": 570,
+					"kit": "1 ud/kit",
+					"stage": 0,
+					"resp": "Laura Pons · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "GI-27-01-2",
+					"name": "Cartas fachada poliéster",
+					"versions": 29,
+					"qty": 205,
+					"kit": "1 ud/kit",
+					"stage": 1,
+					"resp": "Laura Pons · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "GI-27-01-3",
+					"name": "Encarte novedad 15×30",
+					"versions": 2,
+					"qty": 3660,
+					"kit": "30 uds/kit",
+					"stage": 0,
+					"resp": "Laura Pons · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "GI-27-01-4",
+					"name": "Tijera 70×99,7",
+					"versions": 2,
+					"qty": 117,
+					"kit": "1 ud/kit",
+					"stage": 0,
+					"resp": "Laura Pons · Alsea",
+					"note": null,
+					"apr": null
+				}
+			],
+			"kitLines": [
+				{
+					"name": "Carta general Ginos",
+					"ver": "{tarifa} {idioma}",
+					"uds": 30
+				},
+				{
+					"name": "Carta celíacos",
+					"ver": "{tarifa} {idioma}",
+					"uds": 5
+				},
+				{
+					"name": "Carta fachada",
+					"ver": "{fachada} {tarifa} {idioma}",
+					"uds": 2
+				}
+			]
+		},
+		{
+			"id": "GI-27-08",
+			"brand": "GINOS",
+			"name": "Carnaval Ginos",
+			"enRte": "2027-02-09",
+			"rtes": 114,
+			"planned": true,
+			"materials": "Encartes, tijeras (o cartelería en papel), table tent y flyers",
+			"resp": "Laura Pons",
+			"note": "Envío unificado con Pizzas febrero",
+			"stage": 0,
+			"progress": 0,
+			"dates": {
+				"brief": "2026-12-31",
+				"af": "2027-01-14",
+				"aprob": "2027-01-21",
+				"prodIni": "2027-01-22",
+				"prodFin": "2027-01-30",
+				"kitting": "2027-01-31",
+				"exped": "2027-02-02",
+				"plataforma": "2027-02-04",
+				"rte": "2027-02-09"
+			},
+			"supports": [
+				{
+					"id": "GI-27-08-0",
+					"name": "Encarte Carnaval 15×30",
+					"versions": 2,
+					"qty": 3660,
+					"kit": "30 uds/kit",
+					"stage": 0,
+					"resp": "Laura Pons · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "GI-27-08-1",
+					"name": "Tijera 70×99,7",
+					"versions": 2,
+					"qty": 117,
+					"kit": "1 ud/kit",
+					"stage": 0,
+					"resp": "Laura Pons · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "GI-27-08-2",
+					"name": "Table tent",
+					"versions": 6,
+					"qty": 2850,
+					"kit": "25 uds/kit",
+					"stage": 0,
+					"resp": "Laura Pons · Alsea",
+					"note": null,
+					"apr": null
+				},
+				{
+					"id": "GI-27-08-3",
+					"name": "Flyers A5",
+					"versions": 2,
+					"qty": 11400,
+					"kit": "100 uds/kit",
+					"stage": 0,
+					"resp": "Laura Pons · Alsea",
+					"note": null,
+					"apr": null
+				}
+			],
+			"kitLines": [
+				{
+					"name": "Encarte Carnaval",
+					"ver": "{idioma}",
+					"uds": 30
+				},
+				{
+					"name": "Table tent",
+					"ver": "Carnaval {idioma}",
+					"uds": 25
+				}
+			]
+		}
+	],
+	"approvals": {
+		"FH-CS": {
+			"campaign": "FH-26-03",
+			"supportId": "fh-cs",
+			"support": "Carta surtido FH",
+			"brand": "FH",
+			"format": "triptico",
+			"vLabel": "11/2026",
+			"prev": "09/2026",
+			"uploadedBy": "Jorge Martín · Promopicking",
+			"versions": [
+				{
+					"code": "C1 ALL SP",
+					"kits": 254,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-19 09:00",
+					"comments": [],
+					"file": "FH-01_C1-ALL-SP_v1.pdf",
+					"size": "3.2 MB"
+				},
+				{
+					"code": "C1 ALL EN",
+					"kits": 61,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-20 10:07",
+					"comments": [],
+					"file": "FH-01_C1-ALL-EN_v1.pdf",
+					"size": "3.8 MB"
+				},
+				{
+					"code": "C1 ALL FR",
+					"kits": 1,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-21 11:14",
+					"comments": [],
+					"file": "FH-01_C1-ALL-FR_v1.pdf",
+					"size": "4.4 MB"
+				},
+				{
+					"code": "C1 ALL CAT",
+					"kits": 5,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-19 12:21",
+					"comments": [],
+					"file": "FH-01_C1-ALL-CAT_v1.pdf",
+					"size": "5.0 MB"
+				},
+				{
+					"code": "C2 ALL SP",
+					"kits": 594,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-20 13:28",
+					"comments": [],
+					"file": "FH-01_C2-ALL-SP_v1.pdf",
+					"size": "5.6 MB"
+				},
+				{
+					"code": "C2 ALL EN",
+					"kits": 94,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-21 14:35",
+					"comments": [],
+					"file": "FH-01_C2-ALL-EN_v1.pdf",
+					"size": "3.2 MB"
+				},
+				{
+					"code": "C2 ALL CAT",
+					"kits": 31,
+					"status": "pendiente",
+					"rev": 1,
+					"by": null,
+					"at": null,
+					"comments": [
+						{
+							"who": "Jorge Martín · Promopicking",
+							"at": "2026-10-21 17:40",
+							"txt": "Adaptación al catalán revisada por traducción. Precios C2 según tarifa del 15/10."
+						}
+					],
+					"file": "FH-01_C2-ALL-CAT_v1.pdf",
+					"size": "3.8 MB"
+				},
+				{
+					"code": "C2 ALL GALL",
+					"kits": 5,
+					"status": "pendiente",
+					"rev": 1,
+					"by": null,
+					"at": null,
+					"comments": [],
+					"file": "FH-01_C2-ALL-GALL_v1.pdf",
+					"size": "4.4 MB"
+				},
+				{
+					"code": "C2 RED+ SP",
+					"kits": 5,
+					"status": "pendiente",
+					"rev": 2,
+					"by": null,
+					"at": null,
+					"comments": [
+						{
+							"who": "Marta Ruiz · Alsea",
+							"at": "2026-10-21 12:10",
+							"txt": "Falta el menú Méndez Álvaro en la contraportada. Revisar y volver a subir."
+						},
+						{
+							"who": "Jorge Martín · Promopicking",
+							"at": "2026-10-21 16:05",
+							"txt": "Corregido. Nueva revisión v2 subida para aprobación."
+						}
+					],
+					"file": "FH-01_C2-RED+-SP_v2.pdf",
+					"size": "5.0 MB"
+				},
+				{
+					"code": "C3 ALL SP",
+					"kits": 340,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-19 10:03",
+					"comments": [],
+					"file": "FH-01_C3-ALL-SP_v1.pdf",
+					"size": "5.6 MB"
+				},
+				{
+					"code": "C3 ALL EN",
+					"kits": 31,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-20 11:10",
+					"comments": [],
+					"file": "FH-01_C3-ALL-EN_v1.pdf",
+					"size": "3.2 MB"
+				},
+				{
+					"code": "C3 ALL CAT",
+					"kits": 29,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-21 12:17",
+					"comments": [],
+					"file": "FH-01_C3-ALL-CAT_v1.pdf",
+					"size": "3.8 MB"
+				},
+				{
+					"code": "C3+ ALL SP",
+					"kits": 141,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-19 13:24",
+					"comments": [],
+					"file": "FH-01_C3+-ALL-SP_v1.pdf",
+					"size": "4.4 MB"
+				},
+				{
+					"code": "C3+ ALL EN",
+					"kits": 23,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-20 14:31",
+					"comments": [],
+					"file": "FH-01_C3+-ALL-EN_v1.pdf",
+					"size": "5.0 MB"
+				},
+				{
+					"code": "C3+ ALL CAT",
+					"kits": 30,
+					"status": "pendiente",
+					"rev": 1,
+					"by": null,
+					"at": null,
+					"comments": [],
+					"file": "FH-01_C3+-ALL-CAT_v1.pdf",
+					"size": "5.6 MB"
+				},
+				{
+					"code": "WARNER SP",
+					"kits": 20,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-19 16:45",
+					"comments": [],
+					"file": "FH-01_WARNER-SP_v1.pdf",
+					"size": "3.2 MB"
+				},
+				{
+					"code": "WARNER EN",
+					"kits": 4,
+					"status": "cambios",
+					"rev": 1,
+					"by": null,
+					"at": null,
+					"comments": [
+						{
+							"who": "Marta Ruiz · Alsea",
+							"at": "2026-10-20 18:22",
+							"txt": "Pendiente del texto en inglés del menú Warner que envía Parque Warner. No aprobar hasta recibirlo."
+						}
+					],
+					"file": "FH-01_WARNER-EN_v1.pdf",
+					"size": "3.8 MB"
+				}
+			]
+		},
+		"FH-CP": {
+			"campaign": "FH-26-03",
+			"supportId": "fh-cp",
+			"support": "Carta postres FH",
+			"brand": "FH",
+			"format": "page",
+			"vLabel": "11/2026",
+			"prev": "09/2026",
+			"uploadedBy": "Jorge Martín · Promopicking",
+			"versions": [
+				{
+					"code": "C1 ALL SP",
+					"kits": 177,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-19 09:00",
+					"comments": [],
+					"file": "FH-02_C1-ALL-SP_v1.pdf",
+					"size": "3.2 MB"
+				},
+				{
+					"code": "C1 ALL FR",
+					"kits": 2,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-20 10:07",
+					"comments": [],
+					"file": "FH-02_C1-ALL-FR_v1.pdf",
+					"size": "3.8 MB"
+				},
+				{
+					"code": "C1 ALL EN",
+					"kits": 2,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-21 11:14",
+					"comments": [],
+					"file": "FH-02_C1-ALL-EN_v1.pdf",
+					"size": "4.4 MB"
+				},
+				{
+					"code": "C1 ALL CAT",
+					"kits": 3,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-19 12:21",
+					"comments": [],
+					"file": "FH-02_C1-ALL-CAT_v1.pdf",
+					"size": "5.0 MB"
+				},
+				{
+					"code": "C2 ALL SP",
+					"kits": 462,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-20 13:28",
+					"comments": [],
+					"file": "FH-02_C2-ALL-SP_v1.pdf",
+					"size": "5.6 MB"
+				},
+				{
+					"code": "C2 ALL EN",
+					"kits": 60,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-21 14:35",
+					"comments": [],
+					"file": "FH-02_C2-ALL-EN_v1.pdf",
+					"size": "3.2 MB"
+				},
+				{
+					"code": "C2 ALL CAT",
+					"kits": 25,
+					"status": "pendiente",
+					"rev": 1,
+					"by": null,
+					"at": null,
+					"comments": [],
+					"file": "FH-02_C2-ALL-CAT_v1.pdf",
+					"size": "3.8 MB"
+				},
+				{
+					"code": "C2 ALL GALL",
+					"kits": 3,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-20 16:49",
+					"comments": [],
+					"file": "FH-02_C2-ALL-GALL_v1.pdf",
+					"size": "4.4 MB"
+				},
+				{
+					"code": "C2 RED+ SP",
+					"kits": 3,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-21 09:56",
+					"comments": [],
+					"file": "FH-02_C2-RED+-SP_v1.pdf",
+					"size": "5.0 MB"
+				},
+				{
+					"code": "C2 RED+ EN",
+					"kits": 1,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-19 10:03",
+					"comments": [],
+					"file": "FH-02_C2-RED+-EN_v1.pdf",
+					"size": "5.6 MB"
+				},
+				{
+					"code": "C3 ALL SP",
+					"kits": 193,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-20 11:10",
+					"comments": [],
+					"file": "FH-02_C3-ALL-SP_v1.pdf",
+					"size": "3.2 MB"
+				},
+				{
+					"code": "C3 ALL EN",
+					"kits": 4,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-21 12:17",
+					"comments": [],
+					"file": "FH-02_C3-ALL-EN_v1.pdf",
+					"size": "3.8 MB"
+				},
+				{
+					"code": "C3 ALL CAT",
+					"kits": 21,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-19 13:24",
+					"comments": [],
+					"file": "FH-02_C3-ALL-CAT_v1.pdf",
+					"size": "4.4 MB"
+				},
+				{
+					"code": "C3 RED SP",
+					"kits": 5,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-20 14:31",
+					"comments": [],
+					"file": "FH-02_C3-RED-SP_v1.pdf",
+					"size": "5.0 MB"
+				},
+				{
+					"code": "C3 RED EN",
+					"kits": 1,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-21 15:38",
+					"comments": [],
+					"file": "FH-02_C3-RED-EN_v1.pdf",
+					"size": "5.6 MB"
+				},
+				{
+					"code": "C3+ ALL SP",
+					"kits": 83,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-19 16:45",
+					"comments": [],
+					"file": "FH-02_C3+-ALL-SP_v1.pdf",
+					"size": "3.2 MB"
+				},
+				{
+					"code": "C3+ ALL EN",
+					"kits": 15,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-20 09:52",
+					"comments": [],
+					"file": "FH-02_C3+-ALL-EN_v1.pdf",
+					"size": "3.8 MB"
+				},
+				{
+					"code": "C3+ ALL CAT",
+					"kits": 24,
+					"status": "pendiente",
+					"rev": 1,
+					"by": null,
+					"at": null,
+					"comments": [],
+					"file": "FH-02_C3+-ALL-CAT_v1.pdf",
+					"size": "4.4 MB"
+				},
+				{
+					"code": "WARNER SP",
+					"kits": 12,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-19 11:06",
+					"comments": [],
+					"file": "FH-02_WARNER-SP_v1.pdf",
+					"size": "5.0 MB"
+				},
+				{
+					"code": "WARNER EN",
+					"kits": 2,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-20 12:13",
+					"comments": [],
+					"file": "FH-02_WARNER-EN_v1.pdf",
+					"size": "5.6 MB"
+				}
+			]
+		},
+		"FH-TG": {
+			"campaign": "FH-26-03",
+			"supportId": "fh-tg",
+			"support": "Tarifario genérico 35×30",
+			"brand": "FH",
+			"format": "page",
+			"vLabel": "11/2026",
+			"prev": "09/2026",
+			"uploadedBy": "Jorge Martín · Promopicking",
+			"versions": [
+				{
+					"code": "C1 ALL SP",
+					"kits": 66,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-19 09:00",
+					"comments": [],
+					"file": "FH-04_C1-ALL-SP_v1.pdf",
+					"size": "3.2 MB"
+				},
+				{
+					"code": "C1 ALL CAT",
+					"kits": 2,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-20 10:07",
+					"comments": [],
+					"file": "FH-04_C1-ALL-CAT_v1.pdf",
+					"size": "3.8 MB"
+				},
+				{
+					"code": "C2 ALL SP",
+					"kits": 194,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-21 11:14",
+					"comments": [],
+					"file": "FH-04_C2-ALL-SP_v1.pdf",
+					"size": "4.4 MB"
+				},
+				{
+					"code": "C2 ALL CAT",
+					"kits": 16,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-19 12:21",
+					"comments": [],
+					"file": "FH-04_C2-ALL-CAT_v1.pdf",
+					"size": "5.0 MB"
+				},
+				{
+					"code": "C3 ALL SP",
+					"kits": 86,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-20 13:28",
+					"comments": [],
+					"file": "FH-04_C3-ALL-SP_v1.pdf",
+					"size": "5.6 MB"
+				},
+				{
+					"code": "C3 ALL CAT",
+					"kits": 12,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-21 14:35",
+					"comments": [],
+					"file": "FH-04_C3-ALL-CAT_v1.pdf",
+					"size": "3.2 MB"
+				},
+				{
+					"code": "C3+ ALL SP",
+					"kits": 30,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-19 15:42",
+					"comments": [],
+					"file": "FH-04_C3+-ALL-SP_v1.pdf",
+					"size": "3.8 MB"
+				},
+				{
+					"code": "C3+ ALL CAT",
+					"kits": 12,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-20 16:49",
+					"comments": [],
+					"file": "FH-04_C3+-ALL-CAT_v1.pdf",
+					"size": "4.4 MB"
+				},
+				{
+					"code": "WARNER SP MOD. ESP.",
+					"kits": 2,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Marta Ruiz",
+					"at": "2026-10-21 09:56",
+					"comments": [],
+					"file": "FH-04_WARNER-SP-MOD-ESP-_v1.pdf",
+					"size": "5.0 MB"
+				}
+			]
+		},
+		"VI-CG": {
+			"campaign": "VI-26-07",
+			"supportId": "vi7-cg",
+			"support": "Carta general VIPS invierno",
+			"brand": "VIPS",
+			"format": "page",
+			"vLabel": "11/2026",
+			"prev": "06/2026",
+			"uploadedBy": "Jorge Martín · Promopicking",
+			"versions": [
+				{
+					"code": "VIPS CAST",
+					"kits": 118,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Carlos Vega",
+					"at": "2026-10-19 09:00",
+					"comments": [],
+					"file": "VI-02_VIPS-CAST_v1.pdf",
+					"size": "3.2 MB"
+				},
+				{
+					"code": "VIPS CAT",
+					"kits": 9,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Carlos Vega",
+					"at": "2026-10-20 10:07",
+					"comments": [],
+					"file": "VI-02_VIPS-CAT_v1.pdf",
+					"size": "3.8 MB"
+				},
+				{
+					"code": "VSM CAST",
+					"kits": 31,
+					"status": "pendiente",
+					"rev": 1,
+					"by": null,
+					"at": null,
+					"comments": [
+						{
+							"who": "Carlos Vega · Alsea",
+							"at": "2026-10-22 09:15",
+							"txt": "Comprobar que el menú del día de Smart lleva el precio 14,25 € y no 14,95 €."
+						}
+					],
+					"file": "VI-02_VSM-CAST_v1.pdf",
+					"size": "4.4 MB"
+				},
+				{
+					"code": "VSM CAT",
+					"kits": 3,
+					"status": "pendiente",
+					"rev": 1,
+					"by": null,
+					"at": null,
+					"comments": [],
+					"file": "VI-02_VSM-CAT_v1.pdf",
+					"size": "5.0 MB"
+				},
+				{
+					"code": "HÍBRIDOS CAST",
+					"kits": 9,
+					"status": "pendiente",
+					"rev": 1,
+					"by": null,
+					"at": null,
+					"comments": [],
+					"file": "VI-02_H-BRIDOS-CAST_v1.pdf",
+					"size": "5.6 MB"
+				}
+			]
+		},
+		"VI-EM": {
+			"campaign": "VI-26-07",
+			"supportId": "vi7-em",
+			"support": "Encarte menús A5",
+			"brand": "VIPS",
+			"format": "page",
+			"vLabel": "11/2026",
+			"prev": "06/2026",
+			"uploadedBy": "Jorge Martín · Promopicking",
+			"versions": [
+				{
+					"code": "mod. A 14,25",
+					"kits": 7,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Carlos Vega",
+					"at": "2026-10-19 09:00",
+					"comments": [],
+					"file": "VI-07_mod-A-14-25_v1.pdf",
+					"size": "3.2 MB"
+				},
+				{
+					"code": "mod. B 14,25",
+					"kits": 7,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Carlos Vega",
+					"at": "2026-10-20 10:07",
+					"comments": [],
+					"file": "VI-07_mod-B-14-25_v1.pdf",
+					"size": "3.8 MB"
+				},
+				{
+					"code": "mod. A 14,95",
+					"kits": 6,
+					"status": "pendiente",
+					"rev": 1,
+					"by": null,
+					"at": null,
+					"comments": [],
+					"file": "VI-07_mod-A-14-95_v1.pdf",
+					"size": "4.4 MB"
+				},
+				{
+					"code": "mod. B 14,95",
+					"kits": 6,
+					"status": "pendiente",
+					"rev": 1,
+					"by": null,
+					"at": null,
+					"comments": [],
+					"file": "VI-07_mod-B-14-95_v1.pdf",
+					"size": "5.0 MB"
+				},
+				{
+					"code": "mod. A 14,25 Único",
+					"kits": 75,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Carlos Vega",
+					"at": "2026-10-20 13:28",
+					"comments": [],
+					"file": "VI-07_mod-A-14-25-nico_v1.pdf",
+					"size": "5.6 MB"
+				},
+				{
+					"code": "mod. B 14,95 Único",
+					"kits": 43,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Carlos Vega",
+					"at": "2026-10-21 14:35",
+					"comments": [],
+					"file": "VI-07_mod-B-14-95-nico_v1.pdf",
+					"size": "3.2 MB"
+				},
+				{
+					"code": "Único Híbridos / Smart 14,25",
+					"kits": 23,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Carlos Vega",
+					"at": "2026-10-19 15:42",
+					"comments": [],
+					"file": "VI-07_-nico-H-bridos-Smart-14-25_v1.pdf",
+					"size": "3.8 MB"
+				},
+				{
+					"code": "Único Híbridos / Smart 14,25 CAT",
+					"kits": 1,
+					"status": "pendiente",
+					"rev": 1,
+					"by": null,
+					"at": null,
+					"comments": [],
+					"file": "VI-07_-nico-H-bridos-Smart-14-25-CAT_v1.pdf",
+					"size": "4.4 MB"
+				}
+			]
+		},
+		"GI-NAV": {
+			"campaign": "GI-26-09",
+			"supportId": "gi-tm",
+			"support": "Tríptico menús Navidad",
+			"brand": "GINOS",
+			"format": "triptico",
+			"vLabel": "11/2026",
+			"prev": "12/2025",
+			"uploadedBy": "Jorge Martín · Promopicking",
+			"versions": [
+				{
+					"code": "M2 CAST",
+					"kits": 22,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Laura Pons",
+					"at": "2026-10-19 09:00",
+					"comments": [],
+					"file": "GI-08_M2-CAST_v1.pdf",
+					"size": "3.2 MB"
+				},
+				{
+					"code": "M2 ING",
+					"kits": 6,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Laura Pons",
+					"at": "2026-10-20 10:07",
+					"comments": [],
+					"file": "GI-08_M2-ING_v1.pdf",
+					"size": "3.8 MB"
+				},
+				{
+					"code": "M2 PORT",
+					"kits": 2,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Laura Pons",
+					"at": "2026-10-21 11:14",
+					"comments": [],
+					"file": "GI-08_M2-PORT_v1.pdf",
+					"size": "4.4 MB"
+				},
+				{
+					"code": "M3 CAST",
+					"kits": 48,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Laura Pons",
+					"at": "2026-10-19 12:21",
+					"comments": [],
+					"file": "GI-08_M3-CAST_v1.pdf",
+					"size": "5.0 MB"
+				},
+				{
+					"code": "M3 CAT",
+					"kits": 9,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Laura Pons",
+					"at": "2026-10-20 13:28",
+					"comments": [],
+					"file": "GI-08_M3-CAT_v1.pdf",
+					"size": "5.6 MB"
+				},
+				{
+					"code": "M3 ING",
+					"kits": 5,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Laura Pons",
+					"at": "2026-10-21 14:35",
+					"comments": [],
+					"file": "GI-08_M3-ING_v1.pdf",
+					"size": "3.2 MB"
+				},
+				{
+					"code": "M4 CAST",
+					"kits": 18,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Laura Pons",
+					"at": "2026-10-19 15:42",
+					"comments": [],
+					"file": "GI-08_M4-CAST_v1.pdf",
+					"size": "3.8 MB"
+				},
+				{
+					"code": "M4 CAT",
+					"kits": 4,
+					"status": "aprobada",
+					"rev": 1,
+					"by": "Laura Pons",
+					"at": "2026-10-20 16:49",
+					"comments": [],
+					"file": "GI-08_M4-CAT_v1.pdf",
+					"size": "4.4 MB"
+				}
+			]
+		}
+	},
+	"tickets": [
+		{
+			"id": "INC-2041",
+			"campaign": "VI-26-03b",
+			"type": "Incidencia",
+			"kind": "Bulto dañado",
+			"title": "2 bultos dañados en reparto (VIPS Goya y VIPS Castellana 90)",
+			"severity": "alta",
+			"state": "En curso",
+			"opened": "2026-10-20 09:40",
+			"by": "Plataforma Promopicking · ruta 14",
+			"rte": "VI-0023",
+			"updates": [
+				{
+					"at": "2026-10-20 11:15",
+					"who": "Jorge Martín · Promopicking",
+					"txt": "Reposición de 2 kits lanzada. Salida prevista el 23/10 y reclamación abierta al transportista."
+				}
+			]
+		},
+		{
+			"id": "CON-2038",
+			"campaign": "FH-26-03",
+			"type": "Consulta",
+			"kind": "Versiones",
+			"title": "¿Se mantiene la versión C2 RED+ SP para Méndez Álvaro en el lanzamiento?",
+			"severity": "media",
+			"state": "Respondida",
+			"opened": "2026-10-20 16:02",
+			"by": "Jorge Martín · Promopicking",
+			"rte": "FH-0104",
+			"updates": [
+				{
+					"at": "2026-10-21 10:30",
+					"who": "Marta Ruiz · Alsea",
+					"txt": "Sí, se mantiene con el menú de estación en contraportada. Subid la v2."
+				}
+			]
+		},
+		{
+			"id": "INC-2035",
+			"campaign": "GI-26-02",
+			"type": "Incidencia",
+			"kind": "Faltan unidades",
+			"title": "Faltan 2 cartas fachada 50×70 M3 CAST en Ginos La Maquinista",
+			"severity": "media",
+			"state": "Cerrada",
+			"opened": "2026-10-07 12:20",
+			"by": "Gerente · Ginos La Maquinista",
+			"rte": "GI-0045",
+			"updates": [
+				{
+					"at": "2026-10-07 14:05",
+					"who": "Jorge Martín · Promopicking",
+					"txt": "Reposición enviada por mensajería, entrega 09/10."
+				},
+				{
+					"at": "2026-10-09 11:40",
+					"who": "Gerente · Ginos La Maquinista",
+					"txt": "Recibido, gracias."
+				}
+			]
+		},
+		{
+			"id": "CON-2031",
+			"campaign": "VI-26-02",
+			"type": "Consulta",
+			"kind": "Medidas",
+			"title": "Confirmar medida del cartel forex 70×100 para Smart Las Rozas",
+			"severity": "baja",
+			"state": "Cerrada",
+			"opened": "2026-10-14 09:10",
+			"by": "Jorge Martín · Promopicking",
+			"rte": "VI-0120",
+			"updates": [
+				{
+					"at": "2026-10-14 12:45",
+					"who": "Carlos Vega · Alsea",
+					"txt": "Confirmado 69,5×101 según maestro."
+				}
+			]
+		}
+	],
+	"kits": {
+		"FH-26-06": [
+			{
+				"id": "K-FH2606-0147",
+				"rte": "FH-0147",
+				"campaign": "FH-26-06",
+				"bultos": 1,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-10 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-12 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-14 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-15 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-19 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · FH Plenilunio",
+				"lines": [
+					{
+						"name": "Octavillas menú A5",
+						"ver": "SP · 14,95",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "SP",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-FH2606-0012",
+				"rte": "FH-0012",
+				"campaign": "FH-26-06",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-10 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-12 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-14 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-15 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-19 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · FH Gran Vía 48",
+				"lines": [
+					{
+						"name": "Octavillas menú A5",
+						"ver": "SP + EN · 14,95",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "SP + EN",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-FH2606-0231",
+				"rte": "FH-0231",
+				"campaign": "FH-26-06",
+				"bultos": 1,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-10 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-12 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-14 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-15 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-19 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · FH Diagonal Mar",
+				"lines": [
+					{
+						"name": "Octavillas menú A5",
+						"ver": "CAT · 14,95",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "CAT",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-FH2606-0088",
+				"rte": "FH-0088",
+				"campaign": "FH-26-06",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-10 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-12 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-14 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-15 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-19 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · FH Nervión Plaza",
+				"lines": [
+					{
+						"name": "Octavillas menú A5",
+						"ver": "SP · 14,95",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "SP",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-FH2606-0104",
+				"rte": "FH-0104",
+				"campaign": "FH-26-06",
+				"bultos": 1,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-10 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-12 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-14 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-15 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-19 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · FH Méndez Álvaro",
+				"lines": [
+					{
+						"name": "Octavillas menú A5",
+						"ver": "SP · 14,95",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "SP",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-FH2606-0177",
+				"rte": "FH-0177",
+				"campaign": "FH-26-06",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-10 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-12 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-14 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-15 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-19 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · FH Xanadú",
+				"lines": [
+					{
+						"name": "Octavillas menú A5",
+						"ver": "SP · 14,95",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "SP",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-FH2606-0199",
+				"rte": "FH-0199",
+				"campaign": "FH-26-06",
+				"bultos": 1,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-10 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-12 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-14 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-15 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-19 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · FH Vigo Gran Vía",
+				"lines": [
+					{
+						"name": "Octavillas menú A5",
+						"ver": "GALL · 14,95",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "GALL",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-FH2606-0045",
+				"rte": "FH-0045",
+				"campaign": "FH-26-06",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-10 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-12 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-14 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-15 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-19 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · FH Parque Warner",
+				"lines": [
+					{
+						"name": "Octavillas menú A5",
+						"ver": "SP + EN · 14,95",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "SP + EN",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-FH2606-0203",
+				"rte": "FH-0203",
+				"campaign": "FH-26-06",
+				"bultos": 1,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-10 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-12 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-14 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-15 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-19 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · FH Festival Park",
+				"lines": [
+					{
+						"name": "Octavillas menú A5",
+						"ver": "SP · 14,95",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "SP",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-FH2606-0061",
+				"rte": "FH-0061",
+				"campaign": "FH-26-06",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-10 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-12 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-14 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-15 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-19 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · FH Aqua",
+				"lines": [
+					{
+						"name": "Octavillas menú A5",
+						"ver": "SP + EN · 14,95",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "SP + EN",
+						"uds": 1
+					}
+				]
+			}
+		],
+		"FH-26-07": [
+			{
+				"id": "K-FH2607-0147",
+				"rte": "FH-0147",
+				"campaign": "FH-26-07",
+				"bultos": 1,
+				"state": 3,
+				"scans": [
+					{
+						"at": "2026-10-17 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-19 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-21 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-22 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": null,
+				"lines": [
+					{
+						"name": "Encarte Halloween 160×260",
+						"ver": "C2 SP",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "SP",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-FH2607-0012",
+				"rte": "FH-0012",
+				"campaign": "FH-26-07",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-17 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-19 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-21 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-22 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-22 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · FH Gran Vía 48",
+				"lines": [
+					{
+						"name": "Encarte Halloween 160×260",
+						"ver": "C3+ SP + EN",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "SP + EN",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-FH2607-0231",
+				"rte": "FH-0231",
+				"campaign": "FH-26-07",
+				"bultos": 1,
+				"state": 3,
+				"scans": [
+					{
+						"at": "2026-10-17 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-19 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-21 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-22 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": null,
+				"lines": [
+					{
+						"name": "Encarte Halloween 160×260",
+						"ver": "C3 CAT",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "CAT",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-FH2607-0088",
+				"rte": "FH-0088",
+				"campaign": "FH-26-07",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-17 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-19 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-21 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-22 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-22 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · FH Nervión Plaza",
+				"lines": [
+					{
+						"name": "Encarte Halloween 160×260",
+						"ver": "C2 SP",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "SP",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-FH2607-0104",
+				"rte": "FH-0104",
+				"campaign": "FH-26-07",
+				"bultos": 1,
+				"state": 3,
+				"scans": [
+					{
+						"at": "2026-10-17 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-19 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-21 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-22 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": null,
+				"lines": [
+					{
+						"name": "Encarte Halloween 160×260",
+						"ver": "C2 SP",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "SP",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-FH2607-0177",
+				"rte": "FH-0177",
+				"campaign": "FH-26-07",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-17 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-19 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-21 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-22 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-22 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · FH Xanadú",
+				"lines": [
+					{
+						"name": "Encarte Halloween 160×260",
+						"ver": "C3 SP",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "SP",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-FH2607-0199",
+				"rte": "FH-0199",
+				"campaign": "FH-26-07",
+				"bultos": 1,
+				"state": 3,
+				"scans": [
+					{
+						"at": "2026-10-17 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-19 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-21 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-22 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": null,
+				"lines": [
+					{
+						"name": "Encarte Halloween 160×260",
+						"ver": "C2 GALL",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "GALL",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-FH2607-0045",
+				"rte": "FH-0045",
+				"campaign": "FH-26-07",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-17 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-19 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-21 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-22 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-22 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · FH Parque Warner",
+				"lines": [
+					{
+						"name": "Encarte Halloween 160×260",
+						"ver": "WARNER SP + EN",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "SP + EN",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-FH2607-0203",
+				"rte": "FH-0203",
+				"campaign": "FH-26-07",
+				"bultos": 1,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-17 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-19 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-21 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-22 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-22 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · FH Festival Park",
+				"lines": [
+					{
+						"name": "Encarte Halloween 160×260",
+						"ver": "C2 SP",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "SP",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-FH2607-0061",
+				"rte": "FH-0061",
+				"campaign": "FH-26-07",
+				"bultos": 2,
+				"state": 3,
+				"scans": [
+					{
+						"at": "2026-10-17 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-19 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-21 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-22 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": null,
+				"lines": [
+					{
+						"name": "Encarte Halloween 160×260",
+						"ver": "C3+ SP + EN",
+						"uds": 20
+					},
+					{
+						"name": "Lámina imantada 59×92",
+						"ver": "SP + EN",
+						"uds": 1
+					}
+				]
+			}
+		],
+		"VI-26-03": [
+			{
+				"id": "K-VI2603-0023",
+				"rte": "VI-0023",
+				"campaign": "VI-26-03",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-04 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-06 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-08 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-09 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-13 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · VIPS Goya",
+				"lines": [
+					{
+						"name": "Carta menú infantil",
+						"ver": "CAST",
+						"uds": 20
+					}
+				]
+			},
+			{
+				"id": "K-VI2603-0007",
+				"rte": "VI-0007",
+				"campaign": "VI-26-03",
+				"bultos": 1,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-04 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-06 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-08 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-09 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-13 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · VIPS Castellana 90",
+				"lines": [
+					{
+						"name": "Carta menú infantil",
+						"ver": "CAST",
+						"uds": 20
+					}
+				]
+			},
+			{
+				"id": "K-VI2603-0120",
+				"rte": "VI-0120",
+				"campaign": "VI-26-03",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-04 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-06 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-08 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-09 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-13 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · VIPS Smart Las Rozas",
+				"lines": [
+					{
+						"name": "Carta menú infantil",
+						"ver": "CAST",
+						"uds": 20
+					}
+				]
+			},
+			{
+				"id": "K-VI2603-0098",
+				"rte": "VI-0098",
+				"campaign": "VI-26-03",
+				"bultos": 1,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-04 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-06 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-08 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-09 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-13 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · VIPS Neptuno",
+				"lines": [
+					{
+						"name": "Carta menú infantil",
+						"ver": "CAST",
+						"uds": 20
+					}
+				]
+			},
+			{
+				"id": "K-VI2603-0141",
+				"rte": "VI-0141",
+				"campaign": "VI-26-03",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-04 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-06 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-08 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-09 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-13 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · VIPS Plenilunio",
+				"lines": [
+					{
+						"name": "Carta menú infantil",
+						"ver": "CAST",
+						"uds": 20
+					}
+				]
+			},
+			{
+				"id": "K-VI2603-0056",
+				"rte": "VI-0056",
+				"campaign": "VI-26-03",
+				"bultos": 1,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-04 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-06 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-08 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-09 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-13 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · VIPS Diagonal",
+				"lines": [
+					{
+						"name": "Carta menú infantil",
+						"ver": "CAT",
+						"uds": 20
+					}
+				]
+			},
+			{
+				"id": "K-VI2603-0133",
+				"rte": "VI-0133",
+				"campaign": "VI-26-03",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-04 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-06 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-08 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-09 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-13 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · VIPS Smart Islazul",
+				"lines": [
+					{
+						"name": "Carta menú infantil",
+						"ver": "CAST",
+						"uds": 20
+					}
+				]
+			}
+		],
+		"VI-26-03b": [
+			{
+				"id": "K-VI2603b-0023",
+				"rte": "VI-0023",
+				"campaign": "VI-26-03b",
+				"bultos": 1,
+				"state": 3,
+				"scans": [
+					{
+						"at": "2026-10-11 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-13 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-15 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-16 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					}
+				],
+				"incidencia": "INC-2041",
+				"receivedBy": null,
+				"lines": [
+					{
+						"name": "Encarte menú noche 150×300",
+						"ver": "CAST",
+						"uds": 125
+					},
+					{
+						"name": "Cartel 50×70 menú noche",
+						"ver": "CAST",
+						"uds": 2
+					}
+				]
+			},
+			{
+				"id": "K-VI2603b-0007",
+				"rte": "VI-0007",
+				"campaign": "VI-26-03b",
+				"bultos": 2,
+				"state": 3,
+				"scans": [
+					{
+						"at": "2026-10-11 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-13 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-15 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-16 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					}
+				],
+				"incidencia": "INC-2041",
+				"receivedBy": null,
+				"lines": [
+					{
+						"name": "Encarte menú noche 150×300",
+						"ver": "CAST",
+						"uds": 125
+					},
+					{
+						"name": "Cartel 50×70 menú noche",
+						"ver": "CAST",
+						"uds": 2
+					}
+				]
+			},
+			{
+				"id": "K-VI2603b-0120",
+				"rte": "VI-0120",
+				"campaign": "VI-26-03b",
+				"bultos": 1,
+				"state": 3,
+				"scans": [
+					{
+						"at": "2026-10-11 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-13 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-15 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-16 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": null,
+				"lines": [
+					{
+						"name": "Encarte menú noche 150×300",
+						"ver": "CAST",
+						"uds": 125
+					},
+					{
+						"name": "Cartel 50×70 menú noche",
+						"ver": "CAST",
+						"uds": 2
+					}
+				]
+			},
+			{
+				"id": "K-VI2603b-0098",
+				"rte": "VI-0098",
+				"campaign": "VI-26-03b",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-11 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-13 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-15 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-16 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-20 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · VIPS Neptuno",
+				"lines": [
+					{
+						"name": "Encarte menú noche 150×300",
+						"ver": "CAST",
+						"uds": 125
+					},
+					{
+						"name": "Cartel 50×70 menú noche",
+						"ver": "CAST",
+						"uds": 2
+					}
+				]
+			},
+			{
+				"id": "K-VI2603b-0141",
+				"rte": "VI-0141",
+				"campaign": "VI-26-03b",
+				"bultos": 1,
+				"state": 3,
+				"scans": [
+					{
+						"at": "2026-10-11 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-13 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-15 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-16 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": null,
+				"lines": [
+					{
+						"name": "Encarte menú noche 150×300",
+						"ver": "CAST",
+						"uds": 125
+					},
+					{
+						"name": "Cartel 50×70 menú noche",
+						"ver": "CAST",
+						"uds": 2
+					}
+				]
+			},
+			{
+				"id": "K-VI2603b-0056",
+				"rte": "VI-0056",
+				"campaign": "VI-26-03b",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-11 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-13 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-15 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-16 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-20 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · VIPS Diagonal",
+				"lines": [
+					{
+						"name": "Encarte menú noche 150×300",
+						"ver": "CAT",
+						"uds": 125
+					},
+					{
+						"name": "Cartel 50×70 menú noche",
+						"ver": "CAT",
+						"uds": 2
+					}
+				]
+			},
+			{
+				"id": "K-VI2603b-0133",
+				"rte": "VI-0133",
+				"campaign": "VI-26-03b",
+				"bultos": 1,
+				"state": 3,
+				"scans": [
+					{
+						"at": "2026-10-11 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-13 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-15 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-16 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": null,
+				"lines": [
+					{
+						"name": "Encarte menú noche 150×300",
+						"ver": "CAST",
+						"uds": 125
+					},
+					{
+						"name": "Cartel 50×70 menú noche",
+						"ver": "CAST",
+						"uds": 2
+					}
+				]
+			}
+		],
+		"GI-26-02": [
+			{
+				"id": "K-GI2602-0231",
+				"rte": "GI-0231",
+				"campaign": "GI-26-02",
+				"bultos": 1,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-09-27 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-09-29 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-01 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-02 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-06 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · Ginos Alcalá 141",
+				"lines": [
+					{
+						"name": "Carta general Ginos",
+						"ver": "M3 CAST",
+						"uds": 30
+					},
+					{
+						"name": "Carta fachada",
+						"ver": "50×70 M3 CAST",
+						"uds": 2
+					},
+					{
+						"name": "Encarte novedad",
+						"ver": "CAST",
+						"uds": 30
+					},
+					{
+						"name": "Tijera 70×99,7",
+						"ver": "CAST",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-GI2602-0045",
+				"rte": "GI-0045",
+				"campaign": "GI-26-02",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-09-27 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-09-29 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-01 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-02 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-06 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · Ginos La Maquinista",
+				"lines": [
+					{
+						"name": "Carta general Ginos",
+						"ver": "M3 CAT",
+						"uds": 30
+					},
+					{
+						"name": "Carta fachada",
+						"ver": "54×46 M3 CAT",
+						"uds": 2
+					},
+					{
+						"name": "Encarte novedad",
+						"ver": "CAT",
+						"uds": 30
+					},
+					{
+						"name": "Tijera 70×99,7",
+						"ver": "CAT",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-GI2602-0102",
+				"rte": "GI-0102",
+				"campaign": "GI-26-02",
+				"bultos": 1,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-09-27 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-09-29 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-01 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-02 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-06 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · Ginos Puerto Banús",
+				"lines": [
+					{
+						"name": "Carta general Ginos",
+						"ver": "M2 ING turismo",
+						"uds": 30
+					},
+					{
+						"name": "Carta fachada",
+						"ver": "50×70 M2 ING turismo",
+						"uds": 2
+					},
+					{
+						"name": "Encarte novedad",
+						"ver": "ING turismo",
+						"uds": 30
+					},
+					{
+						"name": "Tijera 70×99,7",
+						"ver": "ING turismo",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-GI2602-0066",
+				"rte": "GI-0066",
+				"campaign": "GI-26-02",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-09-27 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-09-29 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-01 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-02 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-06 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · Ginos Nuevo Centro",
+				"lines": [
+					{
+						"name": "Carta general Ginos",
+						"ver": "M4 CAST",
+						"uds": 30
+					},
+					{
+						"name": "Carta fachada",
+						"ver": "47×72 M4 CAST",
+						"uds": 2
+					},
+					{
+						"name": "Encarte novedad",
+						"ver": "CAST",
+						"uds": 30
+					},
+					{
+						"name": "Tijera 70×99,7",
+						"ver": "CAST",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-GI2602-0019",
+				"rte": "GI-0019",
+				"campaign": "GI-26-02",
+				"bultos": 1,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-09-27 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-09-29 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-01 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-02 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-06 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · Ginos Nervión",
+				"lines": [
+					{
+						"name": "Carta general Ginos",
+						"ver": "M2 Andalucía turismo",
+						"uds": 30
+					},
+					{
+						"name": "Carta fachada",
+						"ver": "54×46 M2 Andalucía turismo",
+						"uds": 2
+					},
+					{
+						"name": "Encarte novedad",
+						"ver": "Andalucía turismo",
+						"uds": 30
+					},
+					{
+						"name": "Tijera 70×99,7",
+						"ver": "Andalucía turismo",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-GI2602-0088",
+				"rte": "GI-0088",
+				"campaign": "GI-26-02",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-09-27 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-09-29 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-01 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-02 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-06 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · Ginos Puerto Venecia",
+				"lines": [
+					{
+						"name": "Carta general Ginos",
+						"ver": "M3 CAST",
+						"uds": 30
+					},
+					{
+						"name": "Carta fachada",
+						"ver": "50×70 M3 CAST",
+						"uds": 2
+					},
+					{
+						"name": "Encarte novedad",
+						"ver": "CAST",
+						"uds": 30
+					},
+					{
+						"name": "Tijera 70×99,7",
+						"ver": "CAST",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-GI2602-0110",
+				"rte": "GI-0110",
+				"campaign": "GI-26-02",
+				"bultos": 1,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-09-27 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-09-29 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-01 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-02 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-06 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · Ginos Gran Vía 2",
+				"lines": [
+					{
+						"name": "Carta general Ginos",
+						"ver": "M4 CAT",
+						"uds": 30
+					},
+					{
+						"name": "Carta fachada",
+						"ver": "50×70 M4 CAT",
+						"uds": 2
+					},
+					{
+						"name": "Encarte novedad",
+						"ver": "CAT",
+						"uds": 30
+					},
+					{
+						"name": "Tijera 70×99,7",
+						"ver": "CAT",
+						"uds": 1
+					}
+				]
+			},
+			{
+				"id": "K-GI2602-0133",
+				"rte": "GI-0133",
+				"campaign": "GI-26-02",
+				"bultos": 2,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-09-27 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-09-29 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-01 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-02 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-06 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · Ginos Plenilunio",
+				"lines": [
+					{
+						"name": "Carta general Ginos",
+						"ver": "M3 CAST",
+						"uds": 30
+					},
+					{
+						"name": "Carta fachada",
+						"ver": "59×117 M3 CAST",
+						"uds": 2
+					},
+					{
+						"name": "Encarte novedad",
+						"ver": "CAST",
+						"uds": 30
+					},
+					{
+						"name": "Tijera 70×99,7",
+						"ver": "CAST",
+						"uds": 1
+					}
+				]
+			}
+		],
+		"GI-26-07": [
+			{
+				"id": "K-GI2607-0231",
+				"rte": "GI-0231",
+				"campaign": "GI-26-07",
+				"bultos": 2,
+				"state": 0,
+				"scans": [
+					{
+						"at": "2026-10-20 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": null,
+				"lines": [
+					{
+						"name": "Díptico menú noches 30×30",
+						"ver": "M3 CAST",
+						"uds": 30
+					},
+					{
+						"name": "Tijera 70×99,7",
+						"ver": "CAST",
+						"uds": 1
+					},
+					{
+						"name": "Cartelería papel 50×70",
+						"ver": "CAST",
+						"uds": 2
+					},
+					{
+						"name": "Table tent 12×17,7",
+						"ver": "Menú noches CAST",
+						"uds": 25
+					},
+					{
+						"name": "Flyers A5",
+						"ver": "CAST",
+						"uds": 100
+					}
+				]
+			},
+			{
+				"id": "K-GI2607-0045",
+				"rte": "GI-0045",
+				"campaign": "GI-26-07",
+				"bultos": 1,
+				"state": 0,
+				"scans": [
+					{
+						"at": "2026-10-20 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": null,
+				"lines": [
+					{
+						"name": "Díptico menú noches 30×30",
+						"ver": "M3 CAT",
+						"uds": 30
+					},
+					{
+						"name": "Tijera 70×99,7",
+						"ver": "CAT",
+						"uds": 1
+					},
+					{
+						"name": "Cartelería papel 50×70",
+						"ver": "CAT",
+						"uds": 2
+					},
+					{
+						"name": "Table tent 12×17,7",
+						"ver": "Menú noches CAT",
+						"uds": 25
+					},
+					{
+						"name": "Flyers A5",
+						"ver": "CAT",
+						"uds": 100
+					}
+				]
+			},
+			{
+				"id": "K-GI2607-0102",
+				"rte": "GI-0102",
+				"campaign": "GI-26-07",
+				"bultos": 2,
+				"state": 1,
+				"scans": [
+					{
+						"at": "2026-10-20 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-21 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": null,
+				"lines": [
+					{
+						"name": "Díptico menú noches 30×30",
+						"ver": "M2 ING turismo",
+						"uds": 30
+					},
+					{
+						"name": "Tijera 70×99,7",
+						"ver": "ING turismo",
+						"uds": 1
+					},
+					{
+						"name": "Cartelería papel 50×70",
+						"ver": "ING turismo",
+						"uds": 2
+					},
+					{
+						"name": "Table tent 12×17,7",
+						"ver": "Menú noches ING turismo",
+						"uds": 25
+					},
+					{
+						"name": "Flyers A5",
+						"ver": "ING turismo",
+						"uds": 100
+					}
+				]
+			},
+			{
+				"id": "K-GI2607-0066",
+				"rte": "GI-0066",
+				"campaign": "GI-26-07",
+				"bultos": 1,
+				"state": 1,
+				"scans": [
+					{
+						"at": "2026-10-20 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-21 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": null,
+				"lines": [
+					{
+						"name": "Díptico menú noches 30×30",
+						"ver": "M4 CAST",
+						"uds": 30
+					},
+					{
+						"name": "Tijera 70×99,7",
+						"ver": "CAST",
+						"uds": 1
+					},
+					{
+						"name": "Cartelería papel 50×70",
+						"ver": "CAST",
+						"uds": 2
+					},
+					{
+						"name": "Table tent 12×17,7",
+						"ver": "Menú noches CAST",
+						"uds": 25
+					},
+					{
+						"name": "Flyers A5",
+						"ver": "CAST",
+						"uds": 100
+					}
+				]
+			},
+			{
+				"id": "K-GI2607-0019",
+				"rte": "GI-0019",
+				"campaign": "GI-26-07",
+				"bultos": 2,
+				"state": 2,
+				"scans": [
+					{
+						"at": "2026-10-20 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-21 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-22 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": null,
+				"lines": [
+					{
+						"name": "Díptico menú noches 30×30",
+						"ver": "M2 Andalucía turismo",
+						"uds": 30
+					},
+					{
+						"name": "Tijera 70×99,7",
+						"ver": "Andalucía turismo",
+						"uds": 1
+					},
+					{
+						"name": "Cartelería papel 50×70",
+						"ver": "Andalucía turismo",
+						"uds": 2
+					},
+					{
+						"name": "Table tent 12×17,7",
+						"ver": "Menú noches Andalucía turismo",
+						"uds": 25
+					},
+					{
+						"name": "Flyers A5",
+						"ver": "Andalucía turismo",
+						"uds": 100
+					}
+				]
+			},
+			{
+				"id": "K-GI2607-0088",
+				"rte": "GI-0088",
+				"campaign": "GI-26-07",
+				"bultos": 1,
+				"state": 3,
+				"scans": [
+					{
+						"at": "2026-10-20 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-21 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-22 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-22 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": null,
+				"lines": [
+					{
+						"name": "Díptico menú noches 30×30",
+						"ver": "M3 CAST",
+						"uds": 30
+					},
+					{
+						"name": "Tijera 70×99,7",
+						"ver": "CAST",
+						"uds": 1
+					},
+					{
+						"name": "Cartelería papel 50×70",
+						"ver": "CAST",
+						"uds": 2
+					},
+					{
+						"name": "Table tent 12×17,7",
+						"ver": "Menú noches CAST",
+						"uds": 25
+					},
+					{
+						"name": "Flyers A5",
+						"ver": "CAST",
+						"uds": 100
+					}
+				]
+			},
+			{
+				"id": "K-GI2607-0110",
+				"rte": "GI-0110",
+				"campaign": "GI-26-07",
+				"bultos": 2,
+				"state": 3,
+				"scans": [
+					{
+						"at": "2026-10-20 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-21 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-22 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-22 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": null,
+				"lines": [
+					{
+						"name": "Díptico menú noches 30×30",
+						"ver": "M4 CAT",
+						"uds": 30
+					},
+					{
+						"name": "Tijera 70×99,7",
+						"ver": "CAT",
+						"uds": 1
+					},
+					{
+						"name": "Cartelería papel 50×70",
+						"ver": "CAT",
+						"uds": 2
+					},
+					{
+						"name": "Table tent 12×17,7",
+						"ver": "Menú noches CAT",
+						"uds": 25
+					},
+					{
+						"name": "Flyers A5",
+						"ver": "CAT",
+						"uds": 100
+					}
+				]
+			},
+			{
+				"id": "K-GI2607-0133",
+				"rte": "GI-0133",
+				"campaign": "GI-26-07",
+				"bultos": 1,
+				"state": 4,
+				"scans": [
+					{
+						"at": "2026-10-20 12:30",
+						"what": "Kit preparado y etiquetado",
+						"who": "Kitting · producción"
+					},
+					{
+						"at": "2026-10-21 16:40",
+						"what": "Salida de producción (expedición)",
+						"who": "Expedición · producción"
+					},
+					{
+						"at": "2026-10-22 08:15",
+						"what": "Entrada en plataforma Promopicking",
+						"who": "Plataforma Promopicking"
+					},
+					{
+						"at": "2026-10-22 09:50",
+						"what": "Salida a reparto",
+						"who": "Plataforma Promopicking · ruta 14"
+					},
+					{
+						"at": "2026-10-22 10:20",
+						"what": "Recepción en restaurante",
+						"who": "Gerente del restaurante"
+					}
+				],
+				"incidencia": null,
+				"receivedBy": "Gerente · Ginos Plenilunio",
+				"lines": [
+					{
+						"name": "Díptico menú noches 30×30",
+						"ver": "M3 CAST",
+						"uds": 30
+					},
+					{
+						"name": "Tijera 70×99,7",
+						"ver": "CAST",
+						"uds": 1
+					},
+					{
+						"name": "Cartelería papel 50×70",
+						"ver": "CAST",
+						"uds": 2
+					},
+					{
+						"name": "Table tent 12×17,7",
+						"ver": "Menú noches CAST",
+						"uds": 25
+					},
+					{
+						"name": "Flyers A5",
+						"ver": "CAST",
+						"uds": 100
+					}
+				]
+			}
+		]
+	},
+	"catalog": [
+		{
+			"id": "g1",
+			"cat": "generico",
+			"brand": "FH",
+			"name": "Manteles 30×40 (4 modelos intercalados)",
+			"desc": "Offset blanco 90 g, 4/0 tintas vegetales. Retráctil de 1.000.",
+			"unit": "paquete de 1.000",
+			"price": 48.5,
+			"lead": 5
+		},
+		{
+			"id": "g2",
+			"cat": "generico",
+			"brand": "FH",
+			"name": "Mantel infantil licencia (díptico A4)",
+			"desc": "Offset 100 g, 4/4. Caja impresa de 500.",
+			"unit": "caja de 500",
+			"price": 25.6,
+			"lead": 5
+		},
+		{
+			"id": "g3",
+			"cat": "generico",
+			"brand": "ALL",
+			"name": "Manteleta celíacos A3",
+			"desc": "Estucado reciclado mate PEFC 80 g, 4/0. Paquete de 500.",
+			"unit": "paquete de 500",
+			"price": 19.8,
+			"lead": 5
+		},
+		{
+			"id": "g7",
+			"cat": "generico",
+			"brand": "FH",
+			"name": "Carta surtido FH (versión vigente del restaurante)",
+			"desc": "Tríptico 222×320, 350 g plastificado mate. Se sirve la versión del maestro (tarifa, surtido e idioma).",
+			"unit": "paquete de 10",
+			"price": 9.12,
+			"lead": 4
+		},
+		{
+			"id": "g4",
+			"cat": "generico",
+			"brand": "FH",
+			"name": "Carta sin gluten FH (versión del restaurante)",
+			"desc": "Tríptico 120×279, 300 g plastificado mate.",
+			"unit": "paquete de 10",
+			"price": 9.2,
+			"lead": 4
+		},
+		{
+			"id": "g5",
+			"cat": "generico",
+			"brand": "FH",
+			"name": "Horario 13,5×19",
+			"desc": "Estucado mate 350 g, 4/0. Castellano o catalán.",
+			"unit": "paquete de 10",
+			"price": 6.5,
+			"lead": 3
+		},
+		{
+			"id": "g6",
+			"cat": "generico",
+			"brand": "FH",
+			"name": "Menú de la casa 10×8",
+			"desc": "Estucado mate 350 g, 4/0.",
+			"unit": "paquete de 25",
+			"price": 4.9,
+			"lead": 3
+		},
+		{
+			"id": "g8",
+			"cat": "generico",
+			"brand": "VIPS",
+			"name": "Teléfono Club VIPS 156×130",
+			"desc": "Cartulina 350 g, 4/4, troquelado con cinta.",
+			"unit": "paquete de 50",
+			"price": 7.8,
+			"lead": 4
+		},
+		{
+			"id": "g9",
+			"cat": "generico",
+			"brand": "VIPS",
+			"name": "Table tent VIPS (menú vigente)",
+			"desc": "Estucado mate 350 g plastificado, hendido. Modelo del restaurante.",
+			"unit": "paquete de 25",
+			"price": 6.4,
+			"lead": 4
+		},
+		{
+			"id": "g10",
+			"cat": "generico",
+			"brand": "GINOS",
+			"name": "Carta general Ginos (modelo del restaurante)",
+			"desc": "Cubierta 300 g + 12 págs. 170 g, plastificado antiarañazos.",
+			"unit": "paquete de 10",
+			"price": 23.8,
+			"lead": 5
+		},
+		{
+			"id": "g11",
+			"cat": "generico",
+			"brand": "GINOS",
+			"name": "Carta celíacos Ginos",
+			"desc": "Díptico 350 g plastificado mate. Tarifa del restaurante.",
+			"unit": "paquete de 10",
+			"price": 8.6,
+			"lead": 4
+		},
+		{
+			"id": "g12",
+			"cat": "generico",
+			"brand": "GINOS",
+			"name": "Table tent Ginos 12×17,7",
+			"desc": "Plastificado mate 2/c, 4/0.",
+			"unit": "paquete de 50",
+			"price": 6.9,
+			"lead": 4
+		},
+		{
+			"id": "l1",
+			"cat": "lsm",
+			"brand": "FH",
+			"name": "Tarjetas 2x1 estudiantes 55×85",
+			"desc": "Estucado brillo 350 g, 4/4, plastificado brillo.",
+			"unit": "4.000 uds",
+			"price": 44,
+			"lead": 6
+		},
+		{
+			"id": "l2",
+			"cat": "lsm",
+			"brand": "FH",
+			"name": "Tarjetas 10 % genérico (personalizadas por restaurante)",
+			"desc": "Mismo formato, con nombre y dirección del restaurante desde el maestro.",
+			"unit": "4.000 uds",
+			"price": 52,
+			"lead": 6
+		},
+		{
+			"id": "l6",
+			"cat": "lsm",
+			"brand": "FH",
+			"name": "Tarjetas patrocinios deportivos (7 modelos)",
+			"desc": "Estucado brillo 350 g, 4/4.",
+			"unit": "1.000 uds",
+			"price": 42,
+			"lead": 6
+		},
+		{
+			"id": "l3",
+			"cat": "lsm",
+			"brand": "ALL",
+			"name": "Flyers visitas comerciales A5",
+			"desc": "Estucado 150 g, 4/4.",
+			"unit": "1.000 uds",
+			"price": 38,
+			"lead": 5
+		},
+		{
+			"id": "l4",
+			"cat": "lsm",
+			"brand": "ALL",
+			"name": "Sobres visitas comerciales",
+			"desc": "Offset 90 g, tríptico envolvente, 4/0.",
+			"unit": "500 uds",
+			"price": 45,
+			"lead": 6
+		},
+		{
+			"id": "l5",
+			"cat": "lsm",
+			"brand": "ALL",
+			"name": "Cartas A4 visitas comerciales",
+			"desc": "Estucado mate 150 g, 4/4.",
+			"unit": "500 uds",
+			"price": 42,
+			"lead": 5
+		},
+		{
+			"id": "l7",
+			"cat": "lsm",
+			"brand": "VIPS",
+			"name": "Flyers menú de grupos",
+			"desc": "Estucado 150 g, 4/4.",
+			"unit": "1.000 uds",
+			"price": 38,
+			"lead": 5
+		},
+		{
+			"id": "l8",
+			"cat": "lsm",
+			"brand": "GINOS",
+			"name": "Flyers menú del día",
+			"desc": "Estucado 150 g, 4/4.",
+			"unit": "1.000 uds",
+			"price": 38,
+			"lead": 5
+		}
+	],
+	"orders": [
+		{
+			"id": "REP-2026-0311",
+			"rte": "FH-0177",
+			"date": "2026-10-20 10:12",
+			"lines": [
+				{
+					"id": "g1",
+					"qty": 3
+				},
+				{
+					"id": "g5",
+					"qty": 1
+				}
+			],
+			"state": "En reparto"
+		},
+		{
+			"id": "REP-2026-0310",
+			"rte": "GI-0231",
+			"date": "2026-10-19 17:45",
+			"lines": [
+				{
+					"id": "g10",
+					"qty": 2
+				}
+			],
+			"state": "En preparación"
+		},
+		{
+			"id": "REP-2026-0309",
+			"rte": "VI-0023",
+			"date": "2026-10-16 09:30",
+			"lines": [
+				{
+					"id": "g8",
+					"qty": 2
+				},
+				{
+					"id": "g9",
+					"qty": 2
+				}
+			],
+			"state": "Entregado"
+		},
+		{
+			"id": "REP-2026-0308",
+			"rte": "FH-0147",
+			"date": "2026-10-14 12:05",
+			"lines": [
+				{
+					"id": "l1",
+					"qty": 1
+				}
+			],
+			"state": "Entregado"
+		}
+	],
+	"reports": {
+		"months": [
+			"nov",
+			"dic",
+			"ene",
+			"feb",
+			"mar",
+			"abr",
+			"may",
+			"jun",
+			"jul",
+			"ago",
+			"sep",
+			"oct"
+		],
+		"otif": [
+			96.1,
+			97,
+			95.4,
+			98.2,
+			97.5,
+			96.8,
+			98.9,
+			97.7,
+			99,
+			96.3,
+			97.9,
+			98.4
+		],
+		"consumo": {
+			"FH": [
+				330,
+				300,
+				410,
+				360,
+				310,
+				420,
+				350,
+				290,
+				330,
+				440,
+				340,
+				390
+			],
+			"VIPS": [
+				32,
+				28,
+				45,
+				38,
+				30,
+				48,
+				36,
+				27,
+				33,
+				50,
+				34,
+				42
+			],
+			"GINOS": [
+				36,
+				30,
+				52,
+				40,
+				34,
+				55,
+				41,
+				29,
+				38,
+				58,
+				37,
+				48
+			]
+		},
+		"incidencias": [
+			{
+				"name": "Faltan unidades",
+				"value": 41,
+				"color": "#1f4a7a"
+			},
+			{
+				"name": "Bulto dañado",
+				"value": 27,
+				"color": "#d9452f"
+			},
+			{
+				"name": "Retraso de transporte",
+				"value": 22,
+				"color": "#e0a324"
+			},
+			{
+				"name": "Versión incorrecta",
+				"value": 12,
+				"color": "#5b86b8"
+			},
+			{
+				"name": "Otros",
+				"value": 6,
+				"color": "#9aa5b1"
+			}
+		],
+		"aprobacion": [
+			{
+				"name": "Foster's Hollywood",
+				"value": 2.1
+			},
+			{
+				"name": "VIPS / Smart",
+				"value": 3.4
+			},
+			{
+				"name": "Ginos",
+				"value": 1.8
+			}
+		],
+		"topSoportes": [
+			[
+				"Manteles 30×40 FH",
+				"FH",
+				2233000
+			],
+			[
+				"Mantel infantil licencia FH",
+				"FH",
+				1120000
+			],
+			[
+				"Manteletas celíacos",
+				"FH",
+				220000
+			],
+			[
+				"Teléfono Club VIPS",
+				"VIPS",
+				144750
+			],
+			[
+				"Encartes VIPS",
+				"VIPS",
+				106500
+			],
+			[
+				"Octavillas menú FH",
+				"FH",
+				72000
+			],
+			[
+				"Table tent VIPS",
+				"VIPS",
+				45000
+			],
+			[
+				"Carta surtido FH",
+				"FH",
+				50040
+			],
+			[
+				"Carta postres FH",
+				"FH",
+				32928
+			],
+			[
+				"Carta general Ginos",
+				"GINOS",
+				22080
+			]
+		],
+		"topRepos": [
+			[
+				"FH Xanadú",
+				9,
+				412.3
+			],
+			[
+				"FH Plenilunio",
+				8,
+				356.9
+			],
+			[
+				"Ginos Alcalá 141",
+				7,
+				318.6
+			],
+			[
+				"VIPS Goya",
+				6,
+				121.4
+			],
+			[
+				"FH Gran Vía 48",
+				6,
+				287.2
+			]
+		]
+	}
+}
