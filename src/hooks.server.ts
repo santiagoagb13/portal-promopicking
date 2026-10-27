@@ -132,9 +132,15 @@ const handleHeaders: Handle = async ({ event, resolve }) => {
 	h.set('x-frame-options', 'DENY');
 	h.set('cross-origin-opener-policy', 'same-origin');
 	h.set('cross-origin-resource-policy', 'same-origin');
-	const camera = CAMERA_PATHS.some((r) => r.test(event.url.pathname))
-		? 'camera=(self)'
-		: 'camera=()';
+	const cameraRoute = CAMERA_PATHS.some((r) => r.test(event.url.pathname));
+	const camera = cameraRoute ? 'camera=(self)' : 'camera=()';
+	// El lector de respaldo (zxing-wasm) compila WebAssembly: solo se permite en las rutas con cámara.
+	const csp = h.get('content-security-policy');
+	if (cameraRoute && csp)
+		h.set(
+			'content-security-policy',
+			csp.replace("script-src 'self'", "script-src 'self' 'wasm-unsafe-eval'")
+		);
 	h.set(
 		'permissions-policy',
 		`${camera}, microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=(), browsing-topics=()`

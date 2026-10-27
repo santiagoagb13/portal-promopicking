@@ -5,9 +5,11 @@
 /**
  * Service worker (9.1): precache de la carcasa (JS, CSS, fuentes, iconos) por versión.
  * Las páginas y los datos llevan sesión: van siempre a la red y nunca se guardan en caché;
- * sin red se muestra `offline.html`. La cola de escaneos sin cobertura llega en la fase 4.
+ * sin red se muestra `offline.html`. La cola de escaneos sin cobertura (IndexedDB) se reenvía
+ * con Background Sync donde existe; en el resto, desde la página al recuperar la red.
  */
 import { build, files, version } from '$service-worker';
+import { flush, SYNC_TAG } from '$lib/offline/queue';
 
 const sw = self as unknown as ServiceWorkerGlobalScope;
 const CACHE = `carcasa-${version}`;
@@ -50,4 +52,10 @@ sw.addEventListener('fetch', (event) => {
 			fetch(request).catch(async () => (await caches.match(OFFLINE)) ?? Response.error())
 		);
 	}
+});
+
+/** Background Sync: el navegador avisa cuando vuelve la red y se reenvía la cola de kits. */
+sw.addEventListener('sync', (event) => {
+	const e = event as Event & { tag: string; waitUntil(p: Promise<unknown>): void };
+	if (e.tag === SYNC_TAG) e.waitUntil(flush());
 });

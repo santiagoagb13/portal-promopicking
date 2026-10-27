@@ -593,6 +593,7 @@ async function seed(p: PrototypeData) {
 					k.scans.map((s, i) => ({
 						kitId: k.id,
 						at: madrid(s.at),
+						recordedAt: madrid(s.at),
 						type: KIT_EVENTS[i]!,
 						byLabel: s.who,
 						source: i === 4 ? ('mobile' as const) : ('scanner' as const)
@@ -603,6 +604,7 @@ async function seed(p: PrototypeData) {
 					await tx.insert(T.kitEvents).values({
 						kitId: k.id,
 						at: madrid(incident.opened),
+						recordedAt: madrid(incident.opened),
 						type: 'incident',
 						byLabel: incident.by,
 						source: 'scanner'

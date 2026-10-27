@@ -526,7 +526,13 @@ export const kitEvents = pgTable(
 		byUserId: text('by_user_id').references(() => users.id, { onDelete: 'set null' }),
 		byLabel: text('by_label'),
 		source: eventSourceEnum('source').notNull().default('web'),
-		photoKey: text('photo_key')
+		photoKey: text('photo_key'),
+		/** Id que pone el dispositivo: si la cola sin conexión reenvía el evento, no se duplica. */
+		clientEventId: text('client_event_id').unique(),
+		/** `at` es cuándo se escaneó en el dispositivo; `recorded_at`, cuándo llegó al servidor. */
+		recordedAt: ts('recorded_at').notNull().defaultNow(),
+		/** Bultos comprobados, nota de la incidencia… */
+		detail: jsonb('detail').$type<Record<string, unknown>>()
 	},
 	(t) => [index('kit_events_kit_idx').on(t.kitId, t.at)]
 );
