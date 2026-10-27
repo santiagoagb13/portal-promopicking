@@ -7,7 +7,8 @@ export const config = {
 	},
 	get authSecret() {
 		const secret = env.AUTH_SECRET;
-		if (!secret || secret.length < 32) throw new Error('AUTH_SECRET falta o tiene menos de 32 caracteres');
+		if (!secret || secret.length < 32)
+			throw new Error('AUTH_SECRET falta o tiene menos de 32 caracteres');
 		return secret;
 	},
 	get authOrigin() {

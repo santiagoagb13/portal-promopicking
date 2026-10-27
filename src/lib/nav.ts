@@ -27,16 +27,74 @@ export type NavItem = {
 };
 
 export const NAV: NavItem[] = [
-	{ href: '/campanas', label: 'Campañas', short: 'Campañas', icon: Megaphone, action: 'campaign.view' },
-	{ href: '/aprobaciones', label: 'Aprobación de artes', short: 'Aprobaciones', icon: FileCheck, action: 'artwork.view', count: 'pending' },
-	{ href: '/kits', label: 'Kits y etiquetas', short: 'Kits', icon: Package, action: 'kit.view', roles: ['admin', 'ops', 'production', 'brand'] },
-	{ href: '/kits/recepcion', label: 'Recepción de kits', short: 'Recepción', icon: PackageCheck, action: 'kit.receive', roles: ['manager'] },
+	{
+		href: '/campanas',
+		label: 'Campañas',
+		short: 'Campañas',
+		icon: Megaphone,
+		action: 'campaign.view'
+	},
+	{
+		href: '/aprobaciones',
+		label: 'Aprobación de artes',
+		short: 'Aprobaciones',
+		icon: FileCheck,
+		action: 'artwork.view',
+		count: 'pending'
+	},
+	{
+		href: '/kits',
+		label: 'Kits y etiquetas',
+		short: 'Kits',
+		icon: Package,
+		action: 'kit.view',
+		roles: ['admin', 'ops', 'production', 'brand']
+	},
+	{
+		href: '/kits/recepcion',
+		label: 'Recepción de kits',
+		short: 'Recepción',
+		icon: PackageCheck,
+		action: 'kit.receive',
+		roles: ['manager']
+	},
 	{ href: '/qr', label: 'QR de versión', short: 'QR', icon: QrCode, action: 'qr.view' },
-	{ href: '/reposiciones', label: 'Reposiciones', short: 'Reposiciones', icon: ShoppingCart, action: 'order.place' },
-	{ href: '/informes', label: 'Informes', short: 'Informes', icon: ChartColumn, action: 'report.view' },
-	{ href: '/maestro', label: 'Maestro de restaurantes', short: 'Maestro', icon: Store, action: 'restaurant.view' },
-	{ href: '/soporte', label: 'Soporte e incidencias', short: 'Soporte', icon: LifeBuoy, action: 'ticket.view', count: 'incidents' },
-	{ href: '/admin/invitaciones', label: 'Administración', short: 'Admin', icon: UserCog, action: 'user.invite' }
+	{
+		href: '/reposiciones',
+		label: 'Reposiciones',
+		short: 'Reposiciones',
+		icon: ShoppingCart,
+		action: 'order.place'
+	},
+	{
+		href: '/informes',
+		label: 'Informes',
+		short: 'Informes',
+		icon: ChartColumn,
+		action: 'report.view'
+	},
+	{
+		href: '/maestro',
+		label: 'Maestro de restaurantes',
+		short: 'Maestro',
+		icon: Store,
+		action: 'restaurant.view'
+	},
+	{
+		href: '/soporte',
+		label: 'Soporte e incidencias',
+		short: 'Soporte',
+		icon: LifeBuoy,
+		action: 'ticket.view',
+		count: 'incidents'
+	},
+	{
+		href: '/admin/invitaciones',
+		label: 'Administración',
+		short: 'Admin',
+		icon: UserCog,
+		action: 'user.invite'
+	}
 ];
 
 /** Destinos de la barra inferior en móvil (8.2); el quinto es «Más». */
@@ -57,6 +115,10 @@ export function tabsFor(actor: Actor): { tabs: NavItem[]; more: NavItem[] } {
 }
 
 export function isActive(href: string, pathname: string): boolean {
-	if (href === '/kits') return pathname === '/kits' || (pathname.startsWith('/kits/') && !pathname.startsWith('/kits/recepcion'));
+	if (href === '/kits')
+		return (
+			pathname === '/kits' ||
+			(pathname.startsWith('/kits/') && !pathname.startsWith('/kits/recepcion'))
+		);
 	return pathname === href || pathname.startsWith(href + '/');
 }

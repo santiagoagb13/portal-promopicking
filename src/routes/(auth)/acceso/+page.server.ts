@@ -20,15 +20,27 @@ export const actions: Actions = {
 		const start = Date.now();
 		const form = await request.formData();
 		const parsed = emailInput.safeParse(form.get('email'));
-		if (!parsed.success) return fail(400, { email: String(form.get('email') ?? ''), error: parsed.error.issues[0]?.message });
+		if (!parsed.success)
+			return fail(400, {
+				email: String(form.get('email') ?? ''),
+				error: parsed.error.issues[0]?.message
+			});
 		const email = parsed.data;
 		const back = safeBack(String(form.get('volver') ?? url.searchParams.get('volver') ?? ''));
 		// Límite por cuenta (además del de IP en hooks): 5 enlaces cada 15 min.
-		const perAccount = await hit(`email:ml:${createHash('sha256').update(email).digest('hex')}`, 5, 900);
+		const perAccount = await hit(
+			`email:ml:${createHash('sha256').update(email).digest('hex')}`,
+			5,
+			900
+		);
 		if (perAccount.ok) {
 			try {
 				await getAuth().api.signInMagicLink({
-					body: { email, callbackURL: `/bienvenida?volver=${encodeURIComponent(back)}`, errorCallbackURL: '/acceso?error=enlace' },
+					body: {
+						email,
+						callbackURL: `/bienvenida?volver=${encodeURIComponent(back)}`,
+						errorCallbackURL: '/acceso?error=enlace'
+					},
 					headers: request.headers
 				});
 			} catch (e) {

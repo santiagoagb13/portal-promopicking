@@ -19,7 +19,9 @@ const { brands, restaurants, invitations } = tables;
 export const load: PageServerLoad = async ({ locals, depends }) => {
 	depends('app:invitaciones');
 	const actor = locals.user!;
-	const roles: Role[] = ROLES.filter((r) => can(actor, 'user.invite', r === 'manager' ? undefined : { targetRole: r }));
+	const roles: Role[] = ROLES.filter((r) =>
+		can(actor, 'user.invite', r === 'manager' ? undefined : { targetRole: r })
+	);
 	const [list, brandRows, restaurantRows] = await Promise.all([
 		listOpenInvitations(actor),
 		db.select({ code: brands.code, name: brands.name }).from(brands).orderBy(asc(brands.code)),
@@ -62,8 +64,13 @@ export const actions: Actions = {
 			restaurants: form.getAll('restaurants')
 		};
 		const parsed = invitationInput.safeParse(raw);
-		const values = { email: String(raw.email ?? ''), name: String(raw.name), role: String(raw.role ?? '') };
-		if (!parsed.success) return fail(400, { create: { error: parsed.error.issues[0]?.message, values } });
+		const values = {
+			email: String(raw.email ?? ''),
+			name: String(raw.name),
+			role: String(raw.role ?? '')
+		};
+		if (!parsed.success)
+			return fail(400, { create: { error: parsed.error.issues[0]?.message, values } });
 		// Solo cuenta el ámbito que corresponde al rol elegido.
 		const input = {
 			...parsed.data,
@@ -79,7 +86,10 @@ export const actions: Actions = {
 		return { toast: 'Invitación enviada' };
 	},
 	reenviar: async ({ request, locals, getClientAddress }) => {
-		const id = z.string().uuid().safeParse((await request.formData()).get('id'));
+		const id = z
+			.string()
+			.uuid()
+			.safeParse((await request.formData()).get('id'));
 		if (!id.success) return fail(400);
 		try {
 			await resendInvitation(locals.user!, id.data, meta(request, getClientAddress()));
@@ -98,7 +108,12 @@ export const actions: Actions = {
 			.select({ email: invitations.email })
 			.from(invitations)
 			.where(inArray(invitations.id, [id.data]));
-		if (!inv || String(form.get('confirmacion') ?? '').trim().toLowerCase() !== inv.email)
+		if (
+			!inv ||
+			String(form.get('confirmacion') ?? '')
+				.trim()
+				.toLowerCase() !== inv.email
+		)
 			return fail(400, { error: 'Escribe el correo exacto para revocar' });
 		try {
 			await revokeInvitation(locals.user!, id.data, meta(request, getClientAddress()));

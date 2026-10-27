@@ -19,7 +19,11 @@
 		// Autocompletado condicional: el navegador ofrece la passkey en el campo de correo.
 		if (supported && PublicKeyCredential.isConditionalMediationAvailable)
 			PublicKeyCredential.isConditionalMediationAvailable().then((ok) => {
-				if (ok) authClient.signIn.passkey({ autoFill: true }).then(finish).catch(() => {});
+				if (ok)
+					authClient.signIn
+						.passkey({ autoFill: true })
+						.then(finish)
+						.catch(() => {});
 			});
 	});
 

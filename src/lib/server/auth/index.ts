@@ -31,7 +31,9 @@ export const ADMIN_IDLE_SECONDS = 60 * 60 * 8;
 /** Contexto de la ceremonia de registro con invitación: el token y el nombre confirmado. */
 export type InvitationContext = { t: string; n: string };
 
-export function parseInvitationContext(context: string | null | undefined): InvitationContext | null {
+export function parseInvitationContext(
+	context: string | null | undefined
+): InvitationContext | null {
 	if (!context) return null;
 	try {
 		const v = JSON.parse(context) as Partial<InvitationContext>;
@@ -88,7 +90,13 @@ function createAuth() {
 		trustedOrigins: [origin],
 		database: drizzleAdapter(db, {
 			provider: 'pg',
-			schema: { user: users, session: sessions, account: accounts, verification: verifications, passkey: passkeys },
+			schema: {
+				user: users,
+				session: sessions,
+				account: accounts,
+				verification: verifications,
+				passkey: passkeys
+			},
 			transaction: true
 		}),
 		user: {
@@ -107,7 +115,13 @@ function createAuth() {
 		},
 		// El límite de intentos lo aplica `hooks.server.ts` sobre Postgres (ver ADR 0002).
 		rateLimit: { enabled: false },
-		disabledPaths: ['/update-user', '/change-email', '/delete-user', '/list-accounts', '/sign-up/email'],
+		disabledPaths: [
+			'/update-user',
+			'/change-email',
+			'/delete-user',
+			'/list-accounts',
+			'/sign-up/email'
+		],
 		advanced: {
 			useSecureCookies: origin.startsWith('https://'),
 			database: { generateId: () => randomUUID() },
@@ -138,10 +152,25 @@ function createAuth() {
 						await db
 							.update(passkeys)
 							.set({ lastUsedAt: new Date() })
-							.where(and(eq(passkeys.credentialID, credentialId), eq(passkeys.userId, newSession.user.id)));
-					await audit({ userId: newSession.user.id, action: 'auth.sign_in', after: { method: 'passkey' }, ...m });
+							.where(
+								and(
+									eq(passkeys.credentialID, credentialId),
+									eq(passkeys.userId, newSession.user.id)
+								)
+							);
+					await audit({
+						userId: newSession.user.id,
+						action: 'auth.sign_in',
+						after: { method: 'passkey' },
+						...m
+					});
 				} else if (ctx.path === '/magic-link/verify' && newSession) {
-					await audit({ userId: newSession.user.id, action: 'auth.sign_in', after: { method: 'magic_link' }, ...m });
+					await audit({
+						userId: newSession.user.id,
+						action: 'auth.sign_in',
+						after: { method: 'magic_link' },
+						...m
+					});
 				} else if (ctx.path === '/passkey/delete-passkey' && ctx.context.session) {
 					await audit({
 						userId: ctx.context.session.user.id,
@@ -191,7 +220,8 @@ function createAuth() {
 								...m
 							});
 						} catch (e) {
-							if (e instanceof InvitationError) throw new APIError('BAD_REQUEST', { message: e.message });
+							if (e instanceof InvitationError)
+								throw new APIError('BAD_REQUEST', { message: e.message });
 							throw e;
 						}
 						await audit({ userId: user.id, action: 'passkey.added', ...m });

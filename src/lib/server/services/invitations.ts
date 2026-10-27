@@ -19,7 +19,8 @@ import {
 	type InvitationState
 } from '../auth/invitation-token';
 
-const { invitations, users, brands, restaurants, userBrands, userRestaurants, notifications } = tables;
+const { invitations, users, brands, restaurants, userBrands, userRestaurants, notifications } =
+	tables;
 
 export class InvitationError extends Error {}
 
@@ -27,7 +28,11 @@ type Meta = { ip?: string | null; userAgent?: string | null };
 type InvitationRow = typeof invitations.$inferSelect;
 
 /** «Gerente · FH Plenilunio», «Marketing de marca · Foster's Hollywood», «Operaciones». */
-export async function describeAccess(role: Role, scope: { brands: string[]; restaurants: string[] }, tx: DbOrTx = currentDb()) {
+export async function describeAccess(
+	role: Role,
+	scope: { brands: string[]; restaurants: string[] },
+	tx: DbOrTx = currentDb()
+) {
 	let names: string[] = [];
 	if (scope.restaurants.length) {
 		const rows = await tx
@@ -36,7 +41,10 @@ export async function describeAccess(role: Role, scope: { brands: string[]; rest
 			.where(inArray(restaurants.id, scope.restaurants));
 		names = rows.map((r) => r.name);
 	} else if (scope.brands.length) {
-		const rows = await tx.select({ name: brands.name }).from(brands).where(inArray(brands.code, scope.brands));
+		const rows = await tx
+			.select({ name: brands.name })
+			.from(brands)
+			.where(inArray(brands.code, scope.brands));
 		names = rows.map((r) => r.name);
 	}
 	return [ROLE_LABEL[role], ...(names.length ? [names.join(', ')] : [])].join(' · ');
@@ -50,8 +58,12 @@ function inviteUrl(token: string) {
 async function validateScope(input: InvitationInput) {
 	if (input.role === 'brand') {
 		if (!input.brands.length) throw new InvitationError('Elige al menos una marca');
-		if (input.restaurants.length) throw new InvitationError('Un usuario de marca no lleva restaurantes');
-		const found = await db.select({ code: brands.code }).from(brands).where(inArray(brands.code, input.brands));
+		if (input.restaurants.length)
+			throw new InvitationError('Un usuario de marca no lleva restaurantes');
+		const found = await db
+			.select({ code: brands.code })
+			.from(brands)
+			.where(inArray(brands.code, input.brands));
 		if (found.length !== new Set(input.brands).size) throw new InvitationError('Marca desconocida');
 		return [];
 	}
@@ -62,7 +74,8 @@ async function validateScope(input: InvitationInput) {
 			.select({ id: restaurants.id, brandCode: restaurants.brandCode })
 			.from(restaurants)
 			.where(inArray(restaurants.id, input.restaurants));
-		if (found.length !== new Set(input.restaurants).size) throw new InvitationError('Restaurante desconocido');
+		if (found.length !== new Set(input.restaurants).size)
+			throw new InvitationError('Restaurante desconocido');
 		return [...new Set(found.map((r) => r.brandCode))];
 	}
 	if (input.brands.length || input.restaurants.length)
@@ -88,12 +101,26 @@ async function mailInvitation(inv: InvitationRow, token: string) {
 	);
 }
 
-export async function createInvitation(actor: Actor, input: InvitationInput, meta: Meta = {}) {
+export async function createInvitation(
+	actor: Actor,
+	input: InvitationInput,
+	meta: Meta = {},
+	opts: { sendMail?: boolean } = {}
+) {
 	const restaurantBrands = await validateScope(input);
-	if (!can(actor, 'user.invite', { targetRole: input.role, targetBrands: input.brands, targetRestaurantBrands: restaurantBrands }))
+	if (
+		!can(actor, 'user.invite', {
+			targetRole: input.role,
+			targetBrands: input.brands,
+			targetRestaurantBrands: restaurantBrands
+		})
+	)
 		throw new InvitationError('No puedes invitar con ese rol o ámbito');
 
-	const [existing] = await db.select({ id: users.id }).from(users).where(eq(users.email, input.email));
+	const [existing] = await db
+		.select({ id: users.id })
+		.from(users)
+		.where(eq(users.email, input.email));
 	if (existing) throw new InvitationError('Ya existe una cuenta con ese correo');
 	const [pending] = await db
 		.select({ id: invitations.id })
@@ -122,7 +149,7 @@ export async function createInvitation(actor: Actor, input: InvitationInput, met
 			expiresAt: invitationExpiry()
 		})
 		.returning();
-	await mailInvitation(inv!, token);
+	if (opts.sendMail !== false) await mailInvitation(inv!, token);
 	await audit({
 		userId: actor.id,
 		action: 'invitation.created',
@@ -144,7 +171,12 @@ async function manageable(actor: Actor, id: string) {
 			.select({ brandCode: restaurants.brandCode })
 			.from(restaurants)
 			.where(inArray(restaurants.id, inv.scope.restaurants));
-		if (can(actor, 'user.invite', { targetRole: 'manager', targetRestaurantBrands: rows.map((r) => r.brandCode) }))
+		if (
+			can(actor, 'user.invite', {
+				targetRole: 'manager',
+				targetRestaurantBrands: rows.map((r) => r.brandCode)
+			})
+		)
 			return inv;
 	}
 	throw new InvitationError('No puedes gestionar esta invitación');
@@ -161,14 +193,23 @@ export async function resendInvitation(actor: Actor, id: string, meta: Meta = {}
 		.where(eq(invitations.id, id))
 		.returning();
 	await mailInvitation(updated!, token);
-	await audit({ userId: actor.id, action: 'invitation.resent', entity: 'invitation', entityId: id, ...meta });
+	await audit({
+		userId: actor.id,
+		action: 'invitation.resent',
+		entity: 'invitation',
+		entityId: id,
+		...meta
+	});
 	return { token };
 }
 
 export async function revokeInvitation(actor: Actor, id: string, meta: Meta = {}) {
 	const inv = await manageable(actor, id);
 	if (inv.usedAt || inv.revokedAt) throw new InvitationError('La invitación ya no está pendiente');
-	await db.update(invitations).set({ revokedAt: new Date(), revokedBy: actor.id }).where(eq(invitations.id, id));
+	await db
+		.update(invitations)
+		.set({ revokedAt: new Date(), revokedBy: actor.id })
+		.where(eq(invitations.id, id));
 	await audit({
 		userId: actor.id,
 		action: 'invitation.revoked',
@@ -237,7 +278,10 @@ export type InvitationView = {
 /** Busca la invitación de un token. `null` si el token no existe o está mal formado. */
 export async function findInvitationByToken(token: string): Promise<InvitationView | null> {
 	if (!isWellFormedToken(token)) return null;
-	const [inv] = await db.select().from(invitations).where(eq(invitations.tokenHash, hashToken(token)));
+	const [inv] = await db
+		.select()
+		.from(invitations)
+		.where(eq(invitations.tokenHash, hashToken(token)));
 	if (!inv) return null;
 	return {
 		id: inv.id,
@@ -267,8 +311,12 @@ export async function acceptInvitation(
 		.from(invitations)
 		.where(eq(invitations.tokenHash, hashToken(p.token)))
 		.for('update');
-	if (!inv || invitationState(inv) !== 'pending') throw new InvitationError('La invitación no está disponible');
-	const [existing] = await tx.select({ id: users.id }).from(users).where(eq(users.email, inv.email));
+	if (!inv || invitationState(inv) !== 'pending')
+		throw new InvitationError('La invitación no está disponible');
+	const [existing] = await tx
+		.select({ id: users.id })
+		.from(users)
+		.where(eq(users.email, inv.email));
 	if (existing) throw new InvitationError('Ya existe una cuenta con ese correo');
 
 	const name = p.name.trim() || inv.name || inv.email;
@@ -281,12 +329,17 @@ export async function acceptInvitation(
 		organization: ROLE_ORG[inv.role]
 	});
 	if (inv.scope.brands.length)
-		await tx.insert(userBrands).values(inv.scope.brands.map((brandCode) => ({ userId: p.userId, brandCode })));
+		await tx
+			.insert(userBrands)
+			.values(inv.scope.brands.map((brandCode) => ({ userId: p.userId, brandCode })));
 	if (inv.scope.restaurants.length)
 		await tx
 			.insert(userRestaurants)
 			.values(inv.scope.restaurants.map((restaurantId) => ({ userId: p.userId, restaurantId })));
-	await tx.update(invitations).set({ usedAt: new Date(), usedByUserId: p.userId }).where(eq(invitations.id, inv.id));
+	await tx
+		.update(invitations)
+		.set({ usedAt: new Date(), usedByUserId: p.userId })
+		.where(eq(invitations.id, inv.id));
 	if (inv.invitedBy)
 		await tx.insert(notifications).values({
 			id: randomUUID(),
@@ -322,5 +375,49 @@ export async function requestNewInvitation(token: string, meta: Meta = {}) {
 		entityId: inv.id,
 		href: '/admin/invitaciones'
 	});
-	await audit({ action: 'invitation.renewal_requested', entity: 'invitation', entityId: inv.id, ...meta });
+	await audit({
+		action: 'invitation.renewal_requested',
+		entity: 'invitation',
+		entityId: inv.id,
+		...meta
+	});
+}
+
+/**
+ * Primer administrador de un entorno vacío (`npm run invitar-admin`). Solo funciona mientras no
+ * haya ningún admin activo: a partir de ahí las invitaciones salen del portal.
+ */
+export async function bootstrapAdminInvitation(
+	email: string,
+	name: string,
+	opts: { sendMail?: boolean } = {}
+) {
+	const [admin] = await db
+		.select({ id: users.id })
+		.from(users)
+		.where(and(eq(users.role, 'admin'), eq(users.status, 'active')))
+		.limit(1);
+	if (admin) throw new InvitationError('Ya hay un administrador: invita desde el portal');
+	const token = newInvitationToken();
+	const [inv] = await db
+		.insert(invitations)
+		.values({
+			id: randomUUID(),
+			email: email.trim().toLowerCase(),
+			name: name.trim() || null,
+			role: 'admin',
+			scope: { brands: [], restaurants: [] },
+			tokenHash: hashToken(token),
+			invitedBy: null,
+			expiresAt: invitationExpiry()
+		})
+		.returning();
+	if (opts.sendMail !== false) await mailInvitation(inv!, token);
+	await audit({
+		action: 'invitation.bootstrap',
+		entity: 'invitation',
+		entityId: inv!.id,
+		after: { email: inv!.email }
+	});
+	return { token, url: inviteUrl(token) };
 }

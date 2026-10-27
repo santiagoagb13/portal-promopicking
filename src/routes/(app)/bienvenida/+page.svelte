@@ -43,7 +43,9 @@
 	</p>
 	{#if error}<p class="field-error" role="alert">{error}</p>{/if}
 	<div class="acts">
-		{#if supported}<Button variant="primary" icon={KeyRound} onclick={add} disabled={busy}>Crear passkey</Button>{/if}
+		{#if supported}<Button variant="primary" icon={KeyRound} onclick={add} disabled={busy}
+				>Crear passkey</Button
+			>{/if}
 		<Button href={data.back}>Ahora no</Button>
 	</div>
 </section>

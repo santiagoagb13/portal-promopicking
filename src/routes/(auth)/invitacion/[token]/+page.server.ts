@@ -66,7 +66,10 @@ export const actions: Actions = {
 
 	/** Invitación caducada: avisa a quien invitó para que la reenvíe. */
 	renovar: async ({ params, request, getClientAddress }) => {
-		await requestNewInvitation(params.token, { ip: getClientAddress(), userAgent: request.headers.get('user-agent') });
+		await requestNewInvitation(params.token, {
+			ip: getClientAddress(),
+			userAgent: request.headers.get('user-agent')
+		});
 		return { toast: 'Aviso enviado' };
 	}
 };

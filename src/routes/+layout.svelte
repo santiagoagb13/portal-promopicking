@@ -6,7 +6,9 @@
 
 	let { children } = $props();
 	const toaster = provideToaster();
-	const title = $derived(page.data.title ? `${page.data.title} · Portal Promopicking` : 'Portal Promopicking');
+	const title = $derived(
+		page.data.title ? `${page.data.title} · Portal Promopicking` : 'Portal Promopicking'
+	);
 	const formToast = $derived((page.form as { toast?: string } | null)?.toast ?? null);
 
 	// Respuesta de una acción con `use:enhance`: se muestra como aviso.

@@ -22,7 +22,9 @@ export const devTransport: MailTransport = {
 		await mkdir(dir, { recursive: true });
 		const entry = { at: new Date().toISOString(), from: config.mailFrom, ...message };
 		await appendFile(join(dir, 'outbox.jsonl'), JSON.stringify(entry) + '\n', 'utf8');
-		console.info(`\n[correo] Para: ${message.to}\n[correo] Asunto: ${message.subject}\n${message.text}\n`);
+		console.info(
+			`\n[correo] Para: ${message.to}\n[correo] Asunto: ${message.subject}\n${message.text}\n`
+		);
 	}
 };
 

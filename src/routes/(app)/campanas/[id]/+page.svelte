@@ -19,7 +19,12 @@
 	<BrandChip short={c.brandShort} />
 	<Chip tone={c.stageTone}>{c.stageLabel}</Chip>
 	<Semaphore value={c.semaphore} />
-	<span class="muted">En restaurante el <b class="num">{fmtDay(c.inRestaurantOn)}</b> · {relDays(c.inRestaurantOn, data.today)} · {c.restaurantCount} restaurantes</span>
+	<span class="muted"
+		>En restaurante el <b class="num">{fmtDay(c.inRestaurantOn)}</b> · {relDays(
+			c.inRestaurantOn,
+			data.today
+		)} · {c.restaurantCount} restaurantes</span
+	>
 </div>
 
 <div class="grid">
@@ -30,7 +35,9 @@
 				<li>
 					<div>
 						<b>{s.name}</b>
-						<small>{s.versionsPlanned} versiones · {s.runQty.toLocaleString('es-ES')} uds · {s.packaging}</small>
+						<small
+							>{s.versionsPlanned} versiones · {s.runQty.toLocaleString('es-ES')} uds · {s.packaging}</small
+						>
 					</div>
 					<Chip tone={stageTone(s.stage)}>{stageLabel(s.stage)}</Chip>
 				</li>
@@ -42,7 +49,11 @@
 		<ul class="list">
 			{#each data.milestones as m (m.key)}
 				<li class:done={!!m.doneAt}>
-					<span class="num date">{#if m.doneAt}<Check size={14} strokeWidth={1.5} aria-label="Hecho" />{/if}{fmtDay(m.dueOn)}</span>
+					<span class="num date"
+						>{#if m.doneAt}<Check size={14} strokeWidth={1.5} aria-label="Hecho" />{/if}{fmtDay(
+							m.dueOn
+						)}</span
+					>
 					<span class="grow">{MILESTONE_LABEL[m.key]}</span>
 					<small>{m.doneAt ? 'hecho' : relDays(m.dueOn, data.today)}</small>
 				</li>

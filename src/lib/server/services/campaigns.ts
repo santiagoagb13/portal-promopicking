@@ -99,7 +99,13 @@ export async function listCampaigns(
 				high: sql<number>`count(*) filter (where ${tickets.severity} = 'high')::int`
 			})
 			.from(tickets)
-			.where(and(inArray(tickets.campaignId, ids), eq(tickets.type, 'incident'), ne(tickets.state, 'closed')))
+			.where(
+				and(
+					inArray(tickets.campaignId, ids),
+					eq(tickets.type, 'incident'),
+					ne(tickets.state, 'closed')
+				)
+			)
 			.groupBy(tickets.campaignId),
 		db
 			.select({ campaignId: campaignMilestones.campaignId, dueOn: campaignMilestones.dueOn })
@@ -108,7 +114,8 @@ export async function listCampaigns(
 	]);
 
 	const stagesBy = new Map<string, number[]>();
-	for (const s of stages) stagesBy.set(s.campaignId, [...(stagesBy.get(s.campaignId) ?? []), s.stage]);
+	for (const s of stages)
+		stagesBy.set(s.campaignId, [...(stagesBy.get(s.campaignId) ?? []), s.stage]);
 	const pendingBy = new Map(pending.map((p) => [p.campaignId, p.n]));
 	const incidentsBy = new Map(incidents.map((i) => [i.campaignId!, i]));
 	const aprobBy = new Map(aprob.map((a) => [a.campaignId, a.dueOn]));

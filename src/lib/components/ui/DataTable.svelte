@@ -82,11 +82,7 @@
 		</thead>
 		<tbody>
 			{#each rows as row, i (key(row))}
-				<tr
-					class:more={i >= mobilePage}
-					class:link={!!rowHref}
-					onclick={(e) => onRowClick(e, row)}
-				>
+				<tr class:more={i >= mobilePage} class:link={!!rowHref} onclick={(e) => onRowClick(e, row)}>
 					{#each columns as col (col.key)}
 						<td class="a-{col.align ?? 'left'} c-{col.card ?? 'field'}" data-l={col.label}>
 							{@render cell(row, col)}

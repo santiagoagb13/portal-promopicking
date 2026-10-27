@@ -9,10 +9,7 @@
 	import { fmtDateTime } from '$lib/domain/dates';
 
 	let { data, form } = $props();
-	let name = $state('');
-	$effect.pre(() => {
-		name = 'name' in data ? (data.name ?? '') : '';
-	});
+	let name = $derived('name' in data ? (data.name ?? '') : '');
 	// Sin JS se ofrece el enlace; con JS y passkeys, solo «Crear passkey» salvo que falle.
 	let supported = $state<boolean | null>(null);
 	let error = $state<string | null>(null);
@@ -53,7 +50,14 @@
 		</label>
 		<label class="field">
 			<span>Tu nombre</span>
-			<input class="input" name="name" bind:value={name} required minlength="2" autocomplete="name" />
+			<input
+				class="input"
+				name="name"
+				bind:value={name}
+				required
+				minlength="2"
+				autocomplete="name"
+			/>
 		</label>
 		{#if supported}
 			<Button variant="primary" size={44} icon={KeyRound} onclick={createPasskey} disabled={busy}
@@ -62,12 +66,18 @@
 		{/if}
 		{#if error || form?.error}<p class="field-error" role="alert">{error ?? form?.error}</p>{/if}
 		{#if supported === false || error}
-			{#if supported === false}<p class="alert">Este navegador no admite passkeys. Te enviamos un enlace de acceso; podrás registrar una passkey después.</p>{/if}
+			{#if supported === false}<p class="alert">
+					Este navegador no admite passkeys. Te enviamos un enlace de acceso; podrás registrar una
+					passkey después.
+				</p>{/if}
 			<Button type="submit" variant={supported ? 'neutral' : 'primary'} size={44}
 				>Recibir enlace de acceso</Button
 			>
 		{:else if supported === null}
-			<noscript><Button type="submit" variant="primary" size={44}>Recibir enlace de acceso</Button></noscript>
+			<noscript
+				><Button type="submit" variant="primary" size={44}>Recibir enlace de acceso</Button
+				></noscript
+			>
 		{/if}
 	</form>
 	<p class="lead">Caduca el {fmtDateTime(data.expiresAt)}.</p>

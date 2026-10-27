@@ -17,6 +17,8 @@
 
 	/** URL de la página con un parámetro cambiado (los filtros viven en la URL). */
 	function withParams(changes: Record<string, string | null>) {
+		// Copia local para construir un enlace: no es estado reactivo.
+		// eslint-disable-next-line svelte/prefer-svelte-reactivity
 		const p = new URLSearchParams(page.url.searchParams);
 		p.delete('todas');
 		for (const [k, v] of Object.entries(changes)) {
@@ -29,14 +31,25 @@
 
 	const brandItems = $derived([
 		{ href: withParams({ marca: null }), label: 'Todas', active: !data.brand },
-		...data.brands.map((b) => ({ href: withParams({ marca: b.code }), label: b.label, active: data.brand === b.code }))
+		...data.brands.map((b) => ({
+			href: withParams({ marca: b.code }),
+			label: b.label,
+			active: data.brand === b.code
+		}))
 	]);
 
 	function sortFor(key: 'fecha' | 'semaforo') {
 		const active = data.order === key;
-		const dir: 'ascending' | 'descending' | 'none' = active ? (data.desc ? 'descending' : 'ascending') : 'none';
+		const dir: 'ascending' | 'descending' | 'none' = active
+			? data.desc
+				? 'descending'
+				: 'ascending'
+			: 'none';
 		const nextDesc = active && !data.desc;
-		return { href: withParams({ orden: key === 'fecha' ? null : key, dir: nextDesc ? 'desc' : null }), dir };
+		return {
+			href: withParams({ orden: key === 'fecha' ? null : key, dir: nextDesc ? 'desc' : null }),
+			dir
+		};
 	}
 
 	const columns = $derived([
@@ -46,7 +59,13 @@
 		{ key: 'rtes', label: 'Restaurantes', align: 'right' as const },
 		{ key: 'stage', label: 'Fase' },
 		{ key: 'progress', label: 'Progreso' },
-		{ key: 'sem', label: 'Semáforo', align: 'center' as const, card: 'aside' as const, sort: sortFor('semaforo') }
+		{
+			key: 'sem',
+			label: 'Semáforo',
+			align: 'center' as const,
+			card: 'aside' as const,
+			sort: sortFor('semaforo')
+		}
 	]);
 </script>
 
@@ -55,11 +74,20 @@
 		<Segmented label="Filtrar por marca" items={brandItems} />
 	{/if}
 	{#if data.q}
-		<Chip tone="outline">«{data.q}» <a class="clear" href={withParams({ q: null })} aria-label="Quitar búsqueda">×</a></Chip>
+		<Chip tone="outline"
+			>«{data.q}»
+			<a class="clear" href={withParams({ q: null })} aria-label="Quitar búsqueda">×</a></Chip
+		>
 	{/if}
 	<div class="spacer"></div>
 	{#if data.canCreate}
-		<Button href="/campanas/nueva" variant="primary" icon={Plus} label="Nueva campaña" tipPos="left" />
+		<Button
+			href="/campanas/nueva"
+			variant="primary"
+			icon={Plus}
+			label="Nueva campaña"
+			tipPos="left"
+		/>
 	{/if}
 </div>
 
@@ -85,7 +113,10 @@
 		<div class="k-l">Próxima entrega</div>
 		<div class="k-v num">{data.kpis.next ? fmtDayShort(data.kpis.next.on) : '—'}</div>
 		<div class="k-s">
-			{#if data.kpis.next}{data.kpis.next.name} · {relDays(data.kpis.next.on, data.today)}{:else}&nbsp;{/if}
+			{#if data.kpis.next}{data.kpis.next.name} · {relDays(
+					data.kpis.next.on,
+					data.today
+				)}{:else}&nbsp;{/if}
 		</div>
 	</div>
 </section>
@@ -106,7 +137,9 @@
 			{:else if col.key === 'brand'}
 				<BrandChip short={r.brandShort} />
 			{:else if col.key === 'date'}
-				<span class="num">{fmtDay(r.inRestaurantOn)}</span><span class="sub">{relDays(r.inRestaurantOn, data.today)}</span>
+				<span class="num">{fmtDay(r.inRestaurantOn)}</span><span class="sub"
+					>{relDays(r.inRestaurantOn, data.today)}</span
+				>
 			{:else if col.key === 'rtes'}
 				<span class="num">{r.restaurantCount}</span>
 			{:else if col.key === 'stage'}
@@ -119,7 +152,10 @@
 		{/snippet}
 	</DataTable>
 {:else}
-	<EmptyState icon={Megaphone} text={data.q ? 'Ninguna campaña coincide con la búsqueda.' : 'No hay campañas en tu ámbito.'} />
+	<EmptyState
+		icon={Megaphone}
+		text={data.q ? 'Ninguna campaña coincide con la búsqueda.' : 'No hay campañas en tu ámbito.'}
+	/>
 {/if}
 
 <style>

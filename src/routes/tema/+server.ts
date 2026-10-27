@@ -13,7 +13,8 @@ export const POST: RequestHandler = async ({ request, cookies, url }) => {
 		sameSite: 'lax',
 		secure: url.protocol === 'https:'
 	});
-	if (request.headers.get('accept')?.includes('application/json')) return new Response(null, { status: 204 });
+	if (request.headers.get('accept')?.includes('application/json'))
+		return new Response(null, { status: 204 });
 	const back = String(form.get('volver') ?? '/');
 	redirect(303, back.startsWith('/') && !back.startsWith('//') ? back : '/');
 };

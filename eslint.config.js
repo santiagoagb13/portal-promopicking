@@ -27,7 +27,12 @@ export default ts.config(
 		languageOptions: { globals: { ...globals.browser, ...globals.node } },
 		rules: {
 			'no-undef': 'off',
-			'@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }]
+			'@typescript-eslint/no-unused-vars': [
+				'error',
+				{ argsIgnorePattern: '^_', varsIgnorePattern: '^_' }
+			],
+			// El portal se sirve en la raíz del dominio (sin `paths.base`): resolve() no aporta nada.
+			'svelte/no-navigation-without-resolve': 'off'
 		}
 	},
 	{

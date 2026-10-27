@@ -6,8 +6,11 @@
 		icon: Icon,
 		text,
 		children
-	}: { icon: Component<{ size?: number; strokeWidth?: number }>; text: string; children?: Snippet } =
-		$props();
+	}: {
+		icon: Component<{ size?: number; strokeWidth?: number }>;
+		text: string;
+		children?: Snippet;
+	} = $props();
 </script>
 
 <div class="empty">

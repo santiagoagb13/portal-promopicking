@@ -124,7 +124,9 @@ export function can(actor: Actor | null | undefined, action: Action, r?: Resourc
 			return role === 'manager' && inRestaurants(actor, r?.restaurantId);
 
 		case 'qr.view':
-			return internal || role === 'production' || (role === 'brand' && inBrands(actor, r?.brandCode));
+			return (
+				internal || role === 'production' || (role === 'brand' && inBrands(actor, r?.brandCode))
+			);
 
 		case 'order.place':
 			if (internal) return true;
@@ -143,7 +145,9 @@ export function can(actor: Actor | null | undefined, action: Action, r?: Resourc
 			if (internal) return true;
 			if (role === 'production') return r?.openedBy === undefined || r.openedBy === actor.id;
 			if (role === 'brand')
-				return r?.openedBy === undefined || r.openedBy === actor.id || inBrands(actor, r?.brandCode);
+				return (
+					r?.openedBy === undefined || r.openedBy === actor.id || inBrands(actor, r?.brandCode)
+				);
 			return false;
 
 		case 'user.invite':

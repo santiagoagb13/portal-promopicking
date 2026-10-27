@@ -15,7 +15,11 @@
 	async function undo(read: string[]) {
 		const body = new FormData();
 		for (const id of read) body.append('id', id);
-		const res = await fetch('?/noLeer', { method: 'POST', body, headers: { 'x-sveltekit-action': 'true' } });
+		const res = await fetch('?/noLeer', {
+			method: 'POST',
+			body,
+			headers: { 'x-sveltekit-action': 'true' }
+		});
 		deserialize(await res.text());
 		await invalidateAll();
 	}
@@ -37,7 +41,13 @@
 						}
 					}}
 			>
-				<Button type="submit" variant="green" icon={CheckCheck} label="Marcar todas como leídas" tipPos="left" />
+				<Button
+					type="submit"
+					variant="green"
+					icon={CheckCheck}
+					label="Marcar todas como leídas"
+					tipPos="left"
+				/>
 			</form>
 		{/if}
 	</div>

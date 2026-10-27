@@ -1,5 +1,6 @@
 <!-- Aviso (7.4): una línea, icono, «Deshacer» opcional. Región `aria-live` para lectores de pantalla. -->
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import Check from '@lucide/svelte/icons/check';
 	import Info from '@lucide/svelte/icons/info';
 	import CircleAlert from '@lucide/svelte/icons/circle-alert';
@@ -9,7 +10,7 @@
 	const icons = { neutral: Info, green: Check, amber: CircleAlert, red: CircleAlert };
 	// El aviso que llega en el HTML (formulario sin JS) se sustituye por el de la cola al hidratar.
 	let hydrated = $state(false);
-	$effect(() => {
+	onMount(() => {
 		hydrated = true;
 	});
 </script>

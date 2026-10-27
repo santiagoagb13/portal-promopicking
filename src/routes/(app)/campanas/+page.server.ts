@@ -26,7 +26,8 @@ export const load: PageServerLoad = async ({ locals, url, depends }) => {
 		: [...scoped];
 	rows.sort((a, b) => {
 		const byDate = a.inRestaurantOn.localeCompare(b.inRestaurantOn) || a.id.localeCompare(b.id);
-		const primary = order === 'semaforo' ? SEMAPHORE_RANK[a.semaphore] - SEMAPHORE_RANK[b.semaphore] : 0;
+		const primary =
+			order === 'semaforo' ? SEMAPHORE_RANK[a.semaphore] - SEMAPHORE_RANK[b.semaphore] : 0;
 		const r = primary || byDate;
 		return desc ? -r : r;
 	});
@@ -39,7 +40,13 @@ export const load: PageServerLoad = async ({ locals, url, depends }) => {
 		? await db
 				.select({ n: count() })
 				.from(tickets)
-				.where(and(inArray(tickets.campaignId, ids), eq(tickets.type, 'incident'), ne(tickets.state, 'closed')))
+				.where(
+					and(
+						inArray(tickets.campaignId, ids),
+						eq(tickets.type, 'incident'),
+						ne(tickets.state, 'closed')
+					)
+				)
 		: [{ n: 0 }];
 	const next = scoped
 		.filter((c) => daysBetween(today, c.inRestaurantOn) >= 0)

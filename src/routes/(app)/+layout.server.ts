@@ -8,7 +8,8 @@ import { db, tables } from '$lib/server/db';
 import { campaignScope } from '$lib/server/services/campaigns';
 import type { LayoutServerLoad } from './$types';
 
-const { notifications, supportVersions, supports, campaigns, tickets, brands, restaurants } = tables;
+const { notifications, supportVersions, supports, campaigns, tickets, brands, restaurants } =
+	tables;
 
 function initials(name: string) {
 	return name
@@ -50,20 +51,44 @@ export const load: LayoutServerLoad = async ({ locals, url, depends }) => {
 			? db
 					.select({ name: restaurants.name })
 					.from(restaurants)
-					.where(inArray(restaurants.id, user.restaurants.map((r) => r.id)))
+					.where(
+						inArray(
+							restaurants.id,
+							user.restaurants.map((r) => r.id)
+						)
+					)
 			: user.role === 'brand'
-				? db.select({ name: brands.short }).from(brands).where(inArray(brands.code, visibleBrands(user) ?? []))
+				? db
+						.select({ name: brands.short })
+						.from(brands)
+						.where(inArray(brands.code, visibleBrands(user) ?? []))
 				: []
 	]);
 
-	const subtitle = [ROLE_LABEL[user.role], scopeNames.map((s) => s.name).join(', ') || user.organization]
+	const subtitle = [
+		ROLE_LABEL[user.role],
+		scopeNames.map((s) => s.name).join(', ') || user.organization
+	]
 		.filter(Boolean)
 		.join(' · ');
 	const nav = navFor(user).map(({ href }) => href);
 	const { tabs, more } = tabsFor(user);
 	return {
-		user: { id: user.id, name: user.name, email: user.email, role: user.role, initials: initials(user.name), subtitle },
-		actor: { id: user.id, role: user.role, status: user.status, brands: user.brands, restaurants: user.restaurants },
+		user: {
+			id: user.id,
+			name: user.name,
+			email: user.email,
+			role: user.role,
+			initials: initials(user.name),
+			subtitle
+		},
+		actor: {
+			id: user.id,
+			role: user.role,
+			status: user.status,
+			brands: user.brands,
+			restaurants: user.restaurants
+		},
 		nav,
 		tabs: tabs.map((t) => t.href),
 		more: more.map((t) => t.href),

@@ -15,8 +15,8 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
-		"test": "npm run test:unit && npm run test:e2e",
-		"test:unit": "vitest run",
+		"test": "npm run test:unit && npm run test:integration && npm run test:e2e",
+		"test:unit": "vitest run --project unit",
 		"test:e2e": "playwright test",
 		"db:up": "docker compose up -d --wait",
 		"db:generate": "drizzle-kit generate",
@@ -24,7 +24,12 @@
 		"db:seed": "TSX_TSCONFIG_PATH=scripts/tsconfig.json node --env-file-if-exists=.env --import tsx scripts/seed-from-prototype.ts",
 		"db:studio": "drizzle-kit studio",
 		"seed:extract": "TSX_TSCONFIG_PATH=scripts/tsconfig.json node --env-file-if-exists=.env --import tsx scripts/seed-from-prototype.ts --solo-extraer",
-		"icons": "node --env-file-if-exists=.env --import tsx scripts/generate-icons.ts"
+		"icons": "node --env-file-if-exists=.env --import tsx scripts/generate-icons.ts",
+		"test:integration": "vitest run --project integration",
+		"vercel-build": "npm run db:migrate && if [ \"$VERCEL_ENV\" = \"preview\" ]; then npm run db:seed; fi && npm run build",
+		"build:node": "ADAPTER=node vite build",
+		"start:node": "node build",
+		"invitar-admin": "TSX_TSCONFIG_PATH=scripts/tsconfig.json node --env-file-if-exists=.env --import tsx scripts/invitar-admin.ts"
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
@@ -67,5 +72,12 @@
 		"drizzle-orm": "^0.45.4",
 		"pg": "^8.23.1",
 		"zod": "^4.6.7"
+	},
+	"lint-staged": {
+		"*.{ts,js,svelte}": [
+			"prettier --write",
+			"eslint --fix"
+		],
+		"*.{css,json,md,yml,yaml}": "prettier --write"
 	}
 }

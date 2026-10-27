@@ -74,10 +74,23 @@ export function milestonesFor(inRestaurantOn: string): Record<MilestoneKey, stri
 }
 
 /** Hito que cierra cada fase (índice = fase), como `STAGE_DATE_KEY` del prototipo. */
-export const STAGE_MILESTONE: MilestoneKey[] = ['brief', 'af', 'aprob', 'prod_fin', 'kitting', 'exped', 'rte'];
+export const STAGE_MILESTONE: MilestoneKey[] = [
+	'brief',
+	'af',
+	'aprob',
+	'prod_fin',
+	'kitting',
+	'exped',
+	'rte'
+];
 
 /** ¿Está hecho el hito, según la fase actual de la campaña y la fecha de hoy? */
-export function milestoneDone(key: MilestoneKey, stage: number, dueOn: string, today: string): boolean {
+export function milestoneDone(
+	key: MilestoneKey,
+	stage: number,
+	dueOn: string,
+	today: string
+): boolean {
 	const idx = STAGE_MILESTONE.indexOf(key);
 	if (idx >= 0) return stage > idx || stage === LAST_STAGE;
 	return daysBetween(today, dueOn) < 0;
@@ -118,6 +131,7 @@ export function semaphore(p: {
 }): Semaphore {
 	if (p.planned) return 'gris';
 	if (p.openHighIncidents > 0) return 'rojo';
-	if (p.pendingVersions > 0 && daysBetween(p.today, p.approvalDueOn) <= APPROVAL_RISK_DAYS) return 'ambar';
+	if (p.pendingVersions > 0 && daysBetween(p.today, p.approvalDueOn) <= APPROVAL_RISK_DAYS)
+		return 'ambar';
 	return 'verde';
 }

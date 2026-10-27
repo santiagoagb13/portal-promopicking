@@ -1,0 +1,73 @@
+# CI del portal. Cuota de Actions limitada (cuenta GitHub Free, repos privados):
+# solo Linux, una ejecución por PR (no se repite en el push a main), cancelación de la anterior,
+# sin ejecutar por cambios de documentación y con tiempo máximo. El despliegue lo hace la
+# integración Git de Vercel, que no consume minutos de Actions.
+name: CI
+
+on:
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+      - '.github/dependabot.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  calidad:
+    name: Comprobaciones y pruebas
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: portal
+          POSTGRES_PASSWORD: portal
+          POSTGRES_DB: portal
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd "pg_isready -U portal -d portal"
+          --health-interval 2s
+          --health-timeout 3s
+          --health-retries 30
+    env:
+      DATABASE_URL: postgres://portal:portal@localhost:5433/portal
+      AUTH_SECRET: ci-solo-pruebas-no-es-un-secreto-real-0123456789
+      AUTH_ORIGIN: http://localhost:4173
+      APP_REFERENCE_DATE: '2026-10-22'
+      MAIL_OUTBOX_DIR: test-results/mail
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm audit --omit=dev --audit-level=high
+      - run: npm run check
+      - run: npm run lint
+      - run: npm run test:unit
+      - name: Migraciones y seed (instantánea del prototipo)
+        run: npm run db:migrate && npm run db:seed
+      - run: npm run test:integration
+      - name: Navegador de Playwright
+        run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - name: Capturas y trazas
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-${{ github.run_number }}
+          path: |
+            tests/e2e/capturas/
+            test-results/playwright/
+          retention-days: 7
+          if-no-files-found: ignore

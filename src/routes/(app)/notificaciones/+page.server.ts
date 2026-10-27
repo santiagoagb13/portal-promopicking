@@ -37,7 +37,9 @@ export const actions: Actions = {
 			await db
 				.update(notifications)
 				.set({ readAt: null })
-				.where(and(eq(notifications.userId, locals.user!.id), inArray(notifications.id, parsed.data)));
+				.where(
+					and(eq(notifications.userId, locals.user!.id), inArray(notifications.id, parsed.data))
+				);
 		return { restored: parsed.data.length };
 	}
 };

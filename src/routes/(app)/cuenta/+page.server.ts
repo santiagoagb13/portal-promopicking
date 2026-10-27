@@ -15,7 +15,12 @@ export const load: PageServerLoad = async ({ locals, depends }) => {
 	const user = locals.user!;
 	const [keys, active, access] = await Promise.all([
 		db
-			.select({ id: passkeys.id, name: passkeys.name, createdAt: passkeys.createdAt, lastUsedAt: passkeys.lastUsedAt })
+			.select({
+				id: passkeys.id,
+				name: passkeys.name,
+				createdAt: passkeys.createdAt,
+				lastUsedAt: passkeys.lastUsedAt
+			})
 			.from(passkeys)
 			.where(eq(passkeys.userId, user.id))
 			.orderBy(asc(passkeys.createdAt)),
@@ -87,7 +92,8 @@ export const actions: Actions = {
 	cerrarSesion: async ({ request, locals, getClientAddress }) => {
 		const parsed = id.safeParse((await request.formData()).get('id'));
 		if (!parsed.success) return fail(400);
-		if (parsed.data === locals.session?.id) return fail(400, { error: 'Para cerrar esta sesión usa «Salir»' });
+		if (parsed.data === locals.session?.id)
+			return fail(400, { error: 'Para cerrar esta sesión usa «Salir»' });
 		const deleted = await db
 			.delete(sessions)
 			.where(and(eq(sessions.id, parsed.data), eq(sessions.userId, locals.user!.id)))
@@ -113,6 +119,8 @@ export const actions: Actions = {
 			after: { count: deleted.length },
 			...requestMeta(request, getClientAddress())
 		});
-		return { toast: deleted.length === 1 ? '1 sesión cerrada' : `${deleted.length} sesiones cerradas` };
+		return {
+			toast: deleted.length === 1 ? '1 sesión cerrada' : `${deleted.length} sesiones cerradas`
+		};
 	}
 };

@@ -9,5 +9,9 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 		.select({ n: count() })
 		.from(tables.passkeys)
 		.where(eq(tables.passkeys.userId, locals.user!.id));
-	return { title: 'Bienvenida', back: safeBack(url.searchParams.get('volver')), passkeys: row?.n ?? 0 };
+	return {
+		title: 'Bienvenida',
+		back: safeBack(url.searchParams.get('volver')),
+		passkeys: row?.n ?? 0
+	};
 };

@@ -484,7 +484,12 @@ export const orderLines = pgTable(
 
 export const ticketTypeEnum = pgEnum('ticket_type', ['incident', 'query']);
 export const ticketSeverityEnum = pgEnum('ticket_severity', ['low', 'medium', 'high']);
-export const ticketStateEnum = pgEnum('ticket_state', ['open', 'in_progress', 'answered', 'closed']);
+export const ticketStateEnum = pgEnum('ticket_state', [
+	'open',
+	'in_progress',
+	'answered',
+	'closed'
+]);
 
 export const tickets = pgTable(
 	'tickets',

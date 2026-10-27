@@ -5,7 +5,9 @@ import { createAuthClient } from 'better-auth/client';
 export const authClient = createAuthClient({ basePath: '/api/auth', plugins: [passkeyClient()] });
 
 export function passkeysSupported(): boolean {
-	return typeof window !== 'undefined' && 'PublicKeyCredential' in window && !!navigator.credentials;
+	return (
+		typeof window !== 'undefined' && 'PublicKeyCredential' in window && !!navigator.credentials
+	);
 }
 
 /** Mensaje legible para los errores de la ceremonia WebAuthn. */

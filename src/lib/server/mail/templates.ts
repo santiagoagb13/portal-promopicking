@@ -1,7 +1,10 @@
 import type { MailMessage } from './index';
 
 const esc = (s: string) =>
-	s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+	s.replace(
+		/[&<>"']/g,
+		(c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!
+	);
 
 function layout(title: string, body: string, cta: { label: string; url: string }, foot: string) {
 	return `<!doctype html><html lang="es"><body style="margin:0;padding:24px;background:#ffffff;color:#111111;font:14px/1.5 system-ui,-apple-system,'Segoe UI',sans-serif">

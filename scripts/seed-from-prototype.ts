@@ -64,7 +64,8 @@ const DECLARATIONS = [
 	'REPORTS'
 ];
 
-const TOP_LEVEL = /^(const |let |var |function |\(function|\/\*|[A-Za-z_$][\w$]*\.[\w$]+\s*=|App\b|document\.|window\.)/;
+const TOP_LEVEL =
+	/^(const |let |var |function |\(function|\/\*|[A-Za-z_$][\w$]*\.[\w$]+\s*=|App\b|document\.|window\.)/;
 
 /** Copia una declaración de primer nivel: desde su línea hasta la siguiente declaración de primer nivel. */
 export function extractDeclaration(lines: string[], name: string): string {
@@ -215,7 +216,13 @@ type PrototypeData = {
 		price: number;
 		lead: number;
 	}[];
-	orders: { id: string; rte: string; date: string; lines: { id: string; qty: number }[]; state: string }[];
+	orders: {
+		id: string;
+		rte: string;
+		date: string;
+		lines: { id: string; qty: number }[];
+		state: string;
+	}[];
 	reports: unknown;
 };
 
@@ -243,11 +250,16 @@ export function madrid(s: string): Date {
 	const [y, m, d] = day!.split('-').map(Number) as [number, number, number];
 	const [hh, mm] = time.split(':').map(Number) as [number, number];
 	const guess = Date.UTC(y, m - 1, d, hh, mm);
-	const offset = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Madrid', timeZoneName: 'longOffset' })
+	const offset = new Intl.DateTimeFormat('en-US', {
+		timeZone: 'Europe/Madrid',
+		timeZoneName: 'longOffset'
+	})
 		.formatToParts(new Date(guess))
 		.find((p) => p.type === 'timeZoneName')!
 		.value.match(/GMT([+-])(\d{2}):(\d{2})/);
-	const minutes = offset ? (offset[1] === '-' ? -1 : 1) * (Number(offset[2]) * 60 + Number(offset[3])) : 0;
+	const minutes = offset
+		? (offset[1] === '-' ? -1 : 1) * (Number(offset[2]) * 60 + Number(offset[3]))
+		: 0;
 	return new Date(guess - minutes * 60_000);
 }
 
@@ -281,7 +293,12 @@ const MILESTONE_FROM_PROTOTYPE: Record<string, MilestoneKey> = {
 const VERSION_STATUS = { aprobada: 'approved', pendiente: 'pending', cambios: 'changes' } as const;
 const TICKET_TYPE = { Incidencia: 'incident', Consulta: 'query' } as const;
 const TICKET_SEVERITY = { alta: 'high', media: 'medium', baja: 'low' } as const;
-const TICKET_STATE = { Abierta: 'open', 'En curso': 'in_progress', Respondida: 'answered', Cerrada: 'closed' } as const;
+const TICKET_STATE = {
+	Abierta: 'open',
+	'En curso': 'in_progress',
+	Respondida: 'answered',
+	Cerrada: 'closed'
+} as const;
 const ORDER_STATE: Record<string, 'preparing' | 'shipping' | 'delivered'> = {
 	'En preparación': 'preparing',
 	'En reparto': 'shipping',
@@ -305,11 +322,45 @@ type SeedUser = {
 
 /** Los 5 perfiles del prototipo con su ámbito. Jorge (Promopicking) es quien administra. */
 export const SEED_USERS: SeedUser[] = [
-	{ prototypeId: 'alsea-fh', id: 'u-marta-ruiz', email: 'marta.ruiz@alsea.example', role: 'brand', organization: 'Alsea', brands: ['FH'] },
-	{ prototypeId: 'alsea-vips', id: 'u-carlos-vega', email: 'carlos.vega@alsea.example', role: 'brand', organization: 'Alsea', brands: ['VIPS'] },
-	{ prototypeId: 'alsea-ginos', id: 'u-laura-pons', email: 'laura.pons@alsea.example', role: 'brand', organization: 'Alsea', brands: ['GINOS'] },
-	{ prototypeId: 'promopicking', id: 'u-jorge-martin', email: 'jorge.martin@promopicking.example', role: 'admin', organization: 'Promopicking' },
-	{ prototypeId: 'rte', id: 'u-ana-soler', email: 'ana.soler@fosters.example', role: 'manager', organization: 'FH Plenilunio', restaurants: ['FH-0147'] }
+	{
+		prototypeId: 'alsea-fh',
+		id: 'u-marta-ruiz',
+		email: 'marta.ruiz@alsea.example',
+		role: 'brand',
+		organization: 'Alsea',
+		brands: ['FH']
+	},
+	{
+		prototypeId: 'alsea-vips',
+		id: 'u-carlos-vega',
+		email: 'carlos.vega@alsea.example',
+		role: 'brand',
+		organization: 'Alsea',
+		brands: ['VIPS']
+	},
+	{
+		prototypeId: 'alsea-ginos',
+		id: 'u-laura-pons',
+		email: 'laura.pons@alsea.example',
+		role: 'brand',
+		organization: 'Alsea',
+		brands: ['GINOS']
+	},
+	{
+		prototypeId: 'promopicking',
+		id: 'u-jorge-martin',
+		email: 'jorge.martin@promopicking.example',
+		role: 'admin',
+		organization: 'Promopicking'
+	},
+	{
+		prototypeId: 'rte',
+		id: 'u-ana-soler',
+		email: 'ana.soler@fosters.example',
+		role: 'manager',
+		organization: 'FH Plenilunio',
+		restaurants: ['FH-0147']
+	}
 ];
 
 /** Invitación pendiente de ejemplo: «Jorge Martín te invita como Gerente · FH Gran Vía 48». */
@@ -331,19 +382,25 @@ async function seed(p: PrototypeData) {
 		if (!pu) throw new Error(`Falta el usuario ${su.prototypeId} en el prototipo`);
 		userByName.set(pu.name, su.id);
 	}
-	const who = (label: string | null | undefined) => (label ? (userByName.get(label.split(' · ')[0]!) ?? null) : null);
+	const who = (label: string | null | undefined) =>
+		label ? (userByName.get(label.split(' · ')[0]!) ?? null) : null;
 	const today = p.today;
 
 	await db.transaction(async (tx) => {
 		await tx.execute(sql`truncate kit_events, kit_lines, kits, version_comments, support_versions, qr_codes,
 			supports, campaign_milestones, ticket_updates, tickets, order_lines, orders, catalog_items, campaigns`);
+		// Contadores de intentos a cero: el seed deja el entorno listo para probar.
+		await tx.execute(sql`truncate rate_limits`);
 
 		// Marcas y restaurantes: upsert (las cuentas invitadas pueden apuntar a ellos).
 		for (const [code, b] of Object.entries(p.brands))
 			await tx
 				.insert(T.brands)
 				.values({ code, name: b.name, short: b.short, restaurantCount: b.rtes })
-				.onConflictDoUpdate({ target: T.brands.code, set: { name: b.name, short: b.short, restaurantCount: b.rtes } });
+				.onConflictDoUpdate({
+					target: T.brands.code,
+					set: { name: b.name, short: b.short, restaurantCount: b.rtes }
+				});
 		for (const r of p.restaurants) {
 			const row = {
 				id: r.id,
@@ -358,7 +415,10 @@ async function seed(p: PrototypeData) {
 				deliveryPoint: r.entrega,
 				active: true
 			};
-			await tx.insert(T.restaurants).values(row).onConflictDoUpdate({ target: T.restaurants.id, set: row });
+			await tx
+				.insert(T.restaurants)
+				.values(row)
+				.onConflictDoUpdate({ target: T.restaurants.id, set: row });
 		}
 
 		// Usuarios de prueba: upsert por id; conservan passkeys y sesiones entre seeds.
@@ -376,13 +436,20 @@ async function seed(p: PrototypeData) {
 			await tx.insert(T.users).values(row).onConflictDoUpdate({ target: T.users.id, set: row });
 			await tx.delete(T.userBrands).where(eq(T.userBrands.userId, su.id));
 			await tx.delete(T.userRestaurants).where(eq(T.userRestaurants.userId, su.id));
-			if (su.brands?.length) await tx.insert(T.userBrands).values(su.brands.map((brandCode) => ({ userId: su.id, brandCode })));
+			if (su.brands?.length)
+				await tx
+					.insert(T.userBrands)
+					.values(su.brands.map((brandCode) => ({ userId: su.id, brandCode })));
 			if (su.restaurants?.length)
-				await tx.insert(T.userRestaurants).values(su.restaurants.map((restaurantId) => ({ userId: su.id, restaurantId })));
+				await tx
+					.insert(T.userRestaurants)
+					.values(su.restaurants.map((restaurantId) => ({ userId: su.id, restaurantId })));
 		}
 
 		// Campañas, hitos y soportes.
-		const approvalBySupport = new Map(Object.entries(p.approvals).map(([k, a]) => [a.supportId, { key: k, ...a }]));
+		const approvalBySupport = new Map(
+			Object.entries(p.approvals).map(([k, a]) => [a.supportId, { key: k, ...a }])
+		);
 		for (const c of p.campaigns) {
 			await tx.insert(T.campaigns).values({
 				id: c.id,
@@ -400,7 +467,12 @@ async function seed(p: PrototypeData) {
 				Object.entries(c.dates).map(([k, due]) => {
 					const key = MILESTONE_FROM_PROTOTYPE[k]!;
 					const done = !c.planned && milestoneDone(key, c.stage, due, today);
-					return { campaignId: c.id, key, dueOn: due, doneAt: done ? madrid(`${due} 18:00`) : null };
+					return {
+						campaignId: c.id,
+						key,
+						dueOn: due,
+						doneAt: done ? madrid(`${due} 18:00`) : null
+					};
 				})
 			);
 			await tx.insert(T.supports).values(
@@ -425,7 +497,8 @@ async function seed(p: PrototypeData) {
 				})
 			);
 		}
-		if (MILESTONE_KEYS.length !== Object.keys(MILESTONE_FROM_PROTOTYPE).length) throw new Error('Hitos desalineados');
+		if (MILESTONE_KEYS.length !== Object.keys(MILESTONE_FROM_PROTOTYPE).length)
+			throw new Error('Hitos desalineados');
 
 		// Artes finales: versiones y comentarios.
 		for (const [key, a] of Object.entries(p.approvals)) {
@@ -481,7 +554,13 @@ async function seed(p: PrototypeData) {
 			});
 			if (t.updates.length)
 				await tx.insert(T.ticketUpdates).values(
-					t.updates.map((u) => ({ ticketId: t.id, at: madrid(u.at), userId: who(u.who), authorLabel: u.who, text: u.txt }))
+					t.updates.map((u) => ({
+						ticketId: t.id,
+						at: madrid(u.at),
+						userId: who(u.who),
+						authorLabel: u.who,
+						text: u.txt
+					}))
 				);
 		}
 
@@ -511,15 +590,21 @@ async function seed(p: PrototypeData) {
 				);
 				const incident = k.incidencia ? p.tickets.find((t) => t.id === k.incidencia) : undefined;
 				if (incident)
-					await tx
-						.insert(T.kitEvents)
-						.values({ kitId: k.id, at: madrid(incident.opened), type: 'incident', byLabel: incident.by, source: 'scanner' });
+					await tx.insert(T.kitEvents).values({
+						kitId: k.id,
+						at: madrid(incident.opened),
+						type: 'incident',
+						byLabel: incident.by,
+						source: 'scanner'
+					});
 				if (k.lines.length)
 					await tx.insert(T.kitLines).values(
 						k.lines.map((l) => ({
 							kitId: k.id,
 							supportId:
-								supportsOfCampaign.find((s) => s.name.toLowerCase().startsWith(l.name.toLowerCase()))?.id ?? null,
+								supportsOfCampaign.find((s) =>
+									s.name.toLowerCase().startsWith(l.name.toLowerCase())
+								)?.id ?? null,
 							label: l.name,
 							versionCode: l.ver,
 							qty: l.uds
@@ -552,9 +637,14 @@ async function seed(p: PrototypeData) {
 				state: ORDER_STATE[o.state] ?? 'preparing',
 				source: 'web'
 			});
-			await tx
-				.insert(T.orderLines)
-				.values(o.lines.map((l) => ({ orderId: o.id, itemId: l.id, qty: l.qty, unitPriceCents: price.get(l.id)! })));
+			await tx.insert(T.orderLines).values(
+				o.lines.map((l) => ({
+					orderId: o.id,
+					itemId: l.id,
+					qty: l.qty,
+					unitPriceCents: price.get(l.id)!
+				}))
+			);
 		}
 
 		// Notificaciones de ejemplo para la campana.
@@ -562,8 +652,14 @@ async function seed(p: PrototypeData) {
 		await tx.delete(T.notifications).where(inArray(T.notifications.userId, seedIds));
 		const pendingByBrand = new Map<string, number>();
 		for (const a of Object.values(p.approvals))
-			pendingByBrand.set(a.brand, (pendingByBrand.get(a.brand) ?? 0) + a.versions.filter((v) => v.status !== 'aprobada').length);
-		const notes = SEED_USERS.filter((u) => u.role === 'brand' && pendingByBrand.get(u.brands![0]!)).map((u) => ({
+			pendingByBrand.set(
+				a.brand,
+				(pendingByBrand.get(a.brand) ?? 0) +
+					a.versions.filter((v) => v.status !== 'aprobada').length
+			);
+		const notes = SEED_USERS.filter(
+			(u) => u.role === 'brand' && pendingByBrand.get(u.brands![0]!)
+		).map((u) => ({
 			id: `n-${u.id}-pendientes`,
 			userId: u.id,
 			kind: 'artwork.pending',
@@ -588,13 +684,19 @@ async function seed(p: PrototypeData) {
 	await db.delete(T.users).where(eq(T.users.email, SEED_INVITATION.email));
 	await db.delete(T.invitations).where(eq(T.invitations.email, SEED_INVITATION.email));
 	const jorge = await loadActor('u-jorge-martin');
-	const { token } = await createInvitation(jorge!, {
-		email: SEED_INVITATION.email,
-		name: SEED_INVITATION.name,
-		role: SEED_INVITATION.role,
-		brands: [],
-		restaurants: SEED_INVITATION.restaurants
-	});
+	const { token } = await createInvitation(
+		jorge!,
+		{
+			email: SEED_INVITATION.email,
+			name: SEED_INVITATION.name,
+			role: SEED_INVITATION.role,
+			brands: [],
+			restaurants: SEED_INVITATION.restaurants
+		},
+		{},
+		// En las previsualizaciones de Vercel no se envía (el correo de prueba no existe): el enlace va al registro.
+		{ sendMail: !process.env.VERCEL_ENV }
+	);
 	return { token };
 }
 
@@ -602,7 +704,9 @@ async function main() {
 	const onlyExtract = process.argv.includes('--solo-extraer');
 	const data = await loadPrototype(onlyExtract);
 	if (data.today !== SEED_REFERENCE_DATE)
-		console.warn(`Aviso: la fecha de referencia del prototipo es ${data.today}, no ${SEED_REFERENCE_DATE}`);
+		console.warn(
+			`Aviso: la fecha de referencia del prototipo es ${data.today}, no ${SEED_REFERENCE_DATE}`
+		);
 	if (onlyExtract) return;
 	const { token } = await seed(data);
 	const kits = Object.values(data.kits).reduce((n, l) => n + l.length, 0);
@@ -614,7 +718,8 @@ async function main() {
 	);
 }
 
-const isMain = process.argv[1] && resolve(process.argv[1]) === resolve('scripts/seed-from-prototype.ts');
+const isMain =
+	process.argv[1] && resolve(process.argv[1]) === resolve('scripts/seed-from-prototype.ts');
 if (isMain)
 	main()
 		.catch((e) => {

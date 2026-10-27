@@ -7,12 +7,7 @@ import { can } from '$lib/permissions';
 import { themeInput } from '$lib/schemas/auth';
 import { audit } from '$lib/server/audit';
 import { loadActor } from '$lib/server/auth/actor';
-import {
-	AUTH_LIMITS,
-	CAMERA_PATHS,
-	isPublic,
-	sectionAction
-} from '$lib/server/auth/guards';
+import { AUTH_LIMITS, CAMERA_PATHS, isPublic, sectionAction } from '$lib/server/auth/guards';
 import { ADMIN_IDLE_SECONDS, getAuth, SESSION_ABSOLUTE_SECONDS } from '$lib/server/auth';
 import { db, tables } from '$lib/server/db';
 import { hit, sweep } from '$lib/server/rate-limit';
@@ -60,13 +55,24 @@ const handleSession: Handle = async ({ event, resolve }) => {
 			const { session } = found;
 			const user = await loadActor(session.userId);
 			const absoluteExpired = now - session.createdAt.getTime() > SESSION_ABSOLUTE_SECONDS * 1000;
-			const adminIdle = user?.role === 'admin' && now - session.updatedAt.getTime() > ADMIN_IDLE_SECONDS * 1000;
+			const adminIdle =
+				user?.role === 'admin' && now - session.updatedAt.getTime() > ADMIN_IDLE_SECONDS * 1000;
 			if (!user || user.status !== 'active' || absoluteExpired || adminIdle) {
-				await auth.api.revokeSession({ headers: event.request.headers, body: { token: session.token } });
+				await auth.api.revokeSession({
+					headers: event.request.headers,
+					body: { token: session.token }
+				});
 				await audit({
 					userId: session.userId,
 					action: 'auth.session_expired',
-					after: { reason: !user || user.status !== 'active' ? 'suspended' : absoluteExpired ? 'absolute' : 'admin_idle' }
+					after: {
+						reason:
+							!user || user.status !== 'active'
+								? 'suspended'
+								: absoluteExpired
+									? 'absolute'
+									: 'admin_idle'
+					}
 				});
 			} else {
 				event.locals.user = user;
@@ -118,14 +124,17 @@ const handleGuard: Handle = async ({ event, resolve }) => {
 const handleHeaders: Handle = async ({ event, resolve }) => {
 	const response = await resolve(event);
 	const h = response.headers;
-	const https = event.url.protocol === 'https:' || event.request.headers.get('x-forwarded-proto') === 'https';
+	const https =
+		event.url.protocol === 'https:' || event.request.headers.get('x-forwarded-proto') === 'https';
 	if (https) h.set('strict-transport-security', 'max-age=63072000; includeSubDomains; preload');
 	h.set('x-content-type-options', 'nosniff');
 	h.set('referrer-policy', 'strict-origin-when-cross-origin');
 	h.set('x-frame-options', 'DENY');
 	h.set('cross-origin-opener-policy', 'same-origin');
 	h.set('cross-origin-resource-policy', 'same-origin');
-	const camera = CAMERA_PATHS.some((r) => r.test(event.url.pathname)) ? 'camera=(self)' : 'camera=()';
+	const camera = CAMERA_PATHS.some((r) => r.test(event.url.pathname))
+		? 'camera=(self)'
+		: 'camera=()';
 	h.set(
 		'permissions-policy',
 		`${camera}, microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=(), browsing-topics=()`
@@ -133,14 +142,20 @@ const handleHeaders: Handle = async ({ event, resolve }) => {
 	// Nada con sesión ni de acceso se guarda en cachés compartidas (9.3).
 	const sensitive =
 		event.locals.session || isPublic(event.url.pathname) || event.url.pathname.startsWith('/api/');
-	if (sensitive && !event.url.pathname.startsWith('/_app/')) h.set('cache-control', 'private, no-store');
+	if (sensitive && !event.url.pathname.startsWith('/_app/'))
+		h.set('cache-control', 'private, no-store');
 	return response;
 };
 
-export const handle = sequence(handleHeaders, handleTheme, handleRateLimit, handleSession, handleGuard);
+export const handle = sequence(
+	handleHeaders,
+	handleTheme,
+	handleRateLimit,
+	handleSession,
+	handleGuard
+);
 
 export const handleError: HandleServerError = ({ error: e, status }) => {
 	if (status !== 404) console.error(e);
 	return { message: status === 404 ? 'Página no encontrada' : 'Algo ha fallado' };
 };
-

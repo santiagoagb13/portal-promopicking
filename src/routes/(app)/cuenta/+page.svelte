@@ -63,7 +63,14 @@
 	<section>
 		<div class="h">
 			<h2>Passkeys</h2>
-			<Button variant="primary" icon={Plus} label="Añadir passkey en este dispositivo" tipPos="left" onclick={addPasskey} disabled={busy} />
+			<Button
+				variant="primary"
+				icon={Plus}
+				label="Añadir passkey en este dispositivo"
+				tipPos="left"
+				onclick={addPasskey}
+				disabled={busy}
+			/>
 		</div>
 		{#if form?.error}<p class="field-error" role="alert">{form.error}</p>{/if}
 		{#if data.passkeys.length}
@@ -73,10 +80,27 @@
 						<KeyRound size={20} strokeWidth={1.5} aria-hidden="true" />
 						<div class="grow">
 							<b>{k.name ?? 'Passkey'}</b>
-							<small>Creada {fmtDateTime(k.createdAt)} · {k.lastUsedAt ? `último uso ${fmtDateTime(k.lastUsedAt)}` : 'sin usar'}</small>
+							<small
+								>Creada {fmtDateTime(k.createdAt)} · {k.lastUsedAt
+									? `último uso ${fmtDateTime(k.lastUsedAt)}`
+									: 'sin usar'}</small
+							>
 						</div>
-						<Button href="?confirmar=renombrar-{k.id}" variant="ghost" icon={Pencil} label="Renombrar" onclick={(e: MouseEvent) => open(e, `renombrar-${k.id}`)} />
-						<Button href="?confirmar=borrar-{k.id}" variant="red" icon={Trash2} label="Eliminar" tipPos="left" onclick={(e: MouseEvent) => open(e, `borrar-${k.id}`)} />
+						<Button
+							href="?confirmar=renombrar-{k.id}"
+							variant="ghost"
+							icon={Pencil}
+							label="Renombrar"
+							onclick={(e: MouseEvent) => open(e, `renombrar-${k.id}`)}
+						/>
+						<Button
+							href="?confirmar=borrar-{k.id}"
+							variant="red"
+							icon={Trash2}
+							label="Eliminar"
+							tipPos="left"
+							onclick={(e: MouseEvent) => open(e, `borrar-${k.id}`)}
+						/>
 						<ConfirmDialog
 							bind:this={dialogs[`renombrar-${k.id}`]}
 							id="renombrar-{k.id}"
@@ -86,13 +110,23 @@
 							fields={{ id: k.id }}
 							initiallyOpen={confirmar === `renombrar-${k.id}`}
 						>
-							<label class="field"><span>Nombre</span><input class="input" name="name" value={k.name ?? ''} maxlength="60" required /></label>
+							<label class="field"
+								><span>Nombre</span><input
+									class="input"
+									name="name"
+									value={k.name ?? ''}
+									maxlength="60"
+									required
+								/></label
+							>
 						</ConfirmDialog>
 						<ConfirmDialog
 							bind:this={dialogs[`borrar-${k.id}`]}
 							id="borrar-{k.id}"
 							title="¿Eliminar la passkey «{k.name ?? 'Passkey'}»?"
-							description={data.passkeys.length === 1 ? 'Es la única: solo podrás entrar con un enlace por correo.' : 'Ese dispositivo dejará de servir para entrar.'}
+							description={data.passkeys.length === 1
+								? 'Es la única: solo podrás entrar con un enlace por correo.'
+								: 'Ese dispositivo dejará de servir para entrar.'}
 							confirmLabel="Eliminar"
 							tone="red"
 							action="?/borrarPasskey"
@@ -111,7 +145,14 @@
 		<div class="h">
 			<h2>Sesiones activas</h2>
 			{#if data.sessions.length > 1}
-				<Button href="?confirmar=cerrar-otras" variant="red" icon={LogOut} label="Cerrar las demás sesiones" tipPos="left" onclick={(e: MouseEvent) => open(e, 'cerrar-otras')} />
+				<Button
+					href="?confirmar=cerrar-otras"
+					variant="red"
+					icon={LogOut}
+					label="Cerrar las demás sesiones"
+					tipPos="left"
+					onclick={(e: MouseEvent) => open(e, 'cerrar-otras')}
+				/>
 				<ConfirmDialog
 					bind:this={dialogs['cerrar-otras']}
 					id="cerrar-otras"
@@ -127,11 +168,20 @@
 			{#each data.sessions as s (s.id)}
 				<li>
 					<div class="grow">
-						<b>{s.device}{#if s.current}&nbsp;<Chip tone="green">Esta sesión</Chip>{/if}</b>
+						<b
+							>{s.device}{#if s.current}&nbsp;<Chip tone="green">Esta sesión</Chip>{/if}</b
+						>
 						<small>Última actividad {fmtDateTime(s.updatedAt)}{s.ip ? ` · ${s.ip}` : ''}</small>
 					</div>
 					{#if !s.current}
-						<Button href="?confirmar=sesion-{s.id}" variant="red" icon={LogOut} label="Cerrar sesión" tipPos="left" onclick={(e: MouseEvent) => open(e, `sesion-${s.id}`)} />
+						<Button
+							href="?confirmar=sesion-{s.id}"
+							variant="red"
+							icon={LogOut}
+							label="Cerrar sesión"
+							tipPos="left"
+							onclick={(e: MouseEvent) => open(e, `sesion-${s.id}`)}
+						/>
 						<ConfirmDialog
 							bind:this={dialogs[`sesion-${s.id}`]}
 							id="sesion-{s.id}"

@@ -12,9 +12,19 @@
 
 <ul class="list">
 	{#each items as item (item.href)}
-		<li><a href={item.href}><item.icon size={20} strokeWidth={1.5} aria-hidden={true} />{item.label}</a></li>
+		<li>
+			<a href={item.href}
+				><item.icon size={20} strokeWidth={1.5} aria-hidden={true} />{item.label}</a
+			>
+		</li>
 	{/each}
-	<li><a href="/notificaciones"><Bell size={20} strokeWidth={1.5} aria-hidden="true" />Notificaciones{#if data.unread}<span class="count">{data.unread}</span>{/if}</a></li>
+	<li>
+		<a href="/notificaciones"
+			><Bell size={20} strokeWidth={1.5} aria-hidden="true" />Notificaciones{#if data.unread}<span
+					class="count">{data.unread}</span
+				>{/if}</a
+		>
+	</li>
 	<li><a href="/cuenta"><UserRound size={20} strokeWidth={1.5} aria-hidden="true" />Cuenta</a></li>
 	<li class="row"><span>Tema</span><ThemeSwitch current={data.theme} /></li>
 	<li>

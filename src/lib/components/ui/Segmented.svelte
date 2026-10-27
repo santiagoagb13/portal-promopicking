@@ -1,8 +1,11 @@
 <!-- Segmentos de filtro (7.4): enlaces, para que el filtro viva en la URL y funcione sin JS. -->
 <script lang="ts">
 	type Item = { href: string; label: string; active: boolean; count?: number };
-	let { items, label, size = 'md' }: { items: Item[]; label: string; size?: 'md' | 'mini' } =
-		$props();
+	let {
+		items,
+		label,
+		size = 'md'
+	}: { items: Item[]; label: string; size?: 'md' | 'mini' } = $props();
 </script>
 
 <nav class="seg {size}" aria-label={label}>
@@ -11,8 +14,8 @@
 			href={item.href}
 			aria-current={item.active ? 'true' : undefined}
 			data-sveltekit-noscroll
-			data-sveltekit-replacestate>{item.label}{#if item.count}<span class="count">{item.count}</span
-				>{/if}</a
+			data-sveltekit-replacestate
+			>{item.label}{#if item.count}<span class="count">{item.count}</span>{/if}</a
 		>
 	{/each}
 </nav>

@@ -15,10 +15,10 @@
 	let { data, form } = $props();
 	type Row = (typeof data.invitations)[number];
 
-	let role = $state('');
-	$effect.pre(() => {
-		role = form?.create?.values.role ?? (data.roles.length === 1 ? data.roles[0]!.value : '');
-	});
+	// Se puede cambiar en el formulario; vuelve al valor del servidor tras cada envío.
+	let role = $derived(
+		form?.create?.values.role ?? (data.roles.length === 1 ? data.roles[0]!.value : '')
+	);
 	const confirmar = $derived(page.url.searchParams.get('confirmar'));
 	let dialogs: Record<string, ConfirmDialog | undefined> = $state({});
 	function open(e: MouseEvent, key: string) {
@@ -39,14 +39,34 @@
 <div class="layout">
 	<section class="create">
 		<h2>Invitar</h2>
-		<form method="POST" action="?/crear" class="form" use:enhance={() => async ({ update }) => update({ reset: true })}>
+		<form
+			method="POST"
+			action="?/crear"
+			class="form"
+			use:enhance={() =>
+				async ({ update }) =>
+					update({ reset: true })}
+		>
 			<label class="field">
 				<span>Correo</span>
-				<input class="input" type="email" name="email" required autocomplete="off" value={form?.create?.values.email ?? ''} />
+				<input
+					class="input"
+					type="email"
+					name="email"
+					required
+					autocomplete="off"
+					value={form?.create?.values.email ?? ''}
+				/>
 			</label>
 			<label class="field">
 				<span>Nombre (opcional)</span>
-				<input class="input" name="name" maxlength="120" autocomplete="off" value={form?.create?.values.name ?? ''} />
+				<input
+					class="input"
+					name="name"
+					maxlength="120"
+					autocomplete="off"
+					value={form?.create?.values.name ?? ''}
+				/>
 			</label>
 			<label class="field">
 				<span>Rol</span>
@@ -59,7 +79,9 @@
 				<fieldset class="field">
 					<legend>Marcas</legend>
 					{#each data.brands as b (b.code)}
-						<label class="check"><input type="checkbox" name="brands" value={b.code} />{b.name}</label>
+						<label class="check"
+							><input type="checkbox" name="brands" value={b.code} />{b.name}</label
+						>
 					{/each}
 				</fieldset>
 			{/if}
@@ -67,7 +89,8 @@
 				<label class="field">
 					<span>Restaurantes</span>
 					<select class="input multi" name="restaurants" multiple size="6">
-						{#each data.restaurants as r (r.id)}<option value={r.id}>{r.id} · {r.name}</option>{/each}
+						{#each data.restaurants as r (r.id)}<option value={r.id}>{r.id} · {r.name}</option
+							>{/each}
 					</select>
 				</label>
 			{/if}
@@ -80,7 +103,12 @@
 		<h2>Pendientes</h2>
 		{#if form?.error}<p class="field-error" role="alert">{form.error}</p>{/if}
 		{#if data.invitations.length}
-			<DataTable caption="Invitaciones pendientes" {columns} rows={data.invitations} key={(r: Row) => r.id}>
+			<DataTable
+				caption="Invitaciones pendientes"
+				{columns}
+				rows={data.invitations}
+				key={(r: Row) => r.id}
+			>
 				{#snippet cell(r: Row, col)}
 					{#if col.key === 'who'}
 						<b class="email">{r.email}</b>{#if r.name}<small>{r.name}</small>{/if}
@@ -91,11 +119,26 @@
 					{:else if col.key === 'sent'}
 						<span class="num">{fmtDateTime(r.sentAt)}</span>
 					{:else if col.key === 'expires'}
-						{#if r.state === 'expired'}<Chip tone="amber">Caducada</Chip>{:else}<span class="num">{fmtDateTime(r.expiresAt)}</span>{/if}
+						{#if r.state === 'expired'}<Chip tone="amber">Caducada</Chip>{:else}<span class="num"
+								>{fmtDateTime(r.expiresAt)}</span
+							>{/if}
 					{:else if col.key === 'acts'}
 						<span class="acts">
-							<Button href="?confirmar=reenviar-{r.id}" variant="ghost" icon={RotateCcw} label="Reenviar" onclick={(e: MouseEvent) => open(e, `reenviar-${r.id}`)} />
-							<Button href="?confirmar=revocar-{r.id}" variant="red" icon={Ban} label="Revocar" tipPos="left" onclick={(e: MouseEvent) => open(e, `revocar-${r.id}`)} />
+							<Button
+								href="?confirmar=reenviar-{r.id}"
+								variant="ghost"
+								icon={RotateCcw}
+								label="Reenviar"
+								onclick={(e: MouseEvent) => open(e, `reenviar-${r.id}`)}
+							/>
+							<Button
+								href="?confirmar=revocar-{r.id}"
+								variant="red"
+								icon={Ban}
+								label="Revocar"
+								tipPos="left"
+								onclick={(e: MouseEvent) => open(e, `revocar-${r.id}`)}
+							/>
 						</span>
 						<ConfirmDialog
 							bind:this={dialogs[`reenviar-${r.id}`]}

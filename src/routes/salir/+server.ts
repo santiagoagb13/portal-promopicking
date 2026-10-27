@@ -5,7 +5,11 @@ import type { RequestHandler } from './$types';
 
 export const POST: RequestHandler = async ({ request, locals, getClientAddress }) => {
 	if (locals.user) {
-		await audit({ userId: locals.user.id, action: 'auth.sign_out', ...requestMeta(request, getClientAddress()) });
+		await audit({
+			userId: locals.user.id,
+			action: 'auth.sign_out',
+			...requestMeta(request, getClientAddress())
+		});
 		await getAuth().api.signOut({ headers: request.headers });
 	}
 	redirect(303, '/acceso');

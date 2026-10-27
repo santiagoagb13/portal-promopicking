@@ -3,7 +3,20 @@
  * Algunos soportes usan otros esquemas (`mod. A 14,25`); entonces solo se guarda el código.
  */
 
-export const TARIFFS = ['C1', 'C2', 'C3', 'C3+', 'WARNER', 'VIPS', 'VSM', 'HÍB', 'HÍBRIDOS', 'M2', 'M3', 'M4'];
+export const TARIFFS = [
+	'C1',
+	'C2',
+	'C3',
+	'C3+',
+	'WARNER',
+	'VIPS',
+	'VSM',
+	'HÍB',
+	'HÍBRIDOS',
+	'M2',
+	'M3',
+	'M4'
+];
 export const ASSORTMENTS = ['ALL', 'RED', 'RED+', 'WAR'];
 export const LANGUAGES = ['SP', 'EN', 'FR', 'CAT', 'GALL', 'CAST', 'ING', 'PORT'];
 
@@ -28,8 +41,10 @@ export function parseVersionCode(raw: string): VersionCode {
 	if (!tariff || !TARIFFS.includes(tariff)) return none;
 	let i = 1;
 	let assortment: string | null = null;
-	if (parts[i] && ASSORTMENTS.includes(parts[i]!.toUpperCase())) assortment = parts[i++]!.toUpperCase();
-	const language = parts[i] && LANGUAGES.includes(parts[i]!.toUpperCase()) ? parts[i++]!.toUpperCase() : null;
+	if (parts[i] && ASSORTMENTS.includes(parts[i]!.toUpperCase()))
+		assortment = parts[i++]!.toUpperCase();
+	const language =
+		parts[i] && LANGUAGES.includes(parts[i]!.toUpperCase()) ? parts[i++]!.toUpperCase() : null;
 	if (!language) return none;
 	const rest = parts.slice(i).join(' ');
 	return { code, tariff, assortment, language, variant: rest || null };
@@ -37,5 +52,7 @@ export function parseVersionCode(raw: string): VersionCode {
 
 /** Código compacto para QR y nombres de fichero: `C2 RED+ SP` → `C2RED+SP`. */
 export function compactVersionCode(code: string): string {
-	return normalizeVersionCode(code).replace(/[^A-Za-z0-9+ÁÉÍÓÚÑáéíóúñ]/g, '').toUpperCase();
+	return normalizeVersionCode(code)
+		.replace(/[^A-Za-z0-9+ÁÉÍÓÚÑáéíóúñ]/g, '')
+		.toUpperCase();
 }

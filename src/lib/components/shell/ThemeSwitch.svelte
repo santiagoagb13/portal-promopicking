@@ -8,10 +8,7 @@
 	import type { Theme } from '$lib/schemas/auth';
 
 	let { current, labels = false }: { current: Theme; labels?: boolean } = $props();
-	let theme = $state<Theme>('system');
-	$effect.pre(() => {
-		theme = current;
-	});
+	let theme = $derived<Theme>(current);
 	const options = [
 		{ value: 'system', icon: Monitor },
 		{ value: 'light', icon: Sun },
