@@ -1,0 +1,290 @@
+/*
+ * Sistema de diseño · propuesta B «Lámina» con las reglas de la sección 7.5 del plan.
+ * Fuente de verdad: docs/propuestas/b-lamina-campanas.html y b-lamina-aprobacion.html.
+ * Los colores son tokens (no filtros): claro por defecto, oscuro por `prefers-color-scheme`
+ * salvo que se fuerce con `data-theme` en <html>.
+ */
+@import 'tailwindcss';
+@import '@fontsource-variable/geist/wght.css';
+@import '@fontsource-variable/geist-mono/wght.css';
+
+:root {
+	--bg: #ffffff;
+	--surface: #ffffff;
+	--ink: #111111;
+	--muted: #6b6b6b;
+	--line: #e6e6e6;
+	--line-soft: #f2f2f2;
+	/* El acento es la tinta: negro en claro, blanco en oscuro (7.5, regla 6). */
+	--primary: #111111;
+	--on-primary: #ffffff;
+	--green: #1a7f4b;
+	/* Dos ámbares: el de icono/punto y el de texto sobre su fondo (7.5, regla 1). */
+	--amber: #b7791f;
+	--amber-ink: #8a5a10;
+	--amber-bg: #fbf3e3;
+	--on-amber: #111111;
+	--red: #c62828;
+	--info: #4a4a4a;
+	--seg-on: #111111;
+	--seg-on-ink: #ffffff;
+	--backdrop: rgb(0 0 0 / 0.45);
+
+	--sbw: 232px;
+	--top: 52px;
+	--tab: 56px;
+	--content: 1280px;
+	--dlg: 440px;
+	--t: 150ms;
+	--tp: 200ms;
+	--stroke: 1.5;
+	color-scheme: light dark;
+}
+:root[data-theme='light'] {
+	color-scheme: light;
+}
+:root[data-theme='dark'] {
+	color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) {
+		--bg: #0c0c0c;
+		--surface: #141414;
+		--ink: #f2f2f2;
+		--muted: #9a9a9a;
+		--line: #262626;
+		--line-soft: #1c1c1c;
+		--primary: #f2f2f2;
+		--on-primary: #0c0c0c;
+		--green: #3fab70;
+		--amber: #f0b65a;
+		--amber-ink: #f6cf8a;
+		--amber-bg: #2a2215;
+		--on-amber: #0c0c0c;
+		--red: #e5534b;
+		--info: #a0a0a0;
+		--seg-on: #f2f2f2;
+		--seg-on-ink: #0c0c0c;
+		--backdrop: rgb(0 0 0 / 0.6);
+	}
+}
+:root[data-theme='dark'] {
+	--bg: #0c0c0c;
+	--surface: #141414;
+	--ink: #f2f2f2;
+	--muted: #9a9a9a;
+	--line: #262626;
+	--line-soft: #1c1c1c;
+	--primary: #f2f2f2;
+	--on-primary: #0c0c0c;
+	--green: #3fab70;
+	--amber: #f0b65a;
+	--amber-ink: #f6cf8a;
+	--amber-bg: #2a2215;
+	--on-amber: #0c0c0c;
+	--red: #e5534b;
+	--info: #a0a0a0;
+	--seg-on: #f2f2f2;
+	--seg-on-ink: #0c0c0c;
+	--backdrop: rgb(0 0 0 / 0.6);
+}
+
+/* Tokens de Tailwind: escala propia, sin radios grandes ni sombras (7.1, regla 6; 7.2). */
+@theme inline {
+	--color-*: initial;
+	--color-bg: var(--bg);
+	--color-surface: var(--surface);
+	--color-ink: var(--ink);
+	--color-muted: var(--muted);
+	--color-line: var(--line);
+	--color-line-soft: var(--line-soft);
+	--color-primary: var(--primary);
+	--color-on-primary: var(--on-primary);
+	--color-green: var(--green);
+	--color-amber: var(--amber);
+	--color-amber-ink: var(--amber-ink);
+	--color-amber-bg: var(--amber-bg);
+	--color-red: var(--red);
+	--color-info: var(--info);
+	--color-transparent: transparent;
+	--color-current: currentColor;
+
+	--font-sans: 'Geist Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+	--font-mono: 'Geist Mono Variable', ui-monospace, 'SFMono-Regular', monospace;
+
+	--text-*: initial;
+	--text-xs: 12px;
+	--text-sm: 13px;
+	--text-base: 14px;
+	--text-md: 16px;
+	--text-lg: 20px;
+	--text-xl: 24px;
+	--text-2xl: 32px;
+
+	--radius-*: initial;
+	--radius-ctl: 2px;
+
+	--shadow-*: initial;
+	--inset-shadow-*: initial;
+	--drop-shadow-*: initial;
+	--blur-*: initial;
+
+	--breakpoint-*: initial;
+	--breakpoint-sm: 480px;
+	--breakpoint-md: 768px;
+	--breakpoint-lg: 1024px;
+	--breakpoint-xl: 1280px;
+
+	--ease-*: initial;
+	--default-transition-duration: 150ms;
+}
+
+@layer base {
+	html {
+		-webkit-text-size-adjust: 100%;
+	}
+	body {
+		font-family: var(--font-sans);
+		font-size: 14px;
+		line-height: 1.4;
+		color: var(--ink);
+		background: var(--bg);
+		min-height: 100vh;
+		overflow-x: hidden;
+		-webkit-font-smoothing: antialiased;
+	}
+	h1 {
+		font-size: 24px;
+		font-weight: 500;
+		letter-spacing: -0.01em;
+	}
+	h2 {
+		font-size: 16px;
+		font-weight: 500;
+	}
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+	button {
+		cursor: pointer;
+	}
+	:focus-visible {
+		outline: 2px solid var(--primary);
+		outline-offset: 2px;
+	}
+	input,
+	select,
+	textarea {
+		color: inherit;
+		background: var(--surface);
+	}
+	::placeholder {
+		color: var(--muted);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		*::before,
+		*::after {
+			transition: none !important;
+			animation: none !important;
+		}
+	}
+}
+
+@layer components {
+	.app-root {
+		display: contents;
+	}
+	.mono,
+	.id,
+	.code,
+	kbd {
+		font-family: var(--font-mono);
+		font-size: 12px;
+	}
+	.num,
+	td {
+		font-variant-numeric: tabular-nums;
+	}
+	svg.lucide {
+		flex: none;
+	}
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	/* Tooltip: texto de `data-tip`, al pasar el ratón o con foco de teclado. */
+	[data-tip] {
+		position: relative;
+	}
+	[data-tip]:hover::after,
+	[data-tip]:focus-visible::after {
+		content: attr(data-tip);
+		position: absolute;
+		top: calc(100% + 6px);
+		left: 50%;
+		transform: translateX(-50%);
+		background: var(--ink);
+		color: var(--bg);
+		font-size: 12px;
+		font-weight: 400;
+		line-height: 1;
+		padding: 6px 8px;
+		white-space: nowrap;
+		z-index: 40;
+		border-radius: 2px;
+		pointer-events: none;
+	}
+	[data-tip-pos='left']:hover::after,
+	[data-tip-pos='left']:focus-visible::after {
+		left: auto;
+		right: 0;
+		transform: none;
+	}
+
+	/* Campos de formulario: radio 0 (7.1, regla 6). */
+	.field {
+		display: grid;
+		gap: 6px;
+	}
+	.field > span {
+		font-size: 12px;
+		color: var(--muted);
+	}
+	.input {
+		height: 40px;
+		width: 100%;
+		padding: 0 12px;
+		border: 1px solid var(--line);
+		border-radius: 0;
+		background: var(--surface);
+		font: inherit;
+		transition: border-color var(--t);
+	}
+	.input:hover {
+		border-color: var(--muted);
+	}
+	.input[aria-invalid='true'] {
+		border-color: var(--red);
+	}
+	.field-error {
+		font-size: 12px;
+		color: var(--red);
+	}
+	@media (max-width: 767px) {
+		.input {
+			height: 44px;
+			font-size: 16px;
+		}
+	}
+}
