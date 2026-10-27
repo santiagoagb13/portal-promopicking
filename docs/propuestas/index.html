@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Propuestas de diseño · Portal Promopicking</title>
+<style>
+:root{color-scheme:light dark;--ink:#15181d;--muted:#5c6673;--line:#d8dce3;--bg:#fff;--soft:#f4f5f7}
+@media(prefers-color-scheme:dark){:root{--ink:#e6e9ee;--muted:#98a2b0;--line:#2a313a;--bg:#101418;--soft:#171c22}}
+*{box-sizing:border-box;margin:0}
+body{font:14px/1.45 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);padding:32px 16px 64px;max-width:1280px;margin:0 auto}
+h1{font-size:24px;font-weight:600;margin-bottom:4px} h2{font-size:18px;font-weight:600;margin:40px 0 12px} p{color:var(--muted)} a{color:inherit}
+.props{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:24px}
+.prop{border:1px solid var(--line);padding:16px} .prop h3{font-size:16px;margin-bottom:4px} .prop small{color:var(--muted);display:block;margin-bottom:12px}
+.prop ul{list-style:none;padding:0;display:grid;gap:6px} .prop li a{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:2px;text-decoration:none;font-weight:500} .prop li a:hover{background:var(--soft)}
+.sw{display:inline-flex;gap:4px;margin-bottom:12px} .sw i{width:20px;height:20px;border:1px solid var(--line);display:block}
+table{border-collapse:collapse;width:100%;max-width:720px} th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line)} th{font-size:12px;color:var(--muted);font-weight:500}
+.caps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px} .caps figure{margin:0} .caps img{width:100%;height:auto;border:1px solid var(--line);display:block;background:var(--soft)} .caps figcaption{font-size:12px;color:var(--muted);margin-top:4px}
+.caps.m{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))} .caps.m img{aspect-ratio:375/812;object-fit:cover;object-position:top}
+.caps.d img{aspect-ratio:16/10;object-fit:cover;object-position:top}
+</style>
+</head>
+<body>
+<h1>Propuestas de diseño · fase 0</h1>
+<p>Panel de campañas (8.3) y Aprobación de artes finales (8.5) maquetados con cada propuesta de la sección 7.3 del <a href="../PLAN-PORTAL-V2.md">plan</a>. Cada página tiene conmutador de modo oscuro (icono luna/sol) y es adaptable: a 375 px la tabla pasa a fichas y la aprobación a pantallas encadenadas.</p>
+
+<div class="props">
+  <div class="prop"><h3>A · «Taller»</h3><small>técnico, gris frío, navy · Inter + JetBrains Mono</small>
+    <div class="sw"><i style="background:#f4f5f7"></i><i style="background:#16365c"></i><i style="background:#1f7a45"></i><i style="background:#a66a0f"></i><i style="background:#b3261e"></i></div>
+    <ul><li><a href="a-taller-campanas.html">Campañas</a></li><li><a href="a-taller-aprobacion.html">Aprobación de artes</a></li></ul></div>
+  <div class="prop"><h3>B · «Lámina»</h3><small>blanco, líneas en lugar de tarjetas, acento negro · Geist + Geist Mono</small>
+    <div class="sw"><i style="background:#ffffff"></i><i style="background:#111111"></i><i style="background:#1a7f4b"></i><i style="background:#b7791f"></i><i style="background:#c62828"></i></div>
+    <ul><li><a href="b-lamina-campanas.html">Campañas</a></li><li><a href="b-lamina-aprobacion.html">Aprobación de artes</a></li></ul></div>
+  <div class="prop"><h3>C · «Pliego»</h3><small>hueso, cobre, papel y tinta · Instrument Sans + Fraunces + IBM Plex Mono</small>
+    <div class="sw"><i style="background:#f5f2ec"></i><i style="background:#9c4a1f"></i><i style="background:#4e6b2f"></i><i style="background:#a3720c"></i><i style="background:#a4262c"></i></div>
+    <ul><li><a href="c-pliego-campanas.html">Campañas</a></li><li><a href="c-pliego-aprobacion.html">Aprobación de artes</a></li></ul></div>
+</div>
+
+<h2>Comparativa rápida (plan, 7.3)</h2>
+<table>
+<thead><tr><th></th><th>A · Taller</th><th>B · Lámina</th><th>C · Pliego</th></tr></thead>
+<tbody>
+<tr><td>Continuidad con hoy</td><td>alta</td><td>media</td><td>baja</td></tr>
+<tr><td>Legibilidad en móvil</td><td>buena</td><td>muy buena</td><td>buena</td></tr>
+<tr><td>Densidad en escritorio</td><td>muy alta</td><td>media</td><td>alta</td></tr>
+<tr><td>Personalidad</td><td>baja</td><td>media</td><td>alta</td></tr>
+<tr><td>Peso de fuentes</td><td>1 familia + mono</td><td>1 familia + mono</td><td>2 familias + mono</td></tr>
+<tr><td>Esfuerzo de implementación</td><td>menor</td><td>medio</td><td>mayor</td></tr>
+</tbody>
+</table>
+
+<h2>Capturas · escritorio 1440 px</h2>
+<div class="caps d">
+  <figure><a href="capturas/a-taller-campanas-1440-claro.png"><img src="capturas/a-taller-campanas-1440-claro.png" alt="a-taller campanas 1440 claro" loading="lazy"></a><figcaption>a-taller · campanas · claro</figcaption></figure>
+  <figure><a href="capturas/a-taller-campanas-1440-oscuro.png"><img src="capturas/a-taller-campanas-1440-oscuro.png" alt="a-taller campanas 1440 oscuro" loading="lazy"></a><figcaption>a-taller · campanas · oscuro</figcaption></figure>
+  <figure><a href="capturas/a-taller-aprobacion-1440-claro.png"><img src="capturas/a-taller-aprobacion-1440-claro.png" alt="a-taller aprobacion 1440 claro" loading="lazy"></a><figcaption>a-taller · aprobacion · claro</figcaption></figure>
+  <figure><a href="capturas/a-taller-aprobacion-1440-oscuro.png"><img src="capturas/a-taller-aprobacion-1440-oscuro.png" alt="a-taller aprobacion 1440 oscuro" loading="lazy"></a><figcaption>a-taller · aprobacion · oscuro</figcaption></figure>
+  <figure><a href="capturas/b-lamina-campanas-1440-claro.png"><img src="capturas/b-lamina-campanas-1440-claro.png" alt="b-lamina campanas 1440 claro" loading="lazy"></a><figcaption>b-lamina · campanas · claro</figcaption></figure>
+  <figure><a href="capturas/b-lamina-campanas-1440-oscuro.png"><img src="capturas/b-lamina-campanas-1440-oscuro.png" alt="b-lamina campanas 1440 oscuro" loading="lazy"></a><figcaption>b-lamina · campanas · oscuro</figcaption></figure>
+  <figure><a href="capturas/b-lamina-aprobacion-1440-claro.png"><img src="capturas/b-lamina-aprobacion-1440-claro.png" alt="b-lamina aprobacion 1440 claro" loading="lazy"></a><figcaption>b-lamina · aprobacion · claro</figcaption></figure>
+  <figure><a href="capturas/b-lamina-aprobacion-1440-oscuro.png"><img src="capturas/b-lamina-aprobacion-1440-oscuro.png" alt="b-lamina aprobacion 1440 oscuro" loading="lazy"></a><figcaption>b-lamina · aprobacion · oscuro</figcaption></figure>
+  <figure><a href="capturas/c-pliego-campanas-1440-claro.png"><img src="capturas/c-pliego-campanas-1440-claro.png" alt="c-pliego campanas 1440 claro" loading="lazy"></a><figcaption>c-pliego · campanas · claro</figcaption></figure>
+  <figure><a href="capturas/c-pliego-campanas-1440-oscuro.png"><img src="capturas/c-pliego-campanas-1440-oscuro.png" alt="c-pliego campanas 1440 oscuro" loading="lazy"></a><figcaption>c-pliego · campanas · oscuro</figcaption></figure>
+  <figure><a href="capturas/c-pliego-aprobacion-1440-claro.png"><img src="capturas/c-pliego-aprobacion-1440-claro.png" alt="c-pliego aprobacion 1440 claro" loading="lazy"></a><figcaption>c-pliego · aprobacion · claro</figcaption></figure>
+  <figure><a href="capturas/c-pliego-aprobacion-1440-oscuro.png"><img src="capturas/c-pliego-aprobacion-1440-oscuro.png" alt="c-pliego aprobacion 1440 oscuro" loading="lazy"></a><figcaption>c-pliego · aprobacion · oscuro</figcaption></figure>
+</div>
+<h2>Capturas · móvil 375 px</h2>
+<div class="caps m">
+  <figure><a href="capturas/a-taller-campanas-375-claro.png"><img src="capturas/a-taller-campanas-375-claro.png" alt="a-taller campanas 375 claro" loading="lazy"></a><figcaption>a-taller · campanas · claro</figcaption></figure>
+  <figure><a href="capturas/a-taller-campanas-375-oscuro.png"><img src="capturas/a-taller-campanas-375-oscuro.png" alt="a-taller campanas 375 oscuro" loading="lazy"></a><figcaption>a-taller · campanas · oscuro</figcaption></figure>
+  <figure><a href="capturas/a-taller-aprobacion-375-claro.png"><img src="capturas/a-taller-aprobacion-375-claro.png" alt="a-taller aprobacion 375 claro" loading="lazy"></a><figcaption>a-taller · aprobacion · claro</figcaption></figure>
+  <figure><a href="capturas/a-taller-aprobacion-375-oscuro.png"><img src="capturas/a-taller-aprobacion-375-oscuro.png" alt="a-taller aprobacion 375 oscuro" loading="lazy"></a><figcaption>a-taller · aprobacion · oscuro</figcaption></figure>
+  <figure><a href="capturas/b-lamina-campanas-375-claro.png"><img src="capturas/b-lamina-campanas-375-claro.png" alt="b-lamina campanas 375 claro" loading="lazy"></a><figcaption>b-lamina · campanas · claro</figcaption></figure>
+  <figure><a href="capturas/b-lamina-campanas-375-oscuro.png"><img src="capturas/b-lamina-campanas-375-oscuro.png" alt="b-lamina campanas 375 oscuro" loading="lazy"></a><figcaption>b-lamina · campanas · oscuro</figcaption></figure>
+  <figure><a href="capturas/b-lamina-aprobacion-375-claro.png"><img src="capturas/b-lamina-aprobacion-375-claro.png" alt="b-lamina aprobacion 375 claro" loading="lazy"></a><figcaption>b-lamina · aprobacion · claro</figcaption></figure>
+  <figure><a href="capturas/b-lamina-aprobacion-375-oscuro.png"><img src="capturas/b-lamina-aprobacion-375-oscuro.png" alt="b-lamina aprobacion 375 oscuro" loading="lazy"></a><figcaption>b-lamina · aprobacion · oscuro</figcaption></figure>
+  <figure><a href="capturas/c-pliego-campanas-375-claro.png"><img src="capturas/c-pliego-campanas-375-claro.png" alt="c-pliego campanas 375 claro" loading="lazy"></a><figcaption>c-pliego · campanas · claro</figcaption></figure>
+  <figure><a href="capturas/c-pliego-campanas-375-oscuro.png"><img src="capturas/c-pliego-campanas-375-oscuro.png" alt="c-pliego campanas 375 oscuro" loading="lazy"></a><figcaption>c-pliego · campanas · oscuro</figcaption></figure>
+  <figure><a href="capturas/c-pliego-aprobacion-375-claro.png"><img src="capturas/c-pliego-aprobacion-375-claro.png" alt="c-pliego aprobacion 375 claro" loading="lazy"></a><figcaption>c-pliego · aprobacion · claro</figcaption></figure>
+  <figure><a href="capturas/c-pliego-aprobacion-375-oscuro.png"><img src="capturas/c-pliego-aprobacion-375-oscuro.png" alt="c-pliego aprobacion 375 oscuro" loading="lazy"></a><figcaption>c-pliego · aprobacion · oscuro</figcaption></figure>
+</div>
+</body>
+</html>

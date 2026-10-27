@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campañas · Propuesta B «Lámina»</title>
+<meta name="description" content="Maqueta estática de la propuesta B «Lámina» para el Portal de servicio Promopicking · Alsea (fase 0).">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0}
+:root{--sbw:232px;--content:1280px;--dlg:480px;--t:150ms;--tp:200ms;--top:52px;--tab:56px;color-scheme:light dark}
+:root[data-theme=light]{color-scheme:light} :root[data-theme=dark]{color-scheme:dark}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--font);font-size:14px;line-height:1.4;color:var(--ink);background:var(--bg);min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none} button{font:inherit;color:inherit;cursor:pointer} svg.i{stroke-width:var(--stroke);flex:none}
+.mono,.id,.code,kbd{font-family:var(--mono);font-size:12px} .num,.k-v,td{font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
+.spacer{flex:1}
+/* carcasa */
+.sb{position:fixed;inset:0 auto 0 0;width:var(--sbw);display:flex;flex-direction:column;background:var(--sb-bg);color:var(--sb-ink);border-right:1px solid var(--sb-line);z-index:30;overflow:hidden}
+.sb-logo{height:var(--top);display:flex;align-items:center;gap:12px;padding:0 18px;border-bottom:1px solid var(--sb-line);white-space:nowrap}
+.sb-logo b{font-size:15px;font-weight:600;color:var(--sb-logo);letter-spacing:-.01em}
+.logo-mark{width:20px;height:20px;flex:none;background:var(--sb-logo);color:var(--sb-bg);display:grid;place-items:center;font-weight:700;font-size:12px}
+.sb nav{padding:8px 0;flex:1} .sb a{display:flex;align-items:center;gap:12px;height:40px;padding:0 18px;white-space:nowrap;transition:color var(--t),background var(--t)}
+.sb .sb-label{overflow:hidden;text-overflow:ellipsis}
+.sb-foot{display:flex;align-items:center;gap:12px;padding:12px 18px;border-top:1px solid var(--sb-line);white-space:nowrap;font-size:13px} .sb-foot small{display:block;font-size:12px;opacity:.75}
+.count{min-width:18px;height:18px;padding:0 5px;display:inline-grid;place-items:center;font-size:11px;font-weight:600;background:var(--line-soft);color:var(--ink);border-radius:2px;line-height:1}
+.count.warn{background:var(--amber);color:#fff} .sb a .count{margin-left:auto}
+.avatar{width:28px;height:28px;flex:none;display:grid;place-items:center;font-size:11px;font-weight:600;background:var(--primary);color:var(--on-primary);border:0}
+.main{margin-left:var(--sbw);min-width:0;display:flex;flex-direction:column;min-height:100vh}
+.topbar{position:sticky;top:0;z-index:20;height:var(--top);display:flex;align-items:center;gap:8px;padding:0 24px;background:var(--bg);border-bottom:1px solid var(--line)}
+.topbar h1{margin-right:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.search{height:32px;display:inline-flex;align-items:center;gap:8px;padding:0 10px;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--muted);min-width:220px}
+.search kbd{margin-left:auto;font-size:11px;border:1px solid var(--line);padding:1px 4px;border-radius:2px}
+.pip{position:absolute;top:8px;right:8px;width:7px;height:7px;border-radius:50%;background:var(--amber)}
+.tabbar{display:none}
+.content{padding:24px;max-width:var(--content);width:100%}
+/* botones */
+.btn,.ib{height:36px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0 12px;border:1px solid var(--line);border-radius:2px;background:var(--surface);font-weight:500;white-space:nowrap;transition:background var(--t),color var(--t),border-color var(--t)}
+.ib{width:36px;padding:0;position:relative} .btn:hover,.ib:hover{background:var(--line-soft)}
+.ghost{border-color:transparent;background:transparent}
+.primary{background:var(--primary);color:var(--on-primary);border-color:var(--primary)} .primary:hover{background:var(--primary);filter:brightness(1.1)}
+.btn.green{background:var(--green);color:#fff;border-color:var(--green)} .btn.green:hover{background:var(--green);filter:brightness(1.1)}
+.ib.green{color:var(--green)} .ib.amber{color:var(--amber)} .ib.red{color:var(--red)}
+.ib.green:hover{background:color-mix(in srgb,var(--green) 12%,transparent)} .ib.amber:hover{background:color-mix(in srgb,var(--amber) 12%,transparent)} .ib.red:hover{background:color-mix(in srgb,var(--red) 12%,transparent)}
+.ib[aria-disabled=true]{opacity:.35;cursor:default} .ib[aria-disabled=true]:hover{background:transparent}
+[data-tip]{position:relative} [data-tip]:hover::after,[data-tip]:focus-visible::after{content:attr(data-tip);position:absolute;top:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);font-size:12px;font-weight:400;line-height:1;padding:6px 8px;white-space:nowrap;z-index:40;border-radius:2px;pointer-events:none}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:2px;background:var(--surface);overflow:hidden}
+.seg button{height:34px;padding:0 12px;border:0;background:transparent;color:var(--muted);display:inline-flex;align-items:center;gap:6px;font-weight:500;transition:background var(--t),color var(--t)}
+.seg button+button{border-left:1px solid var(--line)} .seg button[aria-pressed=true]{background:var(--seg-on);color:var(--seg-on-ink)}
+.seg.mini button{height:28px;padding:0 10px;font-size:12px} .seg button .count{font-size:10px;min-width:16px;height:16px}
+.seg button[aria-pressed=true] .count{background:color-mix(in srgb,var(--seg-on-ink) 20%,transparent);color:inherit}
+/* chips y semáforo */
+.chip{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:2px;font-size:12px;font-weight:500;white-space:nowrap;background:var(--line-soft);color:var(--ink)}
+.chip.green{background:color-mix(in srgb,var(--green) 14%,transparent);color:var(--green)}
+.chip.amber{background:color-mix(in srgb,var(--amber) 16%,transparent);color:var(--amber)}
+.chip.red{background:color-mix(in srgb,var(--red) 12%,transparent);color:var(--red)}
+.chip.primary{background:color-mix(in srgb,var(--primary) 12%,transparent);color:var(--primary)}
+.chip.info{background:color-mix(in srgb,var(--info) 12%,transparent);color:var(--info)}
+.chip.outline{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.bchip{display:inline-flex;align-items:center;height:22px;padding:0 7px;border-radius:2px;font-size:12px;font-weight:600;letter-spacing:.02em}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;vertical-align:middle;background:var(--line)}
+.dot.verde{background:var(--green)} .dot.ambar{background:var(--amber)} .dot.rojo{background:var(--red)} .dot.gris{background:var(--line)}
+.bar{display:inline-block;vertical-align:middle;width:96px;max-width:100%;height:6px;background:var(--line-soft)} .bar i{display:block;height:100%;background:var(--primary)}
+.bar.ambar i{background:var(--amber)} .bar.rojo i{background:var(--red)} .bar.done i{background:var(--green)}
+.pct{margin-left:8px;color:var(--muted);font-size:12px}
+/* panel de campañas */
+.page-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-bottom:16px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:16px}
+.kpi{min-width:0} .k-l{font-size:12px;color:var(--muted);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .k-v{line-height:1.1} .k-s{font-size:12px;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .k-s a{text-decoration:underline;text-underline-offset:2px}
+.tbl{width:100%;border-collapse:collapse} .tbl th{height:36px;text-align:left;padding:0 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+.th-abbr{display:none} .tbl th .i{width:14px;height:14px;vertical-align:-2px;margin-left:4px;color:var(--muted)}
+.tbl td{height:36px;padding:0 12px;border-bottom:1px solid var(--line-soft);vertical-align:middle}
+.tbl tbody tr:last-child td{border-bottom:0} .tbl tbody tr{cursor:pointer;transition:background var(--t)} .tbl tbody tr:hover{background:var(--line-soft)}
+.tbl th.num,.tbl td.num{text-align:right} .tbl th.c-sem,.tbl td.c-sem{text-align:center}
+.c-name a{font-weight:500} .c-name .id{display:block;color:var(--muted)} .c-date .sub{display:block;font-size:12px;color:var(--muted)}
+.c-name{min-width:200px} .c-prog{white-space:nowrap}
+td[data-l]::before{display:none}
+/* aprobación */
+.apr{display:grid;grid-template-columns:272px 320px minmax(0,1fr);height:calc(100vh - var(--top))}
+.col{min-width:0;display:flex;flex-direction:column;border-right:1px solid var(--line);overflow:hidden;background:var(--bg)} .col:last-child{border-right:0}
+.col-h{min-height:52px;padding:8px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line);flex:none}
+.col-h>div{min-width:0} .col-h b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .col-h small{display:block;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.col-h .back{display:none;margin-left:-8px}
+.col-sub{padding:8px 16px;border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:center;flex:none}
+.col-b{overflow:auto;flex:1;min-height:0}
+.row{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--line-soft);transition:background var(--t)} .row:hover{background:var(--line-soft)} .row>div{min-width:0;flex:1}
+.row b{display:block;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .row small{display:block;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row.sel,.vrow.sel{background:var(--surface);box-shadow:inset 2px 0 0 var(--primary)}
+.vrow{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;padding:0 16px;height:40px;border-bottom:1px solid var(--line-soft);transition:background var(--t)} .vrow:hover{background:var(--line-soft)}
+.vrow .code{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .vrow .kits{font-size:12px;color:var(--muted)} .vrow .rev{font-size:11px;color:var(--muted);margin-left:6px;font-weight:400}
+.vis-h .code{font-size:16px}
+.toolbar{display:flex;align-items:center;gap:4px;padding:8px 16px;border-bottom:1px solid var(--line);flex:none}
+.stage{flex:1;min-height:0;overflow:auto;padding:24px;display:flex;justify-content:center;align-items:flex-start;background:var(--bg)}
+.page{position:relative;width:100%;max-width:760px;margin:0} .page svg{display:block;width:100%;height:auto;background:var(--surface);border:1px solid var(--line)}
+.page[hidden]{display:none}
+.pin{position:absolute;width:22px;height:22px;display:grid;place-items:center;background:var(--amber);color:#fff;font-size:11px;font-weight:600;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 2px var(--surface)}
+.comments{flex:none;max-height:40%;overflow:auto;border-top:1px solid var(--line);background:var(--surface);padding:12px 16px;display:grid;gap:12px}
+.cm{display:grid;grid-template-columns:22px 1fr;gap:4px 10px;font-size:13px} .cm .pin{position:static;transform:none;box-shadow:none} .cm .n{width:22px;height:22px;display:grid;place-items:center;font-size:11px;background:var(--line-soft);color:var(--muted);border-radius:50%}
+.cm header{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap} .cm header b{font-weight:500} .cm time{font-size:12px;color:var(--muted)} .cm p{grid-column:2}
+.cm-form{display:flex;gap:8px} .cm-form input{flex:1;min-width:0;height:36px;padding:0 10px;border:1px solid var(--line);border-radius:0;background:var(--bg);color:inherit;font:inherit} .cm-form input::placeholder{color:var(--muted)}
+.vis-f{flex:none;display:flex;gap:16px;align-items:center;padding:8px 16px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden} .vis-f span{overflow:hidden;text-overflow:ellipsis}
+/* diálogo */
+dialog{margin:auto;border:1px solid var(--line);border-radius:0;padding:0;width:min(var(--dlg),calc(100vw - 32px));background:var(--surface);color:var(--ink);box-shadow:none}
+dialog::backdrop{background:rgb(0 0 0 / .45)}
+.dlg-h{padding:20px 24px 8px;font-size:18px;font-weight:600;line-height:1.3}
+.dlg-b{padding:4px 24px 16px;color:var(--muted);font-size:13px} .dlg-b ul{list-style:none;padding:0;margin:8px 0 12px;border:1px solid var(--line)} .dlg-b li{display:flex;justify-content:space-between;gap:12px;padding:6px 10px;color:var(--ink)} .dlg-b li+li{border-top:1px solid var(--line-soft)}
+.dlg-f{display:flex;justify-content:flex-end;gap:8px;padding:12px 24px 16px}
+/* tablet */
+@media(max-width:1279px){:root{--sbw:56px} .sb .sb-label{display:none} .sb-logo{justify-content:center;padding:0} .sb a{justify-content:center;padding:0} .sb a .count{position:absolute;right:6px;top:6px;transform:scale(.8);margin:0} .sb a{position:relative} .sb-foot{justify-content:center;padding:12px 0} .sb-foot span{display:none}}
+@media(max-width:1023px){
+ .apr{grid-template-columns:240px minmax(0,1fr)} .col-vis{display:none}
+ .apr[data-step=visor] .col-vis{display:flex;position:fixed;inset:0;z-index:50;border:0} .apr[data-step=visor] .col-vis .back{display:inline-flex}
+ .search{min-width:0} .search span,.search kbd{display:none}
+ .main .tbl th,.main .tbl td{padding:0 6px} .main .tbl tr>:first-child{padding-left:6px} .main .tbl tr>:last-child{padding-right:6px} .c-name{min-width:130px} .bar{width:48px} .pct{margin-left:6px} .c-date .sub{display:none} .tbl th .i{display:none} .th-full{display:none} .th-abbr{display:inline}
+}
+/* móvil */
+@media(max-width:767px){
+ :root{--sbw:0px} .sb{display:none} .main{margin:0;padding-bottom:var(--tab)}
+ .topbar{padding:0 16px} .content{padding:16px}
+ .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;height:var(--tab);border-top:1px solid var(--line);background:var(--surface);z-index:30}
+ .tabbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;color:var(--muted);position:relative} .tabbar a.active{color:var(--primary)} .tabbar a .count{position:absolute;top:6px;left:calc(50% + 4px);transform:scale(.85)}
+ .btn,.ib{min-height:44px;min-width:44px} .ib{width:44px} .seg button{height:42px} .seg.mini button{height:36px}
+ .page-h .seg.view{display:none}
+ .kpis{grid-template-columns:1fr 1fr;gap:8px} .k-v{font-size:24px}
+ .tbl thead{display:none} .tbl,.tbl tbody,.tbl tr,.tbl td{display:block} .tbl td{height:auto;padding:0;border:0;text-align:left}
+ .tbl tr{display:grid;grid-template-columns:1fr auto;grid-template-areas:'name sem' 'brand sem' 'rest rest';gap:4px 12px;padding:12px;border:1px solid var(--line);margin-bottom:8px;background:var(--surface)}
+ .tbl td.c-name{grid-area:name} .tbl td.c-brand{grid-area:brand} .tbl td.c-sem{grid-area:sem;align-self:start}
+ .tbl td.c-date,.tbl td.c-rtes,.tbl td.c-stage,.tbl td.c-prog{grid-column:1/-1;display:flex;align-items:center;gap:8px;font-size:13px}
+ .tbl td.c-date{margin-top:6px} .c-date .sub{display:inline;margin-left:6px}
+ td[data-l]::before{display:inline-block;content:attr(data-l);width:108px;flex:none;font-size:12px;color:var(--muted)}
+ .tbl td.num{text-align:left} .tbl tbody tr:nth-child(even){background:var(--surface)} .tbl tbody tr:hover{background:var(--surface)}
+ .tbl.fichas tr{border-color:var(--line)}
+ .apr{display:block;height:auto} .col{border-right:0;height:calc(100vh - var(--top) - var(--tab))} .col{display:none}
+ .apr[data-step=soportes] .col-sop,.apr[data-step=versiones] .col-ver{display:flex}
+ .apr[data-step=visor] .col-vis{display:flex;position:static;height:calc(100vh - var(--top) - var(--tab))}
+ .col-h .back{display:inline-flex} .stage{padding:12px}
+ .vis-h{flex-wrap:wrap} .vis-h .spacer{flex-basis:100%;height:0} .vis-h .spacer+.ib{margin-left:auto}
+ .c-date .sub{display:inline} .main .tbl th,.main .tbl td{padding:0}
+ .vrow{height:48px} .row{padding:12px 16px}
+ dialog{width:100%;max-width:100%;margin:auto 0 0;border-left:0;border-right:0;border-bottom:0}
+ .dlg-f{flex-direction:column-reverse} .dlg-f .btn{height:44px;justify-content:center}
+}
+@media(max-width:479px){.topbar .search{display:none}}
+
+:root{--font:'Geist',system-ui,sans-serif;--mono:'Geist Mono',ui-monospace,monospace;--font-title:var(--font);--stroke:1.5;
+--bg:#fff;--surface:#fff;--ink:#111;--muted:#6b6b6b;--line:#e6e6e6;--line-soft:#f2f2f2;--zebra:transparent;
+--primary:#111;--on-primary:#fff;--green:#1a7f4b;--amber:#b7791f;--red:#c62828;--info:#4a4a4a;--seg-on:#111;--seg-on-ink:#fff;
+--fh:#9a3b22;--vips:#1c4b8a;--ginos:#2c6b3a;
+--sb-bg:#fff;--sb-ink:#6b6b6b;--sb-active:#111;--sb-line:#e6e6e6;--sb-active-bg:#f2f2f2;--sb-logo:#111;--sbw:56px}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0c0c0c;--surface:#141414;--ink:#f2f2f2;--muted:#9a9a9a;--line:#262626;--line-soft:#1c1c1c;
+--primary:#f2f2f2;--on-primary:#0c0c0c;--green:#3fab70;--amber:#d9983a;--red:#e5534b;--info:#a0a0a0;--seg-on:#f2f2f2;--seg-on-ink:#0c0c0c;
+--fh:#d9754f;--vips:#6b9ad8;--ginos:#6fae7d;
+--sb-bg:#0c0c0c;--sb-ink:#9a9a9a;--sb-active:#f2f2f2;--sb-line:#262626;--sb-active-bg:#1c1c1c;--sb-logo:#f2f2f2}}
+:root[data-theme=dark]{--bg:#0c0c0c;--surface:#141414;--ink:#f2f2f2;--muted:#9a9a9a;--line:#262626;--line-soft:#1c1c1c;
+--primary:#f2f2f2;--on-primary:#0c0c0c;--green:#3fab70;--amber:#d9983a;--red:#e5534b;--info:#a0a0a0;--seg-on:#f2f2f2;--seg-on-ink:#0c0c0c;
+--fh:#d9754f;--vips:#6b9ad8;--ginos:#6fae7d;
+--sb-bg:#0c0c0c;--sb-ink:#9a9a9a;--sb-active:#f2f2f2;--sb-line:#262626;--sb-active-bg:#1c1c1c;--sb-logo:#f2f2f2}
+h1{font-size:24px;font-weight:500;letter-spacing:-.01em}
+.tbl th{font-size:12px;font-weight:400;color:var(--muted);text-transform:none}
+.tbl td{padding:0 16px} .tbl th{padding:0 16px} .tbl tr>:first-child{padding-left:0} .tbl tr>:last-child{padding-right:0}
+.tbl th{height:40px} .tbl td{height:44px}
+.kpis{gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.kpi{padding:20px 24px 20px 0;border:0;border-left:1px solid var(--line);padding-left:24px} .kpi:first-child{border-left:0;padding-left:0}
+.k-v{font-size:32px;font-weight:500;letter-spacing:-.02em}
+.card{background:transparent;border:0}
+.page-h{padding-bottom:24px}
+.sb{width:56px;transition:width var(--tp)} .sb:hover,.sb:focus-within{width:232px} .sb .sb-label{opacity:0;transition:opacity var(--t)} .sb:hover .sb-label,.sb:focus-within .sb-label{opacity:1}
+.sb a.active{color:var(--sb-active);background:var(--sb-active-bg)} .sb a:hover{color:var(--sb-active)}
+.sb .count{position:absolute;right:8px;top:8px;transform:scale(.85)} .sb a{position:relative}
+.sb:hover .count,.sb:focus-within .count{position:static;transform:none;margin-left:auto}
+.sb-logo{justify-content:flex-start}
+.bchip{background:transparent;border:1px solid var(--line);color:var(--muted)} .bchip.FH{color:var(--fh);border-color:var(--fh)} .bchip.VIPS{color:var(--vips);border-color:var(--vips)} .bchip.GINOS{color:var(--ginos);border-color:var(--ginos)}
+.chip{font-weight:400}
+.btn,.ib{border-color:var(--line)}
+.col-h b,.vrow .code{font-weight:500}
+.row,.vrow{padding:12px 20px} .col-b .row b{font-weight:500}
+.tbl.fichas tr{border:0;border-bottom:1px solid var(--line);padding:16px 0}
+</style>
+</head>
+<body>
+<aside class="sb" aria-label="Navegación principal">
+  <div class="sb-logo"><span class="logo-mark">P</span><b class="sb-label">Promopicking</b></div>
+  <nav><a href="b-lamina-campanas.html" class="active" aria-current="page" title="Campañas"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg><span class="sb-label">Campañas</span></a><a href="b-lamina-aprobacion.html" title="Aprobación de artes"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m9 15 2 2 4-4"/></svg><span class="sb-label">Aprobación de artes</span><span class="count warn">13</span></a><a href="#" title="Kits y etiquetas"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg><span class="sb-label">Kits y etiquetas</span></a><a href="#" title="QR de versión"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg><span class="sb-label">QR de versión</span></a><a href="#" title="Reposiciones"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg><span class="sb-label">Reposiciones</span></a><a href="#" title="Informes"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg><span class="sb-label">Informes</span></a><a href="#" title="Maestro de restaurantes"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7"/></svg><span class="sb-label">Maestro de restaurantes</span></a><a href="#" title="Soporte e incidencias"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/><circle cx="12" cy="12" r="4"/></svg><span class="sb-label">Soporte e incidencias</span><span class="count warn">1</span></a></nav>
+  <div class="sb-foot"><span class="avatar">MR</span><span class="sb-label">Marta Ruiz<small>Marketing FH · Alsea</small></span></div>
+</aside>
+<div class="main">
+  <header class="topbar">
+    <h1>Campañas</h1>
+    <button class="search" type="button" aria-label="Buscar (⌘K)"><svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span>Buscar</span><kbd>⌘K</kbd></button>
+    <button class="ib ghost" type="button" data-tip="Notificaciones" aria-label="Notificaciones"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="pip"></span></button>
+    <button class="ib ghost" type="button" id="theme" data-tip="Modo oscuro" aria-label="Modo oscuro"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
+    <button class="avatar" type="button" aria-label="Cuenta de Marta Ruiz">MR</button>
+  </header>
+  
+  <main class="content">
+    <div class="page-h">
+      <div class="seg brand" role="group" aria-label="Filtrar por marca">
+        <button type="button" aria-pressed="true" data-f="ALL">Todas</button><button type="button" aria-pressed="false" data-f="FH">Foster's</button><button type="button" aria-pressed="false" data-f="VIPS">VIPS</button><button type="button" aria-pressed="false" data-f="GINOS">Ginos</button>
+      </div>
+      <div class="spacer"></div>
+      <div class="seg view" role="group" aria-label="Vista">
+        <button type="button" aria-pressed="true" aria-label="Tabla" data-tip="Tabla"><svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/></svg></button><button type="button" aria-pressed="false" aria-label="Calendario" data-tip="Calendario"><svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></button>
+      </div>
+      <button class="ib primary" type="button" data-tip="Nueva campaña" aria-label="Nueva campaña"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></button>
+    </div>
+    <section class="kpis" aria-label="Indicadores">
+      <div class="kpi"><div class="k-l">Campañas activas</div><div class="k-v num">11</div><div class="k-s">de 17 en el calendario</div></div>
+      <div class="kpi"><div class="k-l">Versiones pendientes</div><div class="k-v num">13</div><div class="k-s"><a href="b-lamina-aprobacion.html">Aprobación de artes</a></div></div>
+      <div class="kpi"><div class="k-l">Incidencias abiertas</div><div class="k-v num">1</div><div class="k-s"><a href="#">Soporte</a></div></div>
+      <div class="kpi"><div class="k-l">Próxima entrega</div><div class="k-v num">26/10</div><div class="k-s">Halloween FH · en 4 días</div></div>
+    </section>
+    <div class="card">
+      <table class="tbl fichas">
+        <thead><tr><th>Campaña</th><th>Marca</th><th aria-sort="ascending">En restaurante<svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></svg></th><th class="num"><span class="th-full">Restaurantes</span><abbr class="th-abbr" title="Restaurantes">Rtes.</abbr></th><th>Fase</th><th>Progreso</th><th class="c-sem">Semáforo<svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></svg></th></tr></thead>
+        <tbody>
+      <tr data-brand="GINOS" tabindex="0">
+        <td class="c-name"><a href="#">Pastas octubre Ginos</a><span class="id">GI-26-02</span></td>
+        <td class="c-brand"><span class="bchip GINOS">Ginos</span></td>
+        <td class="c-date" data-l="En restaurante"><span class="num">06/10/2026</span><span class="sub">hace 16 días</span></td>
+        <td class="c-rtes num" data-l="Restaurantes">114</td>
+        <td class="c-stage" data-l="Fase"><span class="chip green">Entregada</span></td>
+        <td class="c-prog" data-l="Progreso"><span class="bar done"><i style="width:100%"></i></span><span class="num pct">100 %</span></td>
+        <td class="c-sem"><span class="dot verde" role="img" aria-label="En plazo" data-tip="En plazo" tabindex="0"></span></td>
+      </tr>
+      <tr data-brand="VIPS" tabindex="0">
+        <td class="c-name"><a href="#">Menú infantil VIPS</a><span class="id">VI-26-03</span></td>
+        <td class="c-brand"><span class="bchip VIPS">VIPS</span></td>
+        <td class="c-date" data-l="En restaurante"><span class="num">13/10/2026</span><span class="sub">hace 9 días</span></td>
+        <td class="c-rtes num" data-l="Restaurantes">167</td>
+        <td class="c-stage" data-l="Fase"><span class="chip green">Entregada</span></td>
+        <td class="c-prog" data-l="Progreso"><span class="bar done"><i style="width:100%"></i></span><span class="num pct">100 %</span></td>
+        <td class="c-sem"><span class="dot verde" role="img" aria-label="En plazo" data-tip="En plazo" tabindex="0"></span></td>
+      </tr>
+      <tr data-brand="FH" tabindex="0">
+        <td class="c-name"><a href="#">Menú 2 platos octubre</a><span class="id">FH-26-06</span></td>
+        <td class="c-brand"><span class="bchip FH">FH</span></td>
+        <td class="c-date" data-l="En restaurante"><span class="num">19/10/2026</span><span class="sub">hace 3 días</span></td>
+        <td class="c-rtes num" data-l="Restaurantes">138</td>
+        <td class="c-stage" data-l="Fase"><span class="chip green">Entregada</span></td>
+        <td class="c-prog" data-l="Progreso"><span class="bar done"><i style="width:100%"></i></span><span class="num pct">100 %</span></td>
+        <td class="c-sem"><span class="dot verde" role="img" aria-label="En plazo" data-tip="En plazo" tabindex="0"></span></td>
+      </tr>
+      <tr data-brand="VIPS" tabindex="0">
+        <td class="c-name"><a href="#">Encartes noche VIPS</a><span class="id">VI-26-03b</span></td>
+        <td class="c-brand"><span class="bchip VIPS">VIPS</span></td>
+        <td class="c-date" data-l="En restaurante"><span class="num">20/10/2026</span><span class="sub">hace 2 días</span></td>
+        <td class="c-rtes num" data-l="Restaurantes">167</td>
+        <td class="c-stage" data-l="Fase"><span class="chip info">Expedida</span></td>
+        <td class="c-prog" data-l="Progreso"><span class="bar rojo"><i style="width:83%"></i></span><span class="num pct">83 %</span></td>
+        <td class="c-sem"><span class="dot rojo" role="img" aria-label="Incidencia abierta" data-tip="Incidencia abierta" tabindex="0"></span></td>
+      </tr>
+      <tr data-brand="FH" tabindex="0">
+        <td class="c-name"><a href="#">Halloween FH</a><span class="id">FH-26-07</span></td>
+        <td class="c-brand"><span class="bchip FH">FH</span></td>
+        <td class="c-date" data-l="En restaurante"><span class="num">26/10/2026</span><span class="sub">en 4 días</span></td>
+        <td class="c-rtes num" data-l="Restaurantes">205</td>
+        <td class="c-stage" data-l="Fase"><span class="chip info">Expedida</span></td>
+        <td class="c-prog" data-l="Progreso"><span class="bar"><i style="width:83%"></i></span><span class="num pct">83 %</span></td>
+        <td class="c-sem"><span class="dot verde" role="img" aria-label="En plazo" data-tip="En plazo" tabindex="0"></span></td>
+      </tr>
+      <tr data-brand="VIPS" tabindex="0">
+        <td class="c-name"><a href="#">Campaña desayunos VIPS</a><span class="id">VI-26-02</span></td>
+        <td class="c-brand"><span class="bchip VIPS">VIPS</span></td>
+        <td class="c-date" data-l="En restaurante"><span class="num">05/11/2026</span><span class="sub">en 14 días</span></td>
+        <td class="c-rtes num" data-l="Restaurantes">167</td>
+        <td class="c-stage" data-l="Fase"><span class="chip primary">En producción</span></td>
+        <td class="c-prog" data-l="Progreso"><span class="bar"><i style="width:55%"></i></span><span class="num pct">55 %</span></td>
+        <td class="c-sem"><span class="dot verde" role="img" aria-label="En plazo" data-tip="En plazo" tabindex="0"></span></td>
+      </tr>
+      <tr data-brand="GINOS" tabindex="0">
+        <td class="c-name"><a href="#">Menú noches Ginos</a><span class="id">GI-26-07</span></td>
+        <td class="c-brand"><span class="bchip GINOS">Ginos</span></td>
+        <td class="c-date" data-l="En restaurante"><span class="num">10/11/2026</span><span class="sub">en 19 días</span></td>
+        <td class="c-rtes num" data-l="Restaurantes">114</td>
+        <td class="c-stage" data-l="Fase"><span class="chip primary">En kitting</span></td>
+        <td class="c-prog" data-l="Progreso"><span class="bar"><i style="width:70%"></i></span><span class="num pct">70 %</span></td>
+        <td class="c-sem"><span class="dot verde" role="img" aria-label="En plazo" data-tip="En plazo" tabindex="0"></span></td>
+      </tr>
+      <tr data-brand="FH" tabindex="0">
+        <td class="c-name"><a href="#">Lanzamiento Burgers</a><span class="id">FH-26-03</span></td>
+        <td class="c-brand"><span class="bchip FH">FH</span></td>
+        <td class="c-date" data-l="En restaurante"><span class="num">12/11/2026</span><span class="sub">en 21 días</span></td>
+        <td class="c-rtes num" data-l="Restaurantes">205</td>
+        <td class="c-stage" data-l="Fase"><span class="chip ">Brief recibido</span></td>
+        <td class="c-prog" data-l="Progreso"><span class="bar ambar"><i style="width:31%"></i></span><span class="num pct">31 %</span></td>
+        <td class="c-sem"><span class="dot ambar" role="img" aria-label="Riesgo de plazo: aprobaciones pendientes" data-tip="Riesgo de plazo: aprobaciones pendientes" tabindex="0"></span></td>
+      </tr>
+      <tr data-brand="VIPS" tabindex="0">
+        <td class="c-name"><a href="#">Menú del día invierno VIPS</a><span class="id">VI-26-07</span></td>
+        <td class="c-brand"><span class="bchip VIPS">VIPS</span></td>
+        <td class="c-date" data-l="En restaurante"><span class="num">17/11/2026</span><span class="sub">en 26 días</span></td>
+        <td class="c-rtes num" data-l="Restaurantes">170</td>
+        <td class="c-stage" data-l="Fase"><span class="chip ">En adaptación</span></td>
+        <td class="c-prog" data-l="Progreso"><span class="bar ambar"><i style="width:22%"></i></span><span class="num pct">22 %</span></td>
+        <td class="c-sem"><span class="dot ambar" role="img" aria-label="Riesgo de plazo: aprobaciones pendientes" data-tip="Riesgo de plazo: aprobaciones pendientes" tabindex="0"></span></td>
+      </tr>
+      <tr data-brand="GINOS" tabindex="0">
+        <td class="c-name"><a href="#">Navidad Ginos</a><span class="id">GI-26-09</span></td>
+        <td class="c-brand"><span class="bchip GINOS">Ginos</span></td>
+        <td class="c-date" data-l="En restaurante"><span class="num">24/11/2026</span><span class="sub">en 33 días</span></td>
+        <td class="c-rtes num" data-l="Restaurantes">114</td>
+        <td class="c-stage" data-l="Fase"><span class="chip primary">En producción</span></td>
+        <td class="c-prog" data-l="Progreso"><span class="bar"><i style="width:53%"></i></span><span class="num pct">53 %</span></td>
+        <td class="c-sem"><span class="dot verde" role="img" aria-label="En plazo" data-tip="En plazo" tabindex="0"></span></td>
+      </tr>
+      <tr data-brand="FH" tabindex="0">
+        <td class="c-name"><a href="#">Menú Navidad FH</a><span class="id">FH-26-09</span></td>
+        <td class="c-brand"><span class="bchip FH">FH</span></td>
+        <td class="c-date" data-l="En restaurante"><span class="num">01/12/2026</span><span class="sub">en 40 días</span></td>
+        <td class="c-rtes num" data-l="Restaurantes">135</td>
+        <td class="c-stage" data-l="Fase"><span class="chip ">En adaptación</span></td>
+        <td class="c-prog" data-l="Progreso"><span class="bar"><i style="width:17%"></i></span><span class="num pct">17 %</span></td>
+        <td class="c-sem"><span class="dot verde" role="img" aria-label="En plazo" data-tip="En plazo" tabindex="0"></span></td>
+      </tr>
+      <tr data-brand="VIPS" tabindex="0">
+        <td class="c-name"><a href="#">Campaña tortitas VIPS</a><span class="id">VI-26-08</span></td>
+        <td class="c-brand"><span class="bchip VIPS">VIPS</span></td>
+        <td class="c-date" data-l="En restaurante"><span class="num">02/12/2026</span><span class="sub">en 41 días</span></td>
+        <td class="c-rtes num" data-l="Restaurantes">170</td>
+        <td class="c-stage" data-l="Fase"><span class="chip ">En adaptación</span></td>
+        <td class="c-prog" data-l="Progreso"><span class="bar"><i style="width:21%"></i></span><span class="num pct">21 %</span></td>
+        <td class="c-sem"><span class="dot verde" role="img" aria-label="En plazo" data-tip="En plazo" tabindex="0"></span></td>
+      </tr>
+      <tr data-brand="FH" tabindex="0">
+        <td class="c-name"><a href="#">2x1 estudiantes</a><span class="id">FH-26-11</span></td>
+        <td class="c-brand"><span class="bchip FH">FH</span></td>
+        <td class="c-date" data-l="En restaurante"><span class="num">12/01/2027</span><span class="sub">en 82 días</span></td>
+        <td class="c-rtes num" data-l="Restaurantes">140</td>
+        <td class="c-stage" data-l="Fase"><span class="chip outline">Planificada</span></td>
+        <td class="c-prog" data-l="Progreso"><span class="bar"><i style="width:0%"></i></span><span class="num pct">0 %</span></td>
+        <td class="c-sem"><span class="dot gris" role="img" aria-label="Planificada" data-tip="Planificada" tabindex="0"></span></td>
+      </tr>
+      <tr data-brand="FH" tabindex="0">
+        <td class="c-name"><a href="#">Campaña celíacos</a><span class="id">FH-26-10</span></td>
+        <td class="c-brand"><span class="bchip FH">FH</span></td>
+        <td class="c-date" data-l="En restaurante"><span class="num">15/01/2027</span><span class="sub">en 85 días</span></td>
+        <td class="c-rtes num" data-l="Restaurantes">205</td>
+        <td class="c-stage" data-l="Fase"><span class="chip ">Brief recibido</span></td>
+        <td class="c-prog" data-l="Progreso"><span class="bar"><i style="width:0%"></i></span><span class="num pct">0 %</span></td>
+        <td class="c-sem"><span class="dot verde" role="img" aria-label="En plazo" data-tip="En plazo" tabindex="0"></span></td>
+      </tr>
+      <tr data-brand="FH" tabindex="0">
+        <td class="c-name"><a href="#">Lanz. Pollo Nashville</a><span class="id">FH-27-01</span></td>
+        <td class="c-brand"><span class="bchip FH">FH</span></td>
+        <td class="c-date" data-l="En restaurante"><span class="num">09/02/2027</span><span class="sub">en 110 días</span></td>
+        <td class="c-rtes num" data-l="Restaurantes">205</td>
+        <td class="c-stage" data-l="Fase"><span class="chip outline">Planificada</span></td>
+        <td class="c-prog" data-l="Progreso"><span class="bar"><i style="width:0%"></i></span><span class="num pct">0 %</span></td>
+        <td class="c-sem"><span class="dot gris" role="img" aria-label="Planificada" data-tip="Planificada" tabindex="0"></span></td>
+      </tr>
+      <tr data-brand="GINOS" tabindex="0">
+        <td class="c-name"><a href="#">Pizzas febrero Ginos</a><span class="id">GI-27-01</span></td>
+        <td class="c-brand"><span class="bchip GINOS">Ginos</span></td>
+        <td class="c-date" data-l="En restaurante"><span class="num">09/02/2027</span><span class="sub">en 110 días</span></td>
+        <td class="c-rtes num" data-l="Restaurantes">114</td>
+        <td class="c-stage" data-l="Fase"><span class="chip ">Brief recibido</span></td>
+        <td class="c-prog" data-l="Progreso"><span class="bar"><i style="width:3%"></i></span><span class="num pct">3 %</span></td>
+        <td class="c-sem"><span class="dot verde" role="img" aria-label="En plazo" data-tip="En plazo" tabindex="0"></span></td>
+      </tr>
+      <tr data-brand="GINOS" tabindex="0">
+        <td class="c-name"><a href="#">Carnaval Ginos</a><span class="id">GI-27-08</span></td>
+        <td class="c-brand"><span class="bchip GINOS">Ginos</span></td>
+        <td class="c-date" data-l="En restaurante"><span class="num">09/02/2027</span><span class="sub">en 110 días</span></td>
+        <td class="c-rtes num" data-l="Restaurantes">114</td>
+        <td class="c-stage" data-l="Fase"><span class="chip outline">Planificada</span></td>
+        <td class="c-prog" data-l="Progreso"><span class="bar"><i style="width:0%"></i></span><span class="num pct">0 %</span></td>
+        <td class="c-sem"><span class="dot gris" role="img" aria-label="Planificada" data-tip="Planificada" tabindex="0"></span></td>
+      </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+<nav class="tabbar" aria-label="Navegación"><a href="b-lamina-campanas.html" class="active" aria-current="page"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>Campañas</a><a href="b-lamina-aprobacion.html"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m9 15 2 2 4-4"/></svg>Aprobaciones<span class="count warn">13</span></a><a href="#"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>Kits</a><a href="#"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/><circle cx="12" cy="12" r="4"/></svg>Soporte<span class="count warn">1</span></a><a href="#"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>Más</a></nav>
+<script>
+(function(){
+  var root=document.documentElement,KEY='pp-tema',q=new URLSearchParams(location.search).get('tema');
+  try{var s=localStorage.getItem(KEY);if(s)root.dataset.theme=s;}catch(e){}
+  if(q)root.dataset.theme=q==='oscuro'?'dark':'light';
+  var btn=document.getElementById('theme'),SUN="<svg class=\"i\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2\"/><path d=\"M12 20v2\"/><path d=\"m4.93 4.93 1.41 1.41\"/><path d=\"m17.66 17.66 1.41 1.41\"/><path d=\"M2 12h2\"/><path d=\"M20 12h2\"/><path d=\"m6.34 17.66-1.41 1.41\"/><path d=\"m19.07 4.93-1.41 1.41\"/></svg>",MOON="<svg class=\"i\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z\"/></svg>";
+  function dark(){return root.dataset.theme==='dark'||(!root.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches)}
+  function paint(){var d=dark();btn.innerHTML=d?SUN:MOON;btn.dataset.tip=btn.ariaLabel=d?'Modo claro':'Modo oscuro'}
+  btn.addEventListener('click',function(){root.dataset.theme=dark()?'light':'dark';try{localStorage.setItem(KEY,root.dataset.theme)}catch(e){}paint()});
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',paint);paint();
+  
+  var segs=document.querySelectorAll('.seg.brand button'),trs=document.querySelectorAll('.tbl tbody tr');
+  segs.forEach(function(b){b.addEventListener('click',function(){var f=b.dataset.f;segs.forEach(function(x){x.setAttribute('aria-pressed',x===b)});trs.forEach(function(tr){tr.hidden=f!=='ALL'&&tr.dataset.brand!==f});history.replaceState(null,'',f==='ALL'?location.pathname:'?marca='+f)})});
+  var m=new URLSearchParams(location.search).get('marca');if(m){var b=document.querySelector('.seg.brand [data-f="'+m+'"]');if(b)b.click()}
+})();
+</script>
+</body>
+</html>
