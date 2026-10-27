@@ -91,7 +91,7 @@ td[data-l]::before{display:none}
 .row.sel,.vrow.sel{background:var(--surface);box-shadow:inset 2px 0 0 var(--primary)}
 .vrow{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;padding:0 16px;height:40px;border-bottom:1px solid var(--line-soft);transition:background var(--t)} .vrow:hover{background:var(--line-soft)}
 .vrow .code{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .vrow .kits{font-size:12px;color:var(--muted)} .vrow .rev{font-size:11px;color:var(--muted);margin-left:6px;font-weight:400}
-.vis-h .code{font-size:16px}
+.vis-h .code{font-size:16px} .acts{display:flex;gap:8px;flex:none} .frac{display:none} .more{display:none}
 .toolbar{display:flex;align-items:center;gap:4px;padding:8px 16px;border-bottom:1px solid var(--line);flex:none}
 .stage{flex:1;min-height:0;overflow:auto;padding:24px;display:flex;justify-content:center;align-items:flex-start;background:var(--bg)}
 .page{position:relative;width:100%;max-width:760px;margin:0} .page svg{display:block;width:100%;height:auto;background:var(--surface);border:1px solid var(--line)}
@@ -125,6 +125,18 @@ dialog::backdrop{background:rgb(0 0 0 / .45)}
  .btn,.ib{min-height:44px;min-width:44px} .ib{width:44px} .seg button{height:42px} .seg.mini button{height:36px}
  .page-h .seg.view{display:none}
  .kpis{grid-template-columns:1fr 1fr;gap:8px} .k-v{font-size:24px}
+ .apr{display:block;height:auto} .col{border-right:0;height:calc(100vh - var(--top) - var(--tab))} .col{display:none}
+ .apr[data-step=soportes] .col-sop,.apr[data-step=versiones] .col-ver{display:flex}
+ .apr[data-step=visor] .col-vis{display:flex;position:static;height:calc(100vh - var(--top) - var(--tab))}
+ .col-h .back{display:inline-flex} .stage{padding:12px}
+ .vis-h{flex-wrap:wrap} .vis-h .spacer{flex-basis:100%;height:0} .vis-h .spacer+.ib,.vis-h .spacer+.acts{margin-left:auto}
+ .vrow{height:48px} .row{padding:12px 16px}
+ dialog{width:100%;max-width:100%;margin:auto 0 0;border-left:0;border-right:0;border-bottom:0}
+ .dlg-f{flex-direction:column-reverse} .dlg-f .btn{height:44px;justify-content:center}
+}
+@media(max-width:479px){.topbar .search{display:none}}
+
+@media(max-width:1023px){
  .tbl thead{display:none} .tbl,.tbl tbody,.tbl tr,.tbl td{display:block} .tbl td{height:auto;padding:0;border:0;text-align:left}
  .tbl tr{display:grid;grid-template-columns:1fr auto;grid-template-areas:'name sem' 'brand sem' 'rest rest';gap:4px 12px;padding:12px;border:1px solid var(--line);margin-bottom:8px;background:var(--surface)}
  .tbl td.c-name{grid-area:name} .tbl td.c-brand{grid-area:brand} .tbl td.c-sem{grid-area:sem;align-self:start}
@@ -132,52 +144,66 @@ dialog::backdrop{background:rgb(0 0 0 / .45)}
  .tbl td.c-date{margin-top:6px} .c-date .sub{display:inline;margin-left:6px}
  td[data-l]::before{display:inline-block;content:attr(data-l);width:108px;flex:none;font-size:12px;color:var(--muted)}
  .tbl td.num{text-align:left} .tbl tbody tr:nth-child(even){background:var(--surface)} .tbl tbody tr:hover{background:var(--surface)}
- .tbl.fichas tr{border-color:var(--line)}
- .apr{display:block;height:auto} .col{border-right:0;height:calc(100vh - var(--top) - var(--tab))} .col{display:none}
- .apr[data-step=soportes] .col-sop,.apr[data-step=versiones] .col-ver{display:flex}
- .apr[data-step=visor] .col-vis{display:flex;position:static;height:calc(100vh - var(--top) - var(--tab))}
- .col-h .back{display:inline-flex} .stage{padding:12px}
- .vis-h{flex-wrap:wrap} .vis-h .spacer{flex-basis:100%;height:0} .vis-h .spacer+.ib{margin-left:auto}
- .c-date .sub{display:inline} .main .tbl th,.main .tbl td{padding:0}
- .vrow{height:48px} .row{padding:12px 16px}
- dialog{width:100%;max-width:100%;margin:auto 0 0;border-left:0;border-right:0;border-bottom:0}
- .dlg-f{flex-direction:column-reverse} .dlg-f .btn{height:44px;justify-content:center}
+ .tbl.fichas tr{border-color:var(--line)} .main .tbl th,.main .tbl td{padding:0}
 }
-@media(max-width:479px){.topbar .search{display:none}}
 
-:root{--font:'Geist',system-ui,sans-serif;--mono:'Geist Mono',ui-monospace,monospace;--font-title:var(--font);--stroke:1.5;
+/* Propuesta B con las reglas definitivas de la sección 7.5 del plan */
+:root{--font:'Geist',system-ui,sans-serif;--mono:'Geist Mono',ui-monospace,monospace;--font-title:var(--font);--stroke:1.5;--dlg:440px;
 --bg:#fff;--surface:#fff;--ink:#111;--muted:#6b6b6b;--line:#e6e6e6;--line-soft:#f2f2f2;--zebra:transparent;
---primary:#111;--on-primary:#fff;--green:#1a7f4b;--amber:#b7791f;--red:#c62828;--info:#4a4a4a;--seg-on:#111;--seg-on-ink:#fff;
---fh:#9a3b22;--vips:#1c4b8a;--ginos:#2c6b3a;
---sb-bg:#fff;--sb-ink:#6b6b6b;--sb-active:#111;--sb-line:#e6e6e6;--sb-active-bg:#f2f2f2;--sb-logo:#111;--sbw:56px}
+--primary:#111;--on-primary:#fff;--green:#1a7f4b;--amber:#b7791f;--amber-ink:#8a5a10;--amber-bg:#fbf3e3;--on-amber:#111;--red:#c62828;--info:#4a4a4a;--seg-on:#111;--seg-on-ink:#fff;
+--sb-bg:#fff;--sb-ink:#6b6b6b;--sb-active:#111;--sb-line:#e6e6e6;--sb-active-bg:#f2f2f2;--sb-logo:#111}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0c0c0c;--surface:#141414;--ink:#f2f2f2;--muted:#9a9a9a;--line:#262626;--line-soft:#1c1c1c;
---primary:#f2f2f2;--on-primary:#0c0c0c;--green:#3fab70;--amber:#d9983a;--red:#e5534b;--info:#a0a0a0;--seg-on:#f2f2f2;--seg-on-ink:#0c0c0c;
---fh:#d9754f;--vips:#6b9ad8;--ginos:#6fae7d;
+--primary:#f2f2f2;--on-primary:#0c0c0c;--green:#3fab70;--amber:#f0b65a;--amber-ink:#f6cf8a;--amber-bg:#2a2215;--on-amber:#0c0c0c;--red:#e5534b;--info:#a0a0a0;--seg-on:#f2f2f2;--seg-on-ink:#0c0c0c;
 --sb-bg:#0c0c0c;--sb-ink:#9a9a9a;--sb-active:#f2f2f2;--sb-line:#262626;--sb-active-bg:#1c1c1c;--sb-logo:#f2f2f2}}
 :root[data-theme=dark]{--bg:#0c0c0c;--surface:#141414;--ink:#f2f2f2;--muted:#9a9a9a;--line:#262626;--line-soft:#1c1c1c;
---primary:#f2f2f2;--on-primary:#0c0c0c;--green:#3fab70;--amber:#d9983a;--red:#e5534b;--info:#a0a0a0;--seg-on:#f2f2f2;--seg-on-ink:#0c0c0c;
---fh:#d9754f;--vips:#6b9ad8;--ginos:#6fae7d;
+--primary:#f2f2f2;--on-primary:#0c0c0c;--green:#3fab70;--amber:#f0b65a;--amber-ink:#f6cf8a;--amber-bg:#2a2215;--on-amber:#0c0c0c;--red:#e5534b;--info:#a0a0a0;--seg-on:#f2f2f2;--seg-on-ink:#0c0c0c;
 --sb-bg:#0c0c0c;--sb-ink:#9a9a9a;--sb-active:#f2f2f2;--sb-line:#262626;--sb-active-bg:#1c1c1c;--sb-logo:#f2f2f2}
 h1{font-size:24px;font-weight:500;letter-spacing:-.01em}
-.tbl th{font-size:12px;font-weight:400;color:var(--muted);text-transform:none}
-.tbl td{padding:0 16px} .tbl th{padding:0 16px} .tbl tr>:first-child{padding-left:0} .tbl tr>:last-child{padding-right:0}
-.tbl th{height:40px} .tbl td{height:44px}
+/* 1 · dos ámbares: icono/punto con --amber, texto con --amber-ink sobre --amber-bg */
+.chip.amber{background:var(--amber-bg);color:var(--amber-ink)} .count.warn{background:var(--amber);color:var(--on-amber)} .pin{color:var(--on-amber)}
+/* 2 · barra de progreso siempre neutra */
+.bar{background:var(--line)} .bar i,.bar.ambar i,.bar.rojo i,.bar.done i{background:var(--ink)}
+/* 3 · chips de marca neutros */
+.bchip{background:var(--line-soft);color:var(--ink);font-size:12px;font-weight:500;border-radius:2px}
+.chip{font-weight:400}
+/* 5 · filas de 40 px (36 en versiones) */
+.tbl th{font-size:12px;font-weight:400;color:var(--muted);text-transform:none;height:40px}
+.tbl td{padding:0 16px;height:40px} .tbl th{padding:0 16px} .tbl tr>:first-child{padding-left:0} .tbl tr>:last-child{padding-right:0}
+.vrow{height:36px} .row{padding:10px 20px} .col-b .row b{font-weight:500}
 .kpis{gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.kpi{padding:20px 24px 20px 0;border:0;border-left:1px solid var(--line);padding-left:24px} .kpi:first-child{border-left:0;padding-left:0}
+.kpi{padding:16px 24px;border:0;border-left:1px solid var(--line)} .kpi:first-child{border-left:0;padding-left:0}
 .k-v{font-size:32px;font-weight:500;letter-spacing:-.02em}
 .card{background:transparent;border:0}
-.page-h{padding-bottom:24px}
-.sb{width:56px;transition:width var(--tp)} .sb:hover,.sb:focus-within{width:232px} .sb .sb-label{opacity:0;transition:opacity var(--t)} .sb:hover .sb-label,.sb:focus-within .sb-label{opacity:1}
+/* 4 · sidebar de 72 px con etiqueta debajo; 232 px desde 1280 */
 .sb a.active{color:var(--sb-active);background:var(--sb-active-bg)} .sb a:hover{color:var(--sb-active)}
-.sb .count{position:absolute;right:8px;top:8px;transform:scale(.85)} .sb a{position:relative}
-.sb:hover .count,.sb:focus-within .count{position:static;transform:none;margin-left:auto}
 .sb-logo{justify-content:flex-start}
-.bchip{background:transparent;border:1px solid var(--line);color:var(--muted)} .bchip.FH{color:var(--fh);border-color:var(--fh)} .bchip.VIPS{color:var(--vips);border-color:var(--vips)} .bchip.GINOS{color:var(--ginos);border-color:var(--ginos)}
-.chip{font-weight:400}
 .btn,.ib{border-color:var(--line)}
 .col-h b,.vrow .code{font-weight:500}
-.row,.vrow{padding:12px 20px} .col-b .row b{font-weight:500}
-.tbl.fichas tr{border:0;border-bottom:1px solid var(--line);padding:16px 0}
+/* 10 · diálogo de 440 px, título de 18 px en una línea */
+.dlg-h{font-size:18px;letter-spacing:-.01em}
+@media(max-width:479px){.dlg-h{font-size:16px;padding:16px 16px 8px} .dlg-b{padding:4px 16px 12px} .dlg-f{padding:12px 16px 16px}}
+.tbl.fichas tr{border:0;border-bottom:1px solid var(--line);padding:16px 0;background:transparent}
+@media(max-width:1279px){
+ :root{--sbw:72px}
+ .sb a{flex-direction:column;justify-content:center;gap:4px;height:60px;padding:0 4px;font-size:11px;line-height:1.15}
+ .sb a .sb-label{display:block;opacity:1;max-width:66px;text-align:center;white-space:normal;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+ .sb a .count{position:absolute;top:4px;left:calc(50% + 2px);transform:scale(.85);margin:0}
+ .sb-foot .sb-label,.sb-logo .sb-label{display:none}
+}
+/* 7 · tablet: fichas a dos columnas, sin compresión de tabla */
+@media(min-width:768px) and (max-width:1023px){
+ .tbl tbody{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
+ .c-date .sub{display:inline} .main .tbl th,.main .tbl td{padding:0} .bar{width:96px} .pct{margin-left:8px} .c-name{min-width:0}
+}
+/* 8 y 9 · móvil: acciones del visor en barra inferior; fichas con progreso en texto y «Ver más» */
+@media(max-width:767px){
+ .vis-h{flex-wrap:nowrap} .vis-h .spacer{flex-basis:auto} .vis-h small{display:none}
+ .vis-h .acts{position:fixed;left:0;right:0;bottom:0;height:var(--tab);display:flex;justify-content:space-evenly;align-items:center;gap:0;background:var(--surface);border-top:1px solid var(--line);z-index:35}
+ body:has(.apr[data-step=visor]) .tabbar{display:none}
+ .c-prog .bar,.c-prog .pct{display:none} .c-prog .frac{display:inline}
+ .tbl:not(.all) tbody tr:nth-child(n+9){display:none} .more{display:inline-flex;width:100%;justify-content:center;margin-top:8px} .tbl.all+.more{display:none}
+ .vrow{height:44px} .tbl.fichas tr{padding:12px 0}
+}
 </style>
 </head>
 <body>
@@ -235,10 +261,12 @@ h1{font-size:24px;font-weight:500;letter-spacing:-.01em}
     </section>
     <section class="col col-vis" aria-label="Visor">
       <div class="col-h vis-h"><button class="ib ghost back" type="button" data-step-to="versiones" aria-label="Volver a versiones"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button><div><b class="code mono">C2 RED+ SP</b><small>rev. 2 · 5 kits · <span class="chip amber">Pendiente</span></small></div><div class="spacer"></div>
+        <div class="acts" role="group" aria-label="Acciones de la versión">
         <button class="ib green" type="button" data-tip="Aprobar" aria-label="Aprobar C2 RED+ SP"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></button>
         <button class="ib amber" type="button" data-tip="Pedir cambios" aria-label="Pedir cambios"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"/></svg></button>
         <button class="ib amber" type="button" data-tip="Reabrir" aria-label="Reabrir" aria-disabled="true"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></button>
         <button class="ib" type="button" data-tip="Descargar PDF" aria-label="Descargar PDF"><svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></button>
+        </div>
       </div>
       <div class="toolbar">
         <div class="seg mini" role="group" aria-label="Cara"><button type="button" aria-pressed="true" data-face="exterior">Exterior</button><button type="button" aria-pressed="false" data-face="interior">Interior</button></div>

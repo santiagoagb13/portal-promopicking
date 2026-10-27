@@ -38,3 +38,30 @@ Cada página lleva conmutador de modo oscuro (luna/sol en la barra superior; sig
 ## Cómo se han hecho
 
 Las seis páginas salen de un generador (plantilla común + bloque de paleta y tipografía por propuesta) y las capturas de un script de Playwright; ambos están guardados fuera del repositorio, en la carpeta de notas compartidas de la sesión, por si hay que regenerar o volver a capturar tras un cambio. Las páginas son autónomas: se pueden editar a mano sin el generador.
+
+## Correcciones aplicadas a B (27/10/2026)
+
+Elegida la propuesta B «Lámina»; sus dos maquetas incorporan las diez reglas de la sección 7.5 del plan. A y C no se han tocado.
+
+| Regla | Cómo queda en la maqueta |
+|---|---|
+| 1 · Dos ámbares | `--amber #b7791f` solo en iconos, puntos del semáforo y contadores (texto `#111` encima); chips «Pendiente» con texto `#8a5a10` sobre `#fbf3e3` (5,7:1). En oscuro `#f0b65a` / `#f6cf8a` sobre `#2a2215`. |
+| 2 · Barra neutra | La barra es siempre tinta sobre `#e6e6e6`; el semáforo es el único color de la fila. |
+| 3 · Chips de marca neutros | Fondo `#f2f2f2`, texto `#111`, 12 px, radio 2 px; sin teja, azul ni verde. |
+| 4 · Sidebar de 72 px | Icono con etiqueta de 11 px debajo (hasta dos líneas) y contador en la esquina superior derecha; desde 1280 px, 232 px con la etiqueta al lado. Sin expansión al pasar el ratón. |
+| 5 · Filas de 40 px | Tabla de campañas a 40 px (17 campañas en 1 000 px de alto a 1440, antes 1 083); lista de versiones a 36 px; 44 px solo en móvil. |
+| 6 · Acento tinta | Sin cambios: negro en claro, blanco en oscuro. |
+| 7 · Tablet | Entre 768 y 1023 px el panel pasa a fichas a dos columnas (captura `b-lamina-campanas-768-claro.png`); la tabla completa solo desde 1024 px. Se retira la compresión de columnas que había. |
+| 8 · Acciones del visor | En móvil van en una barra inferior fija de 56 px que sustituye a la barra de navegación mientras se está en el visor; la cabecera lleva solo volver y el código. |
+| 9 · Fichas en móvil | Progreso como texto («4/7», fase alcanzada de 7) y sin barra; se muestran 8 campañas y un botón «Ver más · 9». |
+| 10 · Diálogo | 440 px y título de 18 px; la pregunta cabe en una línea desde 480 px. |
+
+Comprobado con Playwright: sin scroll horizontal a 375, 480, 768, 1024, 1280 y 1440 px, en claro y oscuro; el título del diálogo ocupa una sola línea a 360, 375, 480, 768 y 1440 px.
+
+### Lo que no ha quedado del todo bien
+
+- **Título del diálogo por debajo de 480 px.** A 18 px la frase mide 349 px y a 360 px de ventana solo hay 328 px útiles, así que no cabe en una línea con el tamaño fijado. Por debajo de 480 px el título baja a 16 px y los márgenes del diálogo a 16 px; con eso ocupa una línea hasta 360 px. Si el título tiene que ser de 18 px también en móvil, la regla 10 no se cumple con esta frase.
+- **Tabla de campañas a 1440 × 900.** Con filas de 40 px la página mide unos 1 000 px de alto, mejor que los 1 083 anteriores pero todavía unos 100 px más que la pantalla de referencia. Entran 15 de las 17 campañas sin desplazarse.
+- **Etiquetas del sidebar de 72 px.** «Maestro de restaurantes» y «Soporte e incidencias» ocupan dos líneas de 11 px; «Aprobación de artes» también. Caben, pero convendría acortar esas etiquetas en el modo estrecho («Maestro», «Soporte»).
+- **Barra de acciones en móvil y diálogo.** En la captura a 375 px el diálogo (hoja inferior) tapa la barra de acciones del visor; la barra está debajo y se ve al cancelar.
+- **Indicador «4/7».** Cuenta la fase alcanzada de 7 (Brief recibido = 1/7, Entregada = 7/7, Planificada = 0/7); es menos preciso que el porcentaje del prototipo, que ponderaba por soporte.
