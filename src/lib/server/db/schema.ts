@@ -537,16 +537,31 @@ export const kitEvents = pgTable(
 	(t) => [index('kit_events_kit_idx').on(t.kitId, t.at)]
 );
 
-export const qrCodes = pgTable('qr_codes', {
-	code: text('code').primaryKey(),
-	supportId: text('support_id')
-		.notNull()
-		.references(() => supports.id, { onDelete: 'cascade' }),
-	versionCode: text('version_code').notNull(),
-	batch: text('batch').notNull(),
-	printedAt: ts('printed_at'),
-	retiredAt: ts('retired_at')
-});
+/**
+ * QR de versión (5.5, 8.7): un código corto y aleatorio por pieza impresa (lote por versión y
+ * restaurante). No revela nada: la landing pública solo dice si la versión sigue vigente.
+ */
+export const qrCodes = pgTable(
+	'qr_codes',
+	{
+		code: text('code').primaryKey(),
+		supportId: text('support_id')
+			.notNull()
+			.references(() => supports.id, { onDelete: 'cascade' }),
+		versionId: text('version_id').references(() => supportVersions.id, { onDelete: 'set null' }),
+		versionCode: text('version_code').notNull(),
+		restaurantId: text('restaurant_id').references(() => restaurants.id),
+		batch: text('batch').notNull(),
+		createdAt: createdAt(),
+		createdBy: text('created_by').references(() => users.id, { onDelete: 'set null' }),
+		printedAt: ts('printed_at'),
+		retiredAt: ts('retired_at')
+	},
+	(t) => [
+		index('qr_codes_support_idx').on(t.supportId),
+		unique('qr_codes_version_restaurant_uq').on(t.versionId, t.restaurantId)
+	]
+);
 
 /* ---------- Reposiciones ---------- */
 
@@ -584,24 +599,36 @@ export const orders = pgTable(
 		placedAt: ts('placed_at').notNull(),
 		state: orderStateEnum('state').notNull(),
 		source: orderSourceEnum('source').notNull().default('web'),
-		validatedBy: text('validated_by').references(() => users.id, { onDelete: 'set null' })
+		validatedBy: text('validated_by').references(() => users.id, { onDelete: 'set null' }),
+		validatedAt: ts('validated_at'),
+		shippedAt: ts('shipped_at'),
+		deliveredAt: ts('delivered_at'),
+		cancelledAt: ts('cancelled_at'),
+		/** Motivo al rechazar (pedidos del QR) o al cancelar. */
+		reason: text('reason'),
+		/** QR desde el que se pidió, si viene de la landing pública. */
+		qrCode: text('qr_code'),
+		note: text('note')
 	},
 	(t) => [index('orders_restaurant_idx').on(t.restaurantId, t.placedAt)]
 );
 
+/** Línea de pedido: un artículo del catálogo o, desde el QR, una pieza de campaña (soporte y versión). */
 export const orderLines = pgTable(
 	'order_lines',
 	{
+		id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
 		orderId: text('order_id')
 			.notNull()
 			.references(() => orders.id, { onDelete: 'cascade' }),
-		itemId: text('item_id')
-			.notNull()
-			.references(() => catalogItems.id),
+		itemId: text('item_id').references(() => catalogItems.id),
+		supportId: text('support_id').references(() => supports.id, { onDelete: 'set null' }),
+		versionCode: text('version_code'),
+		label: text('label'),
 		qty: integer('qty').notNull(),
 		unitPriceCents: integer('unit_price_cents').notNull()
 	},
-	(t) => [primaryKey({ columns: [t.orderId, t.itemId] })]
+	(t) => [index('order_lines_order_idx').on(t.orderId)]
 );
 
 /* ---------- Soporte ---------- */

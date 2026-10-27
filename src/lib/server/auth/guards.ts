@@ -1,7 +1,14 @@
 import type { Action } from '$lib/permissions';
 
 /** Rutas sin sesión. Todo lo demás exige haber entrado. */
-export const PUBLIC_PATHS = [/^\/acceso(\/|$)/, /^\/invitacion\//, /^\/api\/auth\//, /^\/tema$/];
+export const PUBLIC_PATHS = [
+	/^\/acceso(\/|$)/,
+	/^\/invitacion\//,
+	/^\/api\/auth\//,
+	/^\/tema$/,
+	// Landing del QR de versión (5.5): la única ruta de la aplicación sin sesión.
+	/^\/qr\/[2-9A-HJ-NP-Z]{4}-[2-9A-HJ-NP-Z]{4}$/
+];
 
 /** Permiso mínimo por sección, comprobado en `hooks.server.ts` antes de cualquier carga. */
 export const SECTION_ACTION: [RegExp, Action][] = [
@@ -43,5 +50,6 @@ export const AUTH_LIMITS: [RegExp, string, number, number][] = [
 	[/^\/api\/auth\/passkey\/generate-register-options$/, 'pkr', 10, 900],
 	[/^\/api\/auth\/passkey\/verify-registration$/, 'pkrv', 10, 900],
 	[/^\/invitacion\//, 'inv', 20, 900],
-	[/^\/acceso$/, 'acc', 10, 900]
+	[/^\/acceso$/, 'acc', 10, 900],
+	[/^\/qr\/[2-9A-HJ-NP-Z]{4}-[2-9A-HJ-NP-Z]{4}$/, 'qr', 20, 900]
 ];

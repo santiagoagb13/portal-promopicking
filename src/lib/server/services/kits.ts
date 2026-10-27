@@ -18,6 +18,7 @@ import { can, type Actor } from '$lib/permissions';
 import { audit } from '../audit';
 import { db, tables } from '../db';
 import { fileStorage } from '../storage';
+import { nextTicketId } from './tickets';
 
 const {
 	kits,
@@ -413,15 +414,6 @@ export async function receiveKit(
 	return { already: false, kitId };
 }
 
-async function nextIncidentId(tx: typeof db) {
-	await tx.execute(sql`select pg_advisory_xact_lock(hashtext('ticket-id'))`);
-	const [row] = await tx
-		.select({ max: sql<number | null>`max(substring(${tickets.id} from 5)::int)` })
-		.from(tickets)
-		.where(sql`${tickets.id} like 'INC-%'`);
-	return `INC-${(row?.max ?? 2000) + 1}`;
-}
-
 /** Incidencia desde la recepción: ticket de soporte, evento en el kit y aviso a Operaciones. */
 export async function openIncident(
 	actor: Actor & { name?: string },
@@ -445,7 +437,7 @@ export async function openIncident(
 	if (text.length < 3) throw new KitError('Describe la incidencia');
 	const at = clampAt(p.at, lastEventAt(kit));
 	const ticketId = await db.transaction(async (tx) => {
-		const id = await nextIncidentId(tx as unknown as typeof db);
+		const id = await nextTicketId(tx as unknown as typeof db, 'INC');
 		await tx.insert(tickets).values({
 			id,
 			campaignId: kit.campaignId,

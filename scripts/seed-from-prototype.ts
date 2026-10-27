@@ -17,12 +17,15 @@ import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import vm from 'node:vm';
-import { eq, inArray, sql } from 'drizzle-orm';
+import { createHash } from 'node:crypto';
+import { and, eq, inArray, isNull, sql } from 'drizzle-orm';
 import { milestoneDone, MILESTONE_KEYS, type MilestoneKey } from '$lib/domain/campaign';
 import { parseVersionCode } from '$lib/domain/version-code';
 import { closeDb, db, tables } from '$lib/server/db';
 import { loadActor } from '$lib/server/auth/actor';
 import { createInvitation } from '$lib/server/services/invitations';
+import { placeQrOrder } from '$lib/server/services/orders';
+import { generateQr, qrCodeFrom } from '$lib/server/services/qr';
 import { PAGE_WIDTHS, renderPages, samplePdf, sha256 } from '$lib/server/pdf';
 import { fileStorage } from '$lib/server/storage';
 import type { PageImage } from '$lib/server/db/schema';
@@ -693,6 +696,7 @@ async function seed(p: PrototypeData) {
 	});
 
 	await seedArtwork(p);
+	await seedQr();
 
 	// Invitación pendiente: se borra cualquier cuenta o invitación anterior de ese correo y se envía otra.
 	await db.delete(T.users).where(eq(T.users.email, SEED_INVITATION.email));
@@ -712,6 +716,44 @@ async function seed(p: PrototypeData) {
 		{ sendMail: !process.env.VERCEL_ENV }
 	);
 	return { token };
+}
+
+/**
+ * QR de versión de todo lo aprobado, con códigos fijos (derivados de versión y restaurante), y un
+ * pedido desde QR pendiente de validar en el restaurante de Ana para la cola de Operaciones.
+ */
+async function seedQr() {
+	const jorge = (await loadActor('u-jorge-martin'))!;
+	const code = (v: string, r: string) =>
+		qrCodeFrom(createHash('sha256').update(`${v}:${r}`).digest());
+	const approved = await db
+		.selectDistinct({ id: T.supportVersions.supportId })
+		.from(T.supportVersions)
+		.where(and(eq(T.supportVersions.status, 'approved'), isNull(T.supportVersions.supersededAt)));
+	for (const s of approved) await generateQr(jorge, s.id, {}, code);
+	const ana = SEED_USERS.find((u) => u.role === 'manager')!;
+	const [q] = await db
+		.select({
+			code: T.qrCodes.code,
+			supportId: T.qrCodes.supportId,
+			versionCode: T.qrCodes.versionCode,
+			restaurantId: T.qrCodes.restaurantId,
+			name: T.supports.name
+		})
+		.from(T.qrCodes)
+		.innerJoin(T.supports, eq(T.supports.id, T.qrCodes.supportId))
+		.where(inArray(T.qrCodes.restaurantId, ana.restaurants ?? []))
+		.orderBy(T.qrCodes.code)
+		.limit(1);
+	if (q?.restaurantId)
+		await placeQrOrder({
+			restaurantId: q.restaurantId,
+			supportId: q.supportId,
+			versionCode: q.versionCode,
+			label: q.name,
+			qty: 2,
+			qrCode: q.code
+		});
 }
 
 /**

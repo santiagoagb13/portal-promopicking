@@ -14,6 +14,7 @@ import type { PageImage } from '../db/schema';
 import { isPdf, MAX_PDF_BYTES, PAGE_WIDTHS, renderPages, sha256 } from '../pdf';
 import { fileStorage } from '../storage';
 import { campaignScope } from './campaigns';
+import { generateQrOnApproval } from './qr';
 
 const {
 	supports,
@@ -327,6 +328,7 @@ export async function decide(
 				.values({ id: randomUUID(), versionId, userId: actor.id, text: comment });
 	});
 	await syncSupportStage(v.supportId, v.stage);
+	if (next === 'approved') await generateQrOnApproval(v.supportId, actor.id);
 	const verb = {
 		approved: 'ha aprobado',
 		changes: 'pide cambios en',
@@ -408,6 +410,7 @@ export async function approveAll(
 		);
 	});
 	await syncSupportStage(supportId, s.stage);
+	await generateQrOnApproval(supportId, actor.id);
 	const uploaders = [...new Set(pending.map((p) => p.uploadedBy).filter((x): x is string => !!x))];
 	await notify(
 		[...new Set([...uploaders, ...(await opsRecipients(null))])],

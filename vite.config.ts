@@ -3,13 +3,45 @@ import tailwindcss from '@tailwindcss/vite';
 import { loadEnv } from 'vite';
 import { defineConfig } from 'vitest/config';
 
+const SHELL_ICON_NAMES = [
+	'arrow-up-down',
+	'bell',
+	'chart-column',
+	'check',
+	'circle-alert',
+	'ellipsis',
+	'file-check',
+	'info',
+	'life-buoy',
+	'log-out',
+	'megaphone',
+	'monitor',
+	'moon',
+	'package',
+	'package-check',
+	'qr-code',
+	'refresh-cw',
+	'search',
+	'shopping-cart',
+	'store',
+	'sun',
+	'user-cog',
+	'user-round',
+	'x'
+];
+const SHELL_ICONS = new RegExp(
+	`node_modules[\\\\/]@lucide[\\\\/]svelte[\\\\/]dist[\\\\/](Icon\\.svelte|context|defaultAttributes|icons[\\\\/](${SHELL_ICON_NAMES.join('|')})\\.(svelte|js))`
+);
+
 export default defineConfig(({ mode }) => ({
 	plugins: [tailwindcss(), sveltekit()],
 	build: {
 		rolldownOptions: {
 			output: {
-				// Un solo fichero para los iconos: decenas de módulos diminutos pesan más por separado.
-				advancedChunks: { groups: [{ name: 'iconos', test: /node_modules[\\/]@lucide/ }] }
+				// Un solo fichero para los iconos de la carcasa (navegación, barra superior, avisos):
+				// decenas de módulos diminutos pesan más por separado. Los de cada pantalla van con ella,
+				// para que una pantalla nueva no engorde las demás.
+				advancedChunks: { groups: [{ name: 'iconos', test: SHELL_ICONS }] }
 			}
 		}
 	},
