@@ -1,6 +1,6 @@
 import { fail } from '@sveltejs/kit';
 import { asc, inArray } from 'drizzle-orm';
-import { z } from 'zod';
+import { z } from '$lib/schemas/z';
 import { ROLE_LABEL } from '$lib/i18n/es';
 import { can, ROLES, type Role } from '$lib/permissions';
 import { invitationInput } from '$lib/schemas/invitation';

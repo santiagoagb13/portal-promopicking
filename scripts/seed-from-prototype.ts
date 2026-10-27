@@ -387,20 +387,22 @@ async function seed(p: PrototypeData) {
 	const today = p.today;
 
 	await db.transaction(async (tx) => {
-		await tx.execute(sql`truncate kit_events, kit_lines, kits, version_comments, support_versions, qr_codes,
+		await tx.execute(sql`truncate master_imports, master_validations, kit_events, kit_lines, kits, version_comments, support_versions, qr_codes,
 			supports, campaign_milestones, ticket_updates, tickets, order_lines, orders, catalog_items, campaigns`);
 		// Contadores de intentos a cero: el seed deja el entorno listo para probar.
 		await tx.execute(sql`truncate rate_limits`);
 
 		// Marcas y restaurantes: upsert (las cuentas invitadas pueden apuntar a ellos).
-		for (const [code, b] of Object.entries(p.brands))
+		for (const [code, b] of Object.entries(p.brands)) {
+			// El prefijo de los códigos (FH, VI, GI) sale de los restaurantes de la marca.
+			const idPrefix =
+				p.restaurants.find((r) => r.brand === code)?.id.split('-')[0] ?? code.slice(0, 2);
+			const row = { name: b.name, short: b.short, restaurantCount: b.rtes, idPrefix };
 			await tx
 				.insert(T.brands)
-				.values({ code, name: b.name, short: b.short, restaurantCount: b.rtes })
-				.onConflictDoUpdate({
-					target: T.brands.code,
-					set: { name: b.name, short: b.short, restaurantCount: b.rtes }
-				});
+				.values({ code, ...row })
+				.onConflictDoUpdate({ target: T.brands.code, set: row });
+		}
 		for (const r of p.restaurants) {
 			const row = {
 				id: r.id,
@@ -420,6 +422,11 @@ async function seed(p: PrototypeData) {
 				.values(row)
 				.onConflictDoUpdate({ target: T.restaurants.id, set: row });
 		}
+
+		// Restaurantes dados de alta a mano después del seed: fuera, salvo que una cuenta los tenga en su ámbito.
+		const ids = p.restaurants.map((r) => r.id);
+		await tx.execute(sql`delete from restaurants r where r.id not in ${ids}
+			and not exists (select 1 from user_restaurants ur where ur.restaurant_id = r.id)`);
 
 		// Usuarios de prueba: upsert por id; conservan passkeys y sesiones entre seeds.
 		for (const su of SEED_USERS) {

@@ -2,7 +2,7 @@
 
 Portal para gestionar las campañas de material impreso de Foster's Hollywood, VIPS y Ginos: aprobación de artes finales, kits y trazabilidad, reposiciones, soporte e informes. El plan completo está en [`docs/PLAN-PORTAL-V2.md`](docs/PLAN-PORTAL-V2.md); las decisiones, en [`docs/adr/`](docs/adr/); las maquetas de diseño, en [`docs/propuestas/`](docs/propuestas/).
 
-Estado: **fase 1 · Cimientos** (acceso por invitación con passkeys, carcasa y Panel de campañas con datos del prototipo).
+Estado: **fase 2 · Campañas y maestro** sobre la fase 1 (acceso por invitación con passkeys, carcasa, PWA). Hay panel con calendario, alta y detalle de campañas, maestro de restaurantes con edición, importación y descarga de Excel, y administración de usuarios, auditoría y ajustes. Decisiones en [ADR 0006](docs/adr/0006-fase-2-campanas-y-maestro.md).
 
 ## Pila
 

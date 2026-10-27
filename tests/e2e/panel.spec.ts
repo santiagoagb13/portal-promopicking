@@ -1,7 +1,8 @@
 import { mkdirSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
 import { expect, test } from '@playwright/test';
-import { horizontalOverflow, signInWithMagicLink } from './helpers';
+import { stateOf } from './users';
+import { horizontalOverflow } from './helpers';
 
 const WIDTHS = [375, 768, 1024, 1440] as const;
 const HEIGHT: Record<(typeof WIDTHS)[number], number> = {
@@ -13,8 +14,9 @@ const HEIGHT: Record<(typeof WIDTHS)[number], number> = {
 const DIR = 'tests/e2e/capturas';
 
 test.describe('Panel de campañas', () => {
+	test.use({ storageState: stateOf('jorge') });
 	test.beforeEach(async ({ page }) => {
-		await signInWithMagicLink(page, 'jorge.martin@promopicking.example');
+		await page.goto('/campanas');
 	});
 
 	test('KPI, filtro por marca en la URL y orden por semáforo', async ({ page }) => {

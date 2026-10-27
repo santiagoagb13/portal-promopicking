@@ -28,7 +28,11 @@ export default defineConfig({
 		timezoneId: 'Europe/Madrid',
 		trace: 'retain-on-failure'
 	},
-	projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
+	projects: [
+		// Entra una vez por usuario con enlace mágico y guarda la sesión (tests/e2e/.auth/).
+		{ name: 'sesiones', testMatch: /auth\.setup\.ts/, use: { ...devices['Desktop Chrome'] } },
+		{ name: 'chromium', dependencies: ['sesiones'], use: { ...devices['Desktop Chrome'] } }
+	],
 	webServer: {
 		command: 'npm run build && npx vite preview --port 4173 --strictPort',
 		url: `${ORIGIN}/acceso`,

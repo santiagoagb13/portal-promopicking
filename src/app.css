@@ -197,6 +197,17 @@
 	.app-root {
 		display: contents;
 	}
+	/* Anunciador de rutas de SvelteKit: oculto aunque la CSP bloquee su estilo en línea. */
+	#svelte-announcer {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
 	.mono,
 	.id,
 	.code,

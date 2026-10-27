@@ -6,6 +6,9 @@ export const PUBLIC_PATHS = [/^\/acceso(\/|$)/, /^\/invitacion\//, /^\/api\/auth
 /** Permiso mínimo por sección, comprobado en `hooks.server.ts` antes de cualquier carga. */
 export const SECTION_ACTION: [RegExp, Action][] = [
 	[/^\/admin\/auditoria(\/|$)/, 'audit.view'],
+	[/^\/admin\/ajustes(\/|$)/, 'settings.edit'],
+	[/^\/maestro\/importar(\/|$)/, 'restaurant.import'],
+	[/^\/maestro\/exportar/, 'restaurant.view'],
 	[/^\/admin(\/|$)/, 'user.invite'],
 	[/^\/campanas\/nueva(\/|$)/, 'campaign.create'],
 	[/^\/campanas(\/|$)/, 'campaign.view'],

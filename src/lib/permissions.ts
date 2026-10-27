@@ -12,7 +12,7 @@ export type Role = (typeof ROLES)[number];
 export type Actor = {
 	id: string;
 	role: Role;
-	status: 'active' | 'suspended';
+	status: 'active' | 'suspended' | 'deleted';
 	/** Marcas del ámbito (usuarios de marca). */
 	brands: string[];
 	/** Restaurantes del ámbito (gerentes), con su marca. */
@@ -37,11 +37,15 @@ export type Action =
 	| 'order.place'
 	| 'restaurant.view'
 	| 'restaurant.edit'
+	| 'restaurant.create'
+	| 'restaurant.import'
+	| 'master.validate'
 	| 'ticket.view'
 	| 'ticket.respond'
 	| 'user.invite'
 	| 'user.changeRole'
-	| 'audit.view';
+	| 'audit.view'
+	| 'settings.edit';
 
 /** Recurso sobre el que se pregunta. Sin recurso, la pregunta es «¿puede hacerlo en algún caso?». */
 export type Resource = {
@@ -135,8 +139,14 @@ export function can(actor: Actor | null | undefined, action: Action, r?: Resourc
 
 		case 'restaurant.view':
 		case 'restaurant.edit':
+		case 'master.validate':
 			if (internal) return true;
 			return role === 'brand' && inBrands(actor, r?.brandCode);
+
+		// Altas, bajas e importación del maestro: solo Promopicking.
+		case 'restaurant.create':
+		case 'restaurant.import':
+			return internal;
 
 		case 'ticket.view':
 			return true;
@@ -161,6 +171,7 @@ export function can(actor: Actor | null | undefined, action: Action, r?: Resourc
 			return r.targetRestaurantBrands.every((b) => actor.brands.includes(b));
 
 		case 'audit.view':
+		case 'settings.edit':
 			return role === 'admin';
 	}
 }

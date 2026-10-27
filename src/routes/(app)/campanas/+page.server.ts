@@ -1,29 +1,49 @@
 import { and, count, eq, inArray, ne } from 'drizzle-orm';
-import { SEMAPHORE_RANK } from '$lib/domain/campaign';
+import { MILESTONE_LABEL, SEMAPHORE_RANK, STAGES } from '$lib/domain/campaign';
+import { monthGrid } from '$lib/domain/calendar';
 import { daysBetween, todayDay } from '$lib/domain/dates';
 import { can } from '$lib/permissions';
 import { config } from '$lib/server/config';
 import { db, tables } from '$lib/server/db';
-import { brandsFor, listCampaigns } from '$lib/server/services/campaigns';
+import {
+	brandsFor,
+	listCampaigns,
+	milestonesOf,
+	ownersByBrand
+} from '$lib/server/services/campaigns';
 import type { PageServerLoad } from './$types';
 
 const { tickets } = tables;
+
+/** Filtro de fase de la URL: 0–6 o «planificada». */
+function parsePhase(v: string | null): number | 'planificada' | null {
+	if (v === 'planificada') return v;
+	const n = Number(v);
+	return v !== null && v !== '' && Number.isInteger(n) && n >= 0 && n < STAGES.length ? n : null;
+}
 
 export const load: PageServerLoad = async ({ locals, url, depends }) => {
 	depends('app:campanas');
 	const actor = locals.user!;
 	const today = todayDay(config.referenceDate);
+	const sp = url.searchParams;
 	const brands = await brandsFor(actor);
-	const brandParam = url.searchParams.get('marca')?.toUpperCase();
+	const brandParam = sp.get('marca')?.toUpperCase();
 	const brand = brands.some((b) => b.code === brandParam) ? brandParam : undefined;
-	const q = url.searchParams.get('q')?.trim().slice(0, 80) || undefined;
-	const order = url.searchParams.get('orden') === 'semaforo' ? 'semaforo' : 'fecha';
-	const desc = url.searchParams.get('dir') === 'desc';
+	const q = sp.get('q')?.trim().slice(0, 80) || undefined;
+	const phase = parsePhase(sp.get('fase'));
+	const order = sp.get('orden') === 'semaforo' ? 'semaforo' : 'fecha';
+	const desc = sp.get('dir') === 'desc';
+	const view = sp.get('vista') === 'calendario' ? 'calendario' : 'tabla';
+	const month = /^\d{4}-\d{2}$/.test(sp.get('mes') ?? '') ? sp.get('mes')! : today.slice(0, 7);
 
 	const scoped = await listCampaigns(actor, { brand, today });
-	const rows = q
-		? scoped.filter((c) => `${c.name} ${c.id}`.toLowerCase().includes(q.toLowerCase()))
-		: [...scoped];
+	const rows = scoped
+		.filter((c) => !q || `${c.name} ${c.id}`.toLowerCase().includes(q.toLowerCase()))
+		.filter(
+			(c) =>
+				phase === null || (phase === 'planificada' ? c.planned : !c.planned && c.stage === phase)
+		);
 	rows.sort((a, b) => {
 		const byDate = a.inRestaurantOn.localeCompare(b.inRestaurantOn) || a.id.localeCompare(b.id);
 		const primary =
@@ -52,15 +72,40 @@ export const load: PageServerLoad = async ({ locals, url, depends }) => {
 		.filter((c) => daysBetween(today, c.inRestaurantOn) >= 0)
 		.sort((a, b) => a.inRestaurantOn.localeCompare(b.inRestaurantOn))[0];
 
+	// Calendario (mes): los hitos de las campañas filtradas.
+	let calendar = null;
+	if (view === 'calendario') {
+		const byId = new Map(rows.map((c) => [c.id, c]));
+		const ms = await milestonesOf(rows.map((c) => c.id));
+		const items = ms.map((m) => ({
+			day: m.dueOn,
+			campaignId: m.campaignId,
+			name: byId.get(m.campaignId)!.name,
+			brandShort: byId.get(m.campaignId)!.brandShort,
+			label: MILESTONE_LABEL[m.key],
+			key: m.key,
+			done: !!m.doneAt
+		}));
+		calendar = { month, days: monthGrid(month, items) };
+	}
+
+	const canCreate = can(actor, 'campaign.create');
 	return {
 		title: 'Campañas',
 		today,
-		brands: brands.map((b) => ({ code: b.code, label: b.name.split(' ')[0] ?? b.short })),
+		brands: brands.map((b) => ({
+			code: b.code,
+			label: b.name.split(' ')[0] ?? b.short,
+			restaurantCount: b.restaurantCount
+		})),
 		brand: brand ?? null,
 		q: q ?? '',
+		phase,
 		order,
 		desc,
-		expanded: url.searchParams.has('todas'),
+		view,
+		calendar,
+		expanded: sp.has('todas'),
 		rows,
 		kpis: {
 			active,
@@ -69,7 +114,8 @@ export const load: PageServerLoad = async ({ locals, url, depends }) => {
 			incidents: incidents?.n ?? 0,
 			next: next ? { id: next.id, name: next.name, on: next.inRestaurantOn } : null
 		},
-		canCreate: can(actor, 'campaign.create'),
+		canCreate,
+		owners: canCreate ? await ownersByBrand() : [],
 		canSeeApprovals: can(actor, 'artwork.view')
 	};
 };

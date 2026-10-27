@@ -5,6 +5,14 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig(({ mode }) => ({
 	plugins: [tailwindcss(), sveltekit()],
+	build: {
+		rolldownOptions: {
+			output: {
+				// Un solo fichero para los iconos: decenas de módulos diminutos pesan más por separado.
+				advancedChunks: { groups: [{ name: 'iconos', test: /node_modules[\\/]@lucide/ }] }
+			}
+		}
+	},
 	server: { port: 5173, strictPort: true },
 	preview: { port: 4173, strictPort: true },
 	test: {

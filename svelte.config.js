@@ -22,6 +22,11 @@ const config = {
 				'script-src': ['self'],
 				// En desarrollo Vite inyecta los estilos con JavaScript; en producción son ficheros.
 				'style-src': dev ? ['self', 'unsafe-inline'] : ['self'],
+				// Solo el estilo fijo del anunciador de rutas de SvelteKit (#svelte-announcer), por su hash.
+				// Si cambia con una versión de SvelteKit, app.css lo oculta igualmente.
+				'style-src-attr': dev
+					? ['unsafe-inline']
+					: ['unsafe-hashes', 'sha256-S8qMpvofolR8Mpjy4kQvEm7m1q8clzU4dfDH0AmvZjo='],
 				'img-src': ['self', 'data:', 'blob:'],
 				'font-src': ['self'],
 				'connect-src': ['self'],

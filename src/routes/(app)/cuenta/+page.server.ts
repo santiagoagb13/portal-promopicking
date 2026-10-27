@@ -1,6 +1,6 @@
 import { fail } from '@sveltejs/kit';
 import { and, asc, desc, eq, ne } from 'drizzle-orm';
-import { z } from 'zod';
+import { z } from '$lib/schemas/z';
 import { ROLE_LABEL } from '$lib/i18n/es';
 import { audit, requestMeta } from '$lib/server/audit';
 import { deviceLabel, getAuth } from '$lib/server/auth';

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from './z';
 import { ROLES } from '$lib/permissions';
 
 const list = z

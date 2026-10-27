@@ -1,6 +1,6 @@
 import { fail } from '@sveltejs/kit';
 import { and, desc, eq, inArray, isNull } from 'drizzle-orm';
-import { z } from 'zod';
+import { z } from '$lib/schemas/z';
 import { db, tables } from '$lib/server/db';
 import type { Actions, PageServerLoad } from './$types';
 

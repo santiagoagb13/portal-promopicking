@@ -67,10 +67,46 @@ export const MILESTONE_OFFSETS: Record<MilestoneKey, number> = {
 };
 
 /** Hitos de una campaña calculados hacia atrás desde la fecha en restaurante. */
-export function milestonesFor(inRestaurantOn: string): Record<MilestoneKey, string> {
+export function milestonesFor(
+	inRestaurantOn: string,
+	offsets: Record<MilestoneKey, number> = MILESTONE_OFFSETS
+): Record<MilestoneKey, string> {
 	return Object.fromEntries(
-		MILESTONE_KEYS.map((k) => [k, addDays(inRestaurantOn, MILESTONE_OFFSETS[k])])
+		MILESTONE_KEYS.map((k) => [k, addDays(inRestaurantOn, offsets[k])])
 	) as Record<MilestoneKey, string>;
+}
+
+/**
+ * Plazos válidos: cada hito en o antes del siguiente y el último, el día en restaurante (0).
+ * Devuelve el primer problema o `null`.
+ */
+export function offsetsProblem(offsets: Record<MilestoneKey, number>): string | null {
+	for (const k of MILESTONE_KEYS)
+		if (!Number.isInteger(offsets[k]) || offsets[k] > 0 || offsets[k] < -365)
+			return `${MILESTONE_LABEL[k]}: entre 0 y 365 días antes`;
+	if (offsets.rte !== 0) return 'El día en restaurante es el día 0';
+	for (let i = 1; i < MILESTONE_KEYS.length; i++) {
+		const prev = MILESTONE_KEYS[i - 1]!;
+		const cur = MILESTONE_KEYS[i]!;
+		if (offsets[cur] < offsets[prev])
+			return `${MILESTONE_LABEL[cur]} no puede ir antes que ${MILESTONE_LABEL[prev]}`;
+	}
+	return null;
+}
+
+/**
+ * Siguiente código de campaña de una marca y año: `FH-26-12`. Toma el mayor número usado
+ * (los sufijos como `VI-26-03b` cuentan como 03) y suma uno.
+ */
+export function nextCampaignId(
+	prefix: string,
+	inRestaurantOn: string,
+	existingIds: string[]
+): string {
+	const yy = inRestaurantOn.slice(2, 4);
+	const re = new RegExp(`^${prefix}-${yy}-(\\d+)`);
+	const max = existingIds.reduce((m, id) => Math.max(m, Number(id.match(re)?.[1] ?? 0)), 0);
+	return `${prefix}-${yy}-${String(max + 1).padStart(2, '0')}`;
 }
 
 /** Hito que cierra cada fase (índice = fase), como `STAGE_DATE_KEY` del prototipo. */

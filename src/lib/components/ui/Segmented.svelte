@@ -1,6 +1,15 @@
 <!-- Segmentos de filtro (7.4): enlaces, para que el filtro viva en la URL y funcione sin JS. -->
 <script lang="ts">
-	type Item = { href: string; label: string; active: boolean; count?: number };
+	import type { Component } from 'svelte';
+
+	type Item = {
+		href: string;
+		label: string;
+		active: boolean;
+		count?: number;
+		/** Con icono, el texto pasa a tooltip y nombre accesible. */
+		icon?: Component<{ size?: number; strokeWidth?: number }>;
+	};
 	let {
 		items,
 		label,
@@ -15,7 +24,12 @@
 			aria-current={item.active ? 'true' : undefined}
 			data-sveltekit-noscroll
 			data-sveltekit-replacestate
-			>{item.label}{#if item.count}<span class="count">{item.count}</span>{/if}</a
+			aria-label={item.icon ? item.label : undefined}
+			data-tip={item.icon ? item.label : undefined}
+			>{#if item.icon}<item.icon
+					size={18}
+					strokeWidth={1.5}
+				/>{:else}{item.label}{/if}{#if item.count}<span class="count">{item.count}</span>{/if}</a
 		>
 	{/each}
 </nav>

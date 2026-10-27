@@ -89,7 +89,7 @@ export const NAV: NavItem[] = [
 		count: 'incidents'
 	},
 	{
-		href: '/admin/invitaciones',
+		href: '/admin',
 		label: 'Administración',
 		short: 'Admin',
 		icon: UserCog,

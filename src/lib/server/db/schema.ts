@@ -5,6 +5,7 @@
  * sus propiedades JS (camelCase) son los nombres de campo que espera el adaptador de Drizzle.
  */
 import { sql } from 'drizzle-orm';
+import type { ImportDiff } from '../../domain/master';
 import {
 	bigint,
 	boolean,
@@ -26,7 +27,8 @@ const ts = (name: string) => timestamp(name, { withTimezone: true, mode: 'date' 
 const createdAt = () => ts('created_at').notNull().defaultNow();
 
 export const roleEnum = pgEnum('role', ['admin', 'ops', 'production', 'brand', 'manager']);
-export const userStatusEnum = pgEnum('user_status', ['active', 'suspended']);
+/** `deleted`: cuenta eliminada y anonimizada (la fila queda para que la auditoría no apunte a nadie identificable). */
+export const userStatusEnum = pgEnum('user_status', ['active', 'suspended', 'deleted']);
 
 /* ---------- Acceso (Better Auth + invitaciones + auditoría) ---------- */
 
@@ -198,7 +200,9 @@ export const brands = pgTable('brands', {
 	code: text('code').primaryKey(),
 	name: text('name').notNull(),
 	short: text('short').notNull(),
-	restaurantCount: integer('restaurant_count').notNull()
+	restaurantCount: integer('restaurant_count').notNull(),
+	/** Prefijo de los códigos de campaña y de restaurante: FH, VI, GI. */
+	idPrefix: text('id_prefix').notNull().default('')
 });
 
 export const restaurants = pgTable(
@@ -217,11 +221,47 @@ export const restaurants = pgTable(
 		facade: text('facade'),
 		deliveryPoint: text('delivery_point').notNull(),
 		active: boolean('active').notNull().default(true),
+		createdAt: createdAt(),
 		updatedBy: text('updated_by').references(() => users.id, { onDelete: 'set null' }),
 		updatedAt: ts('updated_at').notNull().defaultNow()
 	},
 	(t) => [index('restaurants_brand_idx').on(t.brandCode)]
 );
+
+/** Validación trimestral del maestro, por marca (8.10). */
+export const masterValidations = pgTable(
+	'master_validations',
+	{
+		id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
+		brandCode: text('brand_code')
+			.notNull()
+			.references(() => brands.code),
+		validatedBy: text('validated_by').references(() => users.id, { onDelete: 'set null' }),
+		validatedAt: ts('validated_at').notNull().defaultNow(),
+		restaurantCount: integer('restaurant_count').notNull()
+	},
+	(t) => [index('master_validations_brand_idx').on(t.brandCode, t.validatedAt)]
+);
+
+/** Importación de Excel pendiente de confirmar: se guarda la previsualización (altas, cambios, bajas). */
+export const masterImports = pgTable('master_imports', {
+	id: text('id').primaryKey(),
+	fileName: text('file_name').notNull(),
+	brandCodes: jsonb('brand_codes').$type<string[]>().notNull(),
+	diff: jsonb('diff').$type<ImportDiff>().notNull(),
+	uploadedBy: text('uploaded_by').references(() => users.id, { onDelete: 'set null' }),
+	createdAt: createdAt(),
+	appliedAt: ts('applied_at'),
+	appliedBy: text('applied_by').references(() => users.id, { onDelete: 'set null' })
+});
+
+/** Ajustes del portal (8.12): plazos de las fases, objetivo OTIF… Un valor JSON por clave. */
+export const settings = pgTable('settings', {
+	key: text('key').primaryKey(),
+	value: jsonb('value').notNull(),
+	updatedBy: text('updated_by').references(() => users.id, { onDelete: 'set null' }),
+	updatedAt: ts('updated_at').notNull().defaultNow()
+});
 
 /* ---------- Campañas ---------- */
 
@@ -239,7 +279,14 @@ export const campaigns = pgTable(
 		planned: boolean('planned').notNull().default(false),
 		materials: text('materials'),
 		notes: text('notes'),
-		createdAt: createdAt()
+		/** Campaña de la que se duplicó (plantilla). */
+		templateOf: text('template_of'),
+		createdAt: createdAt(),
+		createdBy: text('created_by').references(() => users.id, { onDelete: 'set null' }),
+		updatedAt: ts('updated_at').notNull().defaultNow(),
+		updatedBy: text('updated_by').references(() => users.id, { onDelete: 'set null' }),
+		archivedAt: ts('archived_at'),
+		archivedBy: text('archived_by').references(() => users.id, { onDelete: 'set null' })
 	},
 	(t) => [index('campaigns_brand_date_idx').on(t.brandCode, t.inRestaurantOn)]
 );
