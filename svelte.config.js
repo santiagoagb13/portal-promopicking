@@ -34,6 +34,8 @@ const config = {
 				'object-src': ['none']
 			}
 		},
+		// Comprueba cada 5 min si hay versión nueva para ofrecer «Actualizar».
+		version: { pollInterval: 300_000 },
 		alias: {
 			$components: 'src/lib/components'
 		}

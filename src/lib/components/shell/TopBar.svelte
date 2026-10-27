@@ -6,6 +6,7 @@
 	import LogOut from '@lucide/svelte/icons/log-out';
 	import type { Theme } from '$lib/schemas/auth';
 	import ThemeSwitch from './ThemeSwitch.svelte';
+	import UpdateNotice from './UpdateNotice.svelte';
 
 	type Props = {
 		title: string;
@@ -28,10 +29,18 @@
 
 <header class="topbar">
 	<h1>{title}</h1>
+	<UpdateNotice />
 	<form class="search" role="search" action="/campanas" method="GET">
 		<Search size={16} strokeWidth={1.5} aria-hidden="true" />
 		<label class="sr-only" for="buscar">Buscar</label>
-		<input id="buscar" bind:this={search} name="q" type="search" placeholder="Buscar" autocomplete="off" />
+		<input
+			id="buscar"
+			bind:this={search}
+			name="q"
+			type="search"
+			placeholder="Buscar"
+			autocomplete="off"
+		/>
 		<kbd aria-hidden="true">⌘K</kbd>
 	</form>
 	<a
@@ -43,8 +52,11 @@
 		<Bell size={20} strokeWidth={1.5} aria-hidden="true" />
 		{#if unread}<span class="pip" aria-hidden="true"></span>{/if}
 	</a>
-	<button class="avatar" type="button" popovertarget="menu-cuenta" aria-label="Cuenta de {user.name}"
-		>{user.initials}</button
+	<button
+		class="avatar"
+		type="button"
+		popovertarget="menu-cuenta"
+		aria-label="Cuenta de {user.name}">{user.initials}</button
 	>
 	<div id="menu-cuenta" class="menu" popover>
 		<div class="who">
@@ -52,10 +64,14 @@
 			<small>{user.email}</small>
 			<small>{user.subtitle}</small>
 		</div>
-		<a href="/cuenta" class="item"><UserRound size={16} strokeWidth={1.5} aria-hidden="true" />Cuenta</a>
+		<a href="/cuenta" class="item"
+			><UserRound size={16} strokeWidth={1.5} aria-hidden="true" />Cuenta</a
+		>
 		<div class="item theme"><span>Tema</span><ThemeSwitch current={theme} /></div>
 		<form method="POST" action="/salir">
-			<button type="submit" class="item"><LogOut size={16} strokeWidth={1.5} aria-hidden="true" />Salir</button>
+			<button type="submit" class="item"
+				><LogOut size={16} strokeWidth={1.5} aria-hidden="true" />Salir</button
+			>
 		</form>
 	</div>
 </header>
