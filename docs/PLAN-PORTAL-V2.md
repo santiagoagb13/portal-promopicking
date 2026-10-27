@@ -386,13 +386,13 @@ Salen de `NOTAS.md`; pasan a ser reglas del sistema de diseño.
 | El ámbar `#b7791f` no llega a AA como texto de 12 px | Dos ámbares: `#b7791f` solo para iconos y puntos; **`#8a5a10`** para texto de chips (≥ 4,5:1 sobre `#fbf3e3`). Mismo criterio en oscuro (`#f0b65a` icono · `#f6cf8a` texto sobre `#2a2215`). |
 | Barra de progreso teñida con el color del semáforo: dos indicadores del mismo estado | La barra es **siempre neutra** (`#111` sobre `#e6e6e6`); el semáforo es el único color de estado de la fila |
 | Chips de marca con color propio (teja, azul, verde) compiten con el semáforo | Chips de marca **neutros**: fondo `#f2f2f2`, texto `#111`, 12 px, 2 px de radio. La marca se distingue por el texto, no por el color |
-| Sidebar de solo iconos ilegible sin pasar el ratón; contadores encima del icono | Sidebar de **72 px con icono y etiqueta de 11 px debajo**; contador en la esquina superior derecha del icono; en ≥ 1280 px puede expandirse a 232 px con etiqueta al lado |
+| Sidebar de solo iconos ilegible sin pasar el ratón; contadores encima del icono | Sidebar de **72 px con icono y etiqueta de 11 px debajo**; contador en la esquina superior derecha del icono; en ≥ 1280 px puede expandirse a 232 px con etiqueta al lado. En el modo de 72 px las etiquetas son cortas, de una línea: Campañas · Aprobaciones · Kits · QR · Reposiciones · Informes · Maestro · Soporte |
 | Filas de 44 px: 17 campañas no caben en 900 px | Filas de **40 px** en escritorio (36 px en tablas densas como versiones y maestro); 44 px solo en móvil |
 | El acento negro desaparece en oscuro | Es la regla, no un fallo: **el acento es la tinta** (negro en claro, blanco en oscuro). Los únicos colores son los de estado |
 | Tablet 768–1023 px: tabla de 7 columnas comprimida | En ese tramo las tablas anchas pasan a **fichas a dos columnas**; la tabla completa solo a partir de 1024 px |
 | Cabecera del visor en móvil con cuatro acciones en dos filas | En móvil las acciones del visor van en una **barra inferior fija** de 56 px; la cabecera solo lleva volver y el código |
-| Panel en móvil de 3 700 px con barra de progreso en cada ficha | Las fichas en móvil muestran el progreso como texto («4/7») y sin barra; 8 campañas por página con «Ver más» |
-| Título del diálogo partido en dos líneas en 480 px | Diálogos de 440 px con título de 18 px; la frase de confirmación cabe en una línea hasta 360 px |
+| Panel en móvil de 3 700 px con barra de progreso en cada ficha | Las fichas en móvil muestran el progreso como texto, el mismo porcentaje ponderado por soporte que en escritorio («64 %»), y sin barra; 8 campañas por página con «Ver más» |
+| Título del diálogo partido en dos líneas en 480 px | Diálogos de 440 px con título de 18 px; por debajo de 480 px el título baja a 16 px y los márgenes a 16 px para que la frase quepa en una línea hasta 360 px |
 
 El resto de la propuesta B queda como está: blanco, líneas de 1 px en lugar de tarjetas, Geist + Geist Mono, títulos de 24 px con peso 500, radio 0 y 2 px.
 
