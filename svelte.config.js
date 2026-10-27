@@ -4,6 +4,13 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 const dev = process.argv.includes('dev');
 
+// Con almacenamiento S3 las imágenes y las subidas van directas al proveedor (URL firmadas).
+const storageOrigin =
+	process.env.STORAGE_PROVIDER === 's3' && process.env.S3_ENDPOINT
+		? new URL(process.env.S3_ENDPOINT).origin
+		: null;
+const storageSrc = storageOrigin ? [storageOrigin] : [];
+
 // ADAPTER=node genera un servidor Node autónomo para el VPS (fase 8); por defecto, Vercel.
 const adapter =
 	process.env.ADAPTER === 'node'
@@ -27,9 +34,9 @@ const config = {
 				'style-src-attr': dev
 					? ['unsafe-inline']
 					: ['unsafe-hashes', 'sha256-S8qMpvofolR8Mpjy4kQvEm7m1q8clzU4dfDH0AmvZjo='],
-				'img-src': ['self', 'data:', 'blob:'],
+				'img-src': ['self', 'data:', 'blob:', ...storageSrc],
 				'font-src': ['self'],
-				'connect-src': ['self'],
+				'connect-src': ['self', ...storageSrc],
 				'manifest-src': ['self'],
 				'worker-src': ['self'],
 				'frame-src': ['none'],

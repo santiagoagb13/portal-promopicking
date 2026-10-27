@@ -116,7 +116,13 @@ export async function listCampaigns(
 			.select({ campaignId: supports.campaignId, n: sql<number>`count(*)::int` })
 			.from(supportVersions)
 			.innerJoin(supports, eq(supports.id, supportVersions.supportId))
-			.where(and(inArray(supports.campaignId, ids), ne(supportVersions.status, 'approved')))
+			.where(
+				and(
+					inArray(supports.campaignId, ids),
+					ne(supportVersions.status, 'approved'),
+					isNull(supportVersions.supersededAt)
+				)
+			)
 			.groupBy(supports.campaignId),
 		db
 			.select({

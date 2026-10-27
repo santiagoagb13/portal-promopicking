@@ -2,7 +2,7 @@
 
 Portal para gestionar las campañas de material impreso de Foster's Hollywood, VIPS y Ginos: aprobación de artes finales, kits y trazabilidad, reposiciones, soporte e informes. El plan completo está en [`docs/PLAN-PORTAL-V2.md`](docs/PLAN-PORTAL-V2.md); las decisiones, en [`docs/adr/`](docs/adr/); las maquetas de diseño, en [`docs/propuestas/`](docs/propuestas/).
 
-Estado: **fase 2 · Campañas y maestro** sobre la fase 1 (acceso por invitación con passkeys, carcasa, PWA). Hay panel con calendario, alta y detalle de campañas, maestro de restaurantes con edición, importación y descarga de Excel, y administración de usuarios, auditoría y ajustes. Decisiones en [ADR 0006](docs/adr/0006-fase-2-campanas-y-maestro.md).
+Estado: **fase 3 · Aprobaciones** sobre las fases 1 y 2. Subida de PDF con conversión a imágenes, visor con exterior e interior, zoom, comparación y comentarios anclados, aprobar, pedir cambios y aprobar todas con registro, acta en PDF y avisos ([ADR 0007](docs/adr/0007-fase-3-aprobaciones.md)). Fase 2 (acceso por invitación con passkeys, carcasa, PWA). Hay panel con calendario, alta y detalle de campañas, maestro de restaurantes con edición, importación y descarga de Excel, y administración de usuarios, auditoría y ajustes. Decisiones en [ADR 0006](docs/adr/0006-fase-2-campanas-y-maestro.md).
 
 ## Pila
 
@@ -92,8 +92,9 @@ Nada de esto está hecho: no hay proyecto en Vercel, ni base de datos en Neon, n
    - `APP_REFERENCE_DATE=2026-10-22` solo en _Preview_ (para que los datos de prueba cuadren); vacía en producción.
    - No definas nunca `PORTAL_ENTORNO` en Vercel.
 5. **Correo**: crea la cuenta de Resend, verifica el dominio remitente (registros DNS) y genera la clave.
-6. **Dominio**: añade `portal.tudominio.com` en _Settings › Domains_ y crea el CNAME que indique Vercel. Mientras tanto, activa _Deployment Protection_ para las previsualizaciones `*.vercel.app`.
-7. **Primer administrador en producción**: el seed no se ejecuta en producción. Con la `DATABASE_URL` de producción en el entorno (y `AUTH_ORIGIN` y el correo configurados), ejecuta una vez `npm run invitar-admin -- tu@correo.com "Tu nombre"`: envía la invitación de administración (con `--sin-correo` solo muestra el enlace). Solo funciona mientras no haya ningún administrador; después, las invitaciones salen del portal (Administración › Invitaciones).
-8. **CI**: el workflow `.github/workflows/ci.yml` se ejecuta en cada PR (solo `ubuntu-latest`, con la cuota de la cuenta en mente). El despliegue lo hace la integración Git de Vercel, que no gasta minutos de Actions.
+6. **Ficheros** (artes finales): Vercel no tiene disco persistente. Crea un bucket en un servicio compatible con S3 (por ejemplo, Cloudflare R2), con una clave de acceso limitada a ese bucket y una regla CORS que permita `PUT` y `GET` desde el dominio del portal. Define `STORAGE_PROVIDER=s3`, `S3_ENDPOINT`, `S3_REGION`, `S3_BUCKET`, `S3_KEY` y `S3_SECRET` también en _Preview_: el origen del endpoint entra en la CSP al compilar.
+7. **Dominio**: añade `portal.tudominio.com` en _Settings › Domains_ y crea el CNAME que indique Vercel. Mientras tanto, activa _Deployment Protection_ para las previsualizaciones `*.vercel.app`.
+8. **Primer administrador en producción**: el seed no se ejecuta en producción. Con la `DATABASE_URL` de producción en el entorno (y `AUTH_ORIGIN` y el correo configurados), ejecuta una vez `npm run invitar-admin -- tu@correo.com "Tu nombre"`: envía la invitación de administración (con `--sin-correo` solo muestra el enlace). Solo funciona mientras no haya ningún administrador; después, las invitaciones salen del portal (Administración › Invitaciones).
+9. **CI**: el workflow `.github/workflows/ci.yml` se ejecuta en cada PR (solo `ubuntu-latest`, con la cuota de la cuenta en mente). El despliegue lo hace la integración Git de Vercel, que no gasta minutos de Actions.
 
-Para el VPS (fase 8): `npm run build:node` genera `build/`, que se arranca con `node build` detrás de Caddy; mismas variables de entorno.
+Para el VPS (fase 8): `npm run build:node` genera `build/`, que se arranca con `node build` detrás de Caddy, con las mismas variables de entorno. Con almacenamiento local en el disco del VPS pon `BODY_SIZE_LIMIT=60M`: la subida de artes pasa entonces por el propio servidor.

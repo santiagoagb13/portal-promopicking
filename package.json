@@ -67,9 +67,13 @@
 	},
 	"dependencies": {
 		"@better-auth/passkey": "^1.7.14",
+		"@napi-rs/canvas": "1.0.11",
 		"@simplewebauthn/browser": "^13.3.0",
+		"aws4fetch": "1.0.20",
 		"better-auth": "^1.7.14",
 		"drizzle-orm": "^0.45.4",
+		"pdf-lib": "1.17.1",
+		"pdfjs-dist": "6.4.299",
 		"pg": "^8.23.1",
 		"read-excel-file": "9.3.12",
 		"write-excel-file": "4.1.1",

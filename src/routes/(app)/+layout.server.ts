@@ -40,7 +40,14 @@ export const load: LayoutServerLoad = async ({ locals, url, depends }) => {
 					.from(supportVersions)
 					.innerJoin(supports, eq(supports.id, supportVersions.supportId))
 					.innerJoin(campaigns, eq(campaigns.id, supports.campaignId))
-					.where(and(ne(supportVersions.status, 'approved'), scope))
+					.where(
+						and(
+							ne(supportVersions.status, 'approved'),
+							isNull(supportVersions.supersededAt),
+							isNull(campaigns.archivedAt),
+							scope
+						)
+					)
 			: [{ n: 0 }],
 		db
 			.select({ n: count() })

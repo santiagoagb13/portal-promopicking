@@ -360,16 +360,87 @@ export const supportVersions = pgTable(
 		revision: smallint('revision').notNull().default(1),
 		fileKey: text('file_key'),
 		fileSize: integer('file_size'),
-		pageImages: jsonb('page_images').$type<string[]>(),
+		pageImages: jsonb('page_images').$type<PageImage[]>(),
 		uploadedBy: text('uploaded_by').references(() => users.id, { onDelete: 'set null' }),
 		decidedBy: text('decided_by').references(() => users.id, { onDelete: 'set null' }),
 		decidedAt: ts('decided_at'),
-		prevVersionId: text('prev_version_id')
+		prevVersionId: text('prev_version_id'),
+		/** SHA-256 del PDF: identifica la revisión exacta que se aprobó. */
+		fileHash: text('file_hash'),
+		originalName: text('original_name'),
+		uploadedAt: ts('uploaded_at'),
+		/** Sustituida por una revisión posterior del mismo código. */
+		supersededAt: ts('superseded_at')
 	},
 	(t) => [
 		index('support_versions_support_status_idx').on(t.supportId, t.status),
 		unique('support_versions_code_rev_uq').on(t.supportId, t.code, t.revision)
 	]
+);
+
+/** Página del arte convertida a imagen (una entrada por página, varias anchuras). */
+export type PageImage = {
+	page: number;
+	width: number;
+	height: number;
+	keys: Record<string, string>;
+};
+
+export const decisionEnum = pgEnum('version_decision', [
+	'approved',
+	'changes',
+	'reopened',
+	'undone'
+]);
+
+/** Historial de decisiones sobre cada versión: quién, cuándo, desde qué dispositivo y sobre qué fichero. */
+export const versionDecisions = pgTable(
+	'version_decisions',
+	{
+		id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
+		versionId: text('version_id')
+			.notNull()
+			.references(() => supportVersions.id, { onDelete: 'cascade' }),
+		decision: decisionEnum('decision').notNull(),
+		userId: text('user_id').references(() => users.id, { onDelete: 'set null' }),
+		userName: text('user_name'),
+		at: ts('at').notNull().defaultNow(),
+		comment: text('comment'),
+		fileHash: text('file_hash'),
+		revision: smallint('revision').notNull(),
+		userAgent: text('user_agent')
+	},
+	(t) => [index('version_decisions_version_idx').on(t.versionId, t.at)]
+);
+
+/** Subida de artes finales en curso: ficheros subidos, pendientes de revisar el código y publicar. */
+export const artworkUploads = pgTable('artwork_uploads', {
+	id: text('id').primaryKey(),
+	supportId: text('support_id')
+		.notNull()
+		.references(() => supports.id, { onDelete: 'cascade' }),
+	uploadedBy: text('uploaded_by').references(() => users.id, { onDelete: 'set null' }),
+	createdAt: createdAt(),
+	publishedAt: ts('published_at'),
+	discardedAt: ts('discarded_at')
+});
+
+export const artworkUploadItems = pgTable(
+	'artwork_upload_items',
+	{
+		id: text('id').primaryKey(),
+		uploadId: text('upload_id')
+			.notNull()
+			.references(() => artworkUploads.id, { onDelete: 'cascade' }),
+		originalName: text('original_name').notNull(),
+		fileKey: text('file_key').notNull(),
+		size: integer('size').notNull(),
+		sha256: text('sha256'),
+		detectedCode: text('detected_code'),
+		registeredAt: ts('registered_at'),
+		error: text('error')
+	},
+	(t) => [index('artwork_upload_items_upload_idx').on(t.uploadId)]
 );
 
 export const versionComments = pgTable(

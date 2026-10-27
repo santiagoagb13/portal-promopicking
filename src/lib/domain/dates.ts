@@ -63,3 +63,11 @@ export function fmtDateTime(dt: Date | string | null | undefined): string {
 export function todayDay(reference?: string): string {
 	return reference ? reference.slice(0, 10) : ymd(new Date());
 }
+
+/** 1,9 KB · 3,2 MB */
+export function fmtSize(bytes: number | null | undefined): string {
+	if (!bytes) return '—';
+	if (bytes < 1024 * 1024)
+		return `${Math.max(1, Math.round(bytes / 1024)).toLocaleString('es-ES')} KB`;
+	return `${(bytes / 1024 / 1024).toLocaleString('es-ES', { maximumFractionDigits: 1 })} MB`;
+}

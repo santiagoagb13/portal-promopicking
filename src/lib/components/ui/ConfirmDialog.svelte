@@ -23,6 +23,8 @@
 		typeToConfirm?: string;
 		initiallyOpen?: boolean;
 		onresult?: (result: ActionResult) => void;
+		/** Si se indica, «Confirmar» envía ese formulario de la página (p. ej. una tabla editable). */
+		formId?: string;
 		children?: Snippet;
 	};
 
@@ -37,6 +39,7 @@
 		typeToConfirm,
 		initiallyOpen = false,
 		onresult,
+		formId,
 		children
 	}: Props = $props();
 
@@ -102,6 +105,7 @@
 			<Button formmethod="dialog" formnovalidate type="submit">Cancelar</Button>
 			<Button
 				type="submit"
+				form={formId}
 				variant={tone}
 				disabled={busy || (typeToConfirm !== undefined && typed !== '' && typed !== typeToConfirm)}
 				>{confirmLabel}</Button

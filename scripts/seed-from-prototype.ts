@@ -23,6 +23,9 @@ import { parseVersionCode } from '$lib/domain/version-code';
 import { closeDb, db, tables } from '$lib/server/db';
 import { loadActor } from '$lib/server/auth/actor';
 import { createInvitation } from '$lib/server/services/invitations';
+import { PAGE_WIDTHS, renderPages, samplePdf, sha256 } from '$lib/server/pdf';
+import { fileStorage } from '$lib/server/storage';
+import type { PageImage } from '$lib/server/db/schema';
 import type { Role } from '$lib/permissions';
 
 const T = tables;
@@ -387,7 +390,7 @@ async function seed(p: PrototypeData) {
 	const today = p.today;
 
 	await db.transaction(async (tx) => {
-		await tx.execute(sql`truncate master_imports, master_validations, kit_events, kit_lines, kits, version_comments, support_versions, qr_codes,
+		await tx.execute(sql`truncate artwork_upload_items, artwork_uploads, version_decisions, master_imports, master_validations, kit_events, kit_lines, kits, version_comments, support_versions, qr_codes,
 			supports, campaign_milestones, ticket_updates, tickets, order_lines, orders, catalog_items, campaigns`);
 		// Contadores de intentos a cero: el seed deja el entorno listo para probar.
 		await tx.execute(sql`truncate rate_limits`);
@@ -687,6 +690,8 @@ async function seed(p: PrototypeData) {
 		await tx.insert(T.notifications).values(notes);
 	});
 
+	await seedArtwork(p);
+
 	// Invitación pendiente: se borra cualquier cuenta o invitación anterior de ese correo y se envía otra.
 	await db.delete(T.users).where(eq(T.users.email, SEED_INVITATION.email));
 	await db.delete(T.invitations).where(eq(T.invitations.email, SEED_INVITATION.email));
@@ -705,6 +710,152 @@ async function seed(p: PrototypeData) {
 		{ sendMail: !process.env.VERCEL_ENV }
 	);
 	return { token };
+}
+
+/**
+ * Artes de muestra: un PDF por versión (exterior e interior en los trípticos) que pasa por la
+ * misma conversión que los reales. Las páginas ya convertidas se reutilizan entre seeds.
+ * La versión «C2 RED+ SP» lleva además su revisión 1 sustituida, para poder comparar.
+ */
+async function seedArtwork(p: PrototypeData) {
+	const storage = fileStorage();
+	const accent: Record<string, [number, number, number]> = {
+		FH: [0.6, 0.23, 0.13],
+		VIPS: [0.11, 0.29, 0.54],
+		GINOS: [0.17, 0.42, 0.23]
+	};
+	const uploader = 'u-jorge-martin';
+	let rendered = 0;
+	async function store(
+		versionId: string,
+		campaignId: string,
+		supportId: string,
+		title: string,
+		code: string,
+		revision: number,
+		format: string,
+		brand: string
+	) {
+		const pdf = await samplePdf({
+			title,
+			code,
+			revision,
+			pages: format === 'triptico' ? ['Exterior', 'Interior'] : ['Página 1'],
+			accent: accent[brand] ?? [0.3, 0.3, 0.3]
+		});
+		const hash = sha256(pdf);
+		const base = `artes/${campaignId}/${supportId}/${versionId}`;
+		await storage.put(`${base}/original.pdf`, pdf, 'application/pdf');
+		const pages = format === 'triptico' ? 2 : 1;
+		let images: PageImage[];
+		const marker = await storage.get(`${base}/paginas.json`);
+		const cached = marker
+			? (JSON.parse(Buffer.from(marker).toString('utf8')) as { hash: string; images: PageImage[] })
+			: null;
+		if (cached && cached.hash === hash && cached.images.length === pages) images = cached.images;
+		else {
+			const out = await renderPages(pdf);
+			images = [];
+			for (const pg of out.pages) {
+				const keys: Record<string, string> = {};
+				for (const w of PAGE_WIDTHS) {
+					keys[w] = `${base}/p${pg.page}-${w}.webp`;
+					await storage.put(keys[w], pg.images[w]!, 'image/webp');
+				}
+				images.push({ page: pg.page, width: pg.width, height: pg.height, keys });
+			}
+			await storage.put(
+				`${base}/paginas.json`,
+				Buffer.from(JSON.stringify({ hash, images })),
+				'application/json'
+			);
+			rendered++;
+		}
+		return {
+			fileKey: `${base}/original.pdf`,
+			fileSize: pdf.byteLength,
+			fileHash: hash,
+			pageImages: images
+		};
+	}
+
+	for (const [key, a] of Object.entries(p.approvals)) {
+		for (const [i, v] of a.versions.entries()) {
+			const id = `sv-${key}-${String(i + 1).padStart(2, '0')}`;
+			const art = await store(
+				id,
+				a.campaign,
+				a.supportId,
+				a.support,
+				v.code,
+				v.rev,
+				a.format,
+				a.brand
+			);
+			const uploadedAt = madrid('2026-10-18 17:00');
+			let prevVersionId: string | null = null;
+			if (v.rev > 1) {
+				prevVersionId = `${id}-r1`;
+				const old = await store(
+					prevVersionId,
+					a.campaign,
+					a.supportId,
+					a.support,
+					v.code,
+					1,
+					a.format,
+					a.brand
+				);
+				const parsed = parseVersionCode(v.code);
+				await db
+					.insert(T.supportVersions)
+					.values({
+						id: prevVersionId,
+						supportId: a.supportId,
+						code: parsed.code,
+						tariff: parsed.tariff,
+						assortment: parsed.assortment,
+						language: parsed.language,
+						variant: parsed.variant,
+						kitsCount: v.kits,
+						status: 'changes',
+						revision: 1,
+						...old,
+						originalName: v.file.replace(/_v\d+\.pdf$/, '_v1.pdf'),
+						uploadedBy: uploader,
+						uploadedAt,
+						supersededAt: madrid('2026-10-21 16:05')
+					})
+					.onConflictDoNothing();
+			}
+			await db
+				.update(T.supportVersions)
+				.set({
+					...art,
+					originalName: v.file,
+					uploadedBy: uploader,
+					uploadedAt: v.rev > 1 ? madrid('2026-10-21 16:05') : uploadedAt,
+					prevVersionId
+				})
+				.where(eq(T.supportVersions.id, id));
+			if (v.status === 'aprobada' && v.at)
+				await db.insert(T.versionDecisions).values({
+					versionId: id,
+					decision: 'approved',
+					userId:
+						SEED_USERS.find(
+							(u) =>
+								u.prototypeId ===
+								`alsea-${a.brand === 'FH' ? 'fh' : a.brand === 'VIPS' ? 'vips' : 'ginos'}`
+						)?.id ?? null,
+					userName: v.by,
+					at: madrid(v.at),
+					fileHash: art.fileHash,
+					revision: v.rev
+				});
+		}
+	}
+	console.info(`Artes de muestra: ${rendered} PDF convertidos (el resto, reutilizados)`);
 }
 
 async function main() {

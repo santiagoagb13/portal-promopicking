@@ -164,7 +164,7 @@ describe('importación del maestro', () => {
 			['Código', 'Dirección'],
 			['FH-0001', 'C/ Mayor; 3 "bajo"']
 		]);
-		expect(csv.startsWith('﻿')).toBe(true);
+		expect(csv.startsWith('\uFEFF')).toBe(true);
 		expect(parseCsv(csv)).toEqual([
 			['Código', 'Dirección'],
 			['FH-0001', 'C/ Mayor; 3 "bajo"']
