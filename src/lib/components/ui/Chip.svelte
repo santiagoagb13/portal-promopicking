@@ -23,7 +23,7 @@
 	}
 	.green {
 		background: color-mix(in srgb, var(--green) 14%, transparent);
-		color: var(--green);
+		color: var(--green-ink);
 	}
 	.amber {
 		background: var(--amber-bg);

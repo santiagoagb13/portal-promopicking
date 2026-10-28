@@ -25,6 +25,8 @@
 	--primary: #111111;
 	--on-primary: #ffffff;
 	--green: #1a7f4b;
+	/* Texto verde sobre fondo verde tenue (chips): #1a7f4b no llega a 4,5:1 ahí. */
+	--green-ink: #146038;
 	/* Dos ámbares: el de icono/punto y el de texto sobre su fondo (7.5, regla 1). */
 	--amber: #b7791f;
 	--amber-ink: #8a5a10;
@@ -69,6 +71,7 @@
 		--primary: #f2f2f2;
 		--on-primary: #0c0c0c;
 		--green: #3fab70;
+		--green-ink: #3fab70;
 		--amber: #f0b65a;
 		--amber-ink: #f6cf8a;
 		--amber-bg: #2a2215;
@@ -95,6 +98,7 @@
 	--primary: #f2f2f2;
 	--on-primary: #0c0c0c;
 	--green: #3fab70;
+	--green-ink: #3fab70;
 	--amber: #f0b65a;
 	--amber-ink: #f6cf8a;
 	--amber-bg: #2a2215;

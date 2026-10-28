@@ -21,7 +21,7 @@
 	{/each}
 	<a href="/mas" class:active={moreActive} aria-current={moreActive ? 'page' : undefined}>
 		<Ellipsis size={20} strokeWidth={1.5} aria-hidden="true" />
-		<span>Más</span>
+		<span>Más<span class="sr-only">&nbsp;secciones</span></span>
 	</a>
 </nav>
 

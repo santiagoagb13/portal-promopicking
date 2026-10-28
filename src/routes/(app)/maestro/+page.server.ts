@@ -29,6 +29,10 @@ import type { Actions, PageServerLoad } from './$types';
 /** Tamaño máximo del Excel del maestro. */
 const MAX_IMPORT_BYTES = 5 * 1024 * 1024;
 
+// Sin JS en el cliente (9.2: maestro < 30 KB). Paneles y confirmaciones se abren por URL y los
+// formularios son POST normales; ver ADR 0011.
+export const csr = false;
+
 export const load: PageServerLoad = async ({ locals, url, depends }) => {
 	depends('app:maestro');
 	const actor = locals.user!;

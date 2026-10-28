@@ -6,8 +6,9 @@ export const PUBLIC_PATHS = [
 	/^\/invitacion\//,
 	/^\/api\/auth\//,
 	/^\/tema$/,
-	// Landing del QR de versión (5.5): la única ruta de la aplicación sin sesión.
-	/^\/qr\/[2-9A-HJ-NP-Z]{4}-[2-9A-HJ-NP-Z]{4}$/
+	// Landing del QR de versión (5.5) y aviso legal: las rutas de la aplicación sin sesión.
+	/^\/qr\/[2-9A-HJ-NP-Z]{4}-[2-9A-HJ-NP-Z]{4}$/,
+	/^\/aviso-legal$/
 ];
 
 /** Permiso mínimo por sección, comprobado en `hooks.server.ts` antes de cualquier carga. */

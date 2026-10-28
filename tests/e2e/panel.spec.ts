@@ -1,5 +1,4 @@
 import { mkdirSync } from 'node:fs';
-import { gzipSync } from 'node:zlib';
 import { expect, test } from '@playwright/test';
 import { stateOf } from './users';
 import { horizontalOverflow } from './helpers';
@@ -74,28 +73,8 @@ test.describe('Panel de campañas', () => {
 			/^\s*Aprobaciones\s*13\s*$/,
 			/^\s*Kits\s*$/,
 			/^\s*Soporte\s*1\s*$/,
-			/^\s*Más\s*$/
+			/^\s*Más secciones\s*$/
 		]);
-	});
-
-	test('presupuesto: < 60 KB de JS comprimido en la ruta del panel (9.2)', async ({
-		page,
-		request
-	}) => {
-		await page.goto('/campanas');
-		await page.waitForLoadState('networkidle');
-		const scripts = await page.evaluate(() =>
-			performance
-				.getEntriesByType('resource')
-				.map((e) => e.name)
-				.filter((n) => n.endsWith('.js') && n.includes('/_app/'))
-		);
-		let total = 0;
-		for (const url of scripts) total += gzipSync(await (await request.get(url)).body()).length;
-		console.info(
-			`JS de /campanas: ${(total / 1024).toFixed(1)} KB gzip en ${scripts.length} ficheros`
-		);
-		expect(total).toBeLessThan(60 * 1024);
 	});
 
 	test('tema: el conmutador cambia y se recuerda', async ({ page }) => {

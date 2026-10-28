@@ -8,12 +8,12 @@ import { db, tables } from '$lib/server/db';
 import { describeAccess } from '$lib/server/services/invitations';
 import type { Actions, PageServerLoad } from './$types';
 
-const { passkeys, sessions } = tables;
+const { passkeys, sessions, users } = tables;
 
 export const load: PageServerLoad = async ({ locals, depends }) => {
 	depends('app:cuenta');
 	const user = locals.user!;
-	const [keys, active, access] = await Promise.all([
+	const [keys, active, access, [prefs]] = await Promise.all([
 		db
 			.select({
 				id: passkeys.id,
@@ -38,11 +38,13 @@ export const load: PageServerLoad = async ({ locals, depends }) => {
 		describeAccess(user.role, {
 			brands: user.brands,
 			restaurants: user.restaurants.map((r) => r.id)
-		})
+		}),
+		db.select({ notifyEmail: users.notifyEmail }).from(users).where(eq(users.id, user.id))
 	]);
 	return {
 		title: 'Cuenta',
 		profile: { name: user.name, email: user.email, role: ROLE_LABEL[user.role], access },
+		notifyEmail: prefs?.notifyEmail ?? true,
 		passkeys: keys,
 		sessions: active
 			.filter((s) => s.updatedAt) // todas
@@ -60,6 +62,23 @@ export const load: PageServerLoad = async ({ locals, depends }) => {
 const id = z.string().min(1).max(80);
 
 export const actions: Actions = {
+	avisos: async ({ request, locals }) => {
+		const on = (await request.formData()).get('correo') === 'si';
+		await db.update(users).set({ notifyEmail: on }).where(eq(users.id, locals.user!.id));
+		await audit({
+			userId: locals.user!.id,
+			action: 'user.notify_email',
+			entity: 'user',
+			entityId: locals.user!.id,
+			after: { notifyEmail: on },
+			...requestMeta(request)
+		});
+		return {
+			toast: on
+				? 'Recibirás los avisos también por correo'
+				: 'Los avisos solo llegarán a la campana'
+		};
+	},
 	renombrar: async ({ request, locals }) => {
 		const form = await request.formData();
 		const parsed = z

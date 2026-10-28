@@ -46,12 +46,20 @@
 	function withParams(changes: Record<string, string | null>) {
 		// eslint-disable-next-line svelte/prefer-svelte-reactivity
 		const p = new URLSearchParams(page.url.searchParams);
+		// Tras un POST sin JS la URL lleva la acción (`/guardar`): no se arrastra a los enlaces.
+		for (const k of [...p.keys()]) if (k.startsWith('/')) p.delete(k);
 		for (const [k, v] of Object.entries(changes)) {
 			if (v === null) p.delete(k);
 			else p.set(k, v);
 		}
 		const s = p.toString();
 		return s ? `?${s}` : page.url.pathname;
+	}
+
+	/** Acción que conserva filtros y ficha abierta: sin JS (ADR 0011) el POST pinta esta misma vista. */
+	function act(name: string) {
+		const p = withParams({ confirmar: null });
+		return p.startsWith('?') ? `${p}&/${name}` : `?/${name}`;
 	}
 
 	const brandItems = $derived([
@@ -135,7 +143,7 @@
 						description="Confirmas que los {b.active} restaurantes activos están al día. Queda registrado con tu nombre."
 						confirmLabel="Validar"
 						tone="green"
-						action="?/validar"
+						action={act('validar')}
 						fields={{ brand: b.code }}
 						initiallyOpen={confirmar === `validar-${b.code}`}
 					/>
@@ -249,7 +257,7 @@
 		{#key ficha.id}
 			<form
 				method="POST"
-				action="?/guardar"
+				action={act('guardar')}
 				class="form"
 				use:enhance={() =>
 					async ({ result, update }) => {
@@ -322,7 +330,7 @@
 						{/if}
 					{/if}
 					<span class="spacer"></span>
-					<Button type="button" onclick={() => fichaDrawer?.close()}>Cerrar</Button>
+					<Button href={withParams({ ficha: null, confirmar: null })}>Cerrar</Button>
 					{#if data.editable.length && ficha.active}
 						<Button type="submit" variant="primary"
 							>{form?.save?.confirm ? 'Guardar igualmente' : 'Guardar'}</Button
@@ -356,7 +364,7 @@
 			description="Deja de recibir campañas y reposiciones. Se puede reactivar."
 			confirmLabel="Dar de baja"
 			tone="red"
-			action="?/baja"
+			action={act('baja')}
 			fields={{ id: ficha.id }}
 			typeToConfirm={ficha.name}
 			initiallyOpen={confirmar === 'baja'}
@@ -367,7 +375,7 @@
 			title="¿Reactivar «{ficha.name}»?"
 			confirmLabel="Reactivar"
 			tone="amber"
-			action="?/reactivar"
+			action={act('reactivar')}
 			fields={{ id: ficha.id }}
 			initiallyOpen={confirmar === 'reactivar'}
 		/>
@@ -382,7 +390,7 @@
 		initiallyOpen={data.openNew || !!form?.create}
 		closeHref={withParams({ alta: null })}
 	>
-		<form method="POST" action="?/alta" class="form" use:enhance>
+		<form method="POST" action={act('alta')} class="form" use:enhance>
 			<div class="row2">
 				<label class="field">
 					<span>Marca</span>
@@ -422,7 +430,7 @@
 			{/each}
 			{#if form?.create?.error}<p class="field-error" role="alert">{form.create.error}</p>{/if}
 			<div class="actions">
-				<Button type="button" onclick={() => newDrawer?.close()}>Cancelar</Button>
+				<Button href={withParams({ alta: null })}>Cancelar</Button>
 				<Button type="submit" variant="primary">Dar de alta</Button>
 			</div>
 		</form>
@@ -437,7 +445,13 @@
 		initiallyOpen={data.openImport || !!form?.import}
 		closeHref={withParams({ importar: null })}
 	>
-		<form method="POST" action="?/importar" enctype="multipart/form-data" class="form" use:enhance>
+		<form
+			method="POST"
+			action={act('importar')}
+			enctype="multipart/form-data"
+			class="form"
+			use:enhance
+		>
 			<p class="hint">
 				Un .xlsx o .csv con las columnas de la descarga: Código, Marca, Nombre, Ciudad, Dirección,
 				Tarifa, Idioma, Surtido, Fachada y Entrega. Antes de aplicar nada verás las altas, los
@@ -454,7 +468,7 @@
 			>
 			{#if form?.import?.error}<p class="field-error" role="alert">{form.import.error}</p>{/if}
 			<div class="actions">
-				<Button type="button" onclick={() => importDrawer?.close()}>Cancelar</Button>
+				<Button href={withParams({ importar: null })}>Cancelar</Button>
 				<Button type="submit" variant="primary" icon={Upload}>Previsualizar</Button>
 			</div>
 		</form>

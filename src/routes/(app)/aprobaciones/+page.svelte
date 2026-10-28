@@ -29,7 +29,7 @@
 	import EmptyState from '$components/ui/EmptyState.svelte';
 	import Segmented from '$components/ui/Segmented.svelte';
 	import { useToaster } from '$components/ui/toast.svelte';
-	import UploadDrawer from '$components/domain/approval/UploadDrawer.svelte';
+	import type UploadDrawerT from '$components/domain/approval/UploadDrawer.svelte';
 	import Viewer from '$components/domain/approval/Viewer.svelte';
 	import { faceLabel } from '$lib/domain/artwork';
 	import { fmtDateTime, fmtSize } from '$lib/domain/dates';
@@ -90,7 +90,17 @@
 	);
 
 	let dialogs: Record<string, ConfirmDialog | undefined> = $state({});
-	let uploadDrawer: UploadDrawer | undefined = $state();
+	let uploadDrawer: UploadDrawerT | undefined = $state();
+	/*
+	 * El panel de subida solo se descarga al pulsar «Subir artes finales» (presupuesto de JS, 9.2).
+	 * Sin JS, el botón lleva a /aprobaciones/subir.
+	 */
+	let UploadDrawer = $state<typeof UploadDrawerT | null>(null);
+	async function openUpload(e: MouseEvent) {
+		e.preventDefault();
+		UploadDrawer ??= (await import('$components/domain/approval/UploadDrawer.svelte')).default;
+		requestAnimationFrame(() => uploadDrawer?.show());
+	}
 	const confirmar = $derived(page.url.searchParams.get('confirmar'));
 	function ask(e: MouseEvent, key: string) {
 		e.preventDefault();
@@ -248,15 +258,12 @@
 				/>
 				{#if data.canUpload}
 					<Button
-						href={href({ subir: '1' })}
+						href="/aprobaciones/subir?soporte={support.id}"
 						variant="primary"
 						icon={Upload}
 						label="Subir artes finales"
 						tipPos="left"
-						onclick={(e: MouseEvent) => {
-							e.preventDefault();
-							uploadDrawer?.show();
-						}}
+						onclick={openUpload}
 					/>
 				{/if}
 			</div>
@@ -560,14 +567,16 @@
 			</p>{/if}
 	</ConfirmDialog>
 {/if}
-{#if support && data.canUpload}
+{#if support && data.canUpload && UploadDrawer}
 	<UploadDrawer
 		bind:this={uploadDrawer}
 		supportId={support.id}
 		supportName={support.name}
-		initiallyOpen={page.url.searchParams.has('subir') || !!form?.upload}
+		initiallyOpen={!!form?.upload}
 		error={form?.upload?.error}
 	/>
+{:else if form?.upload?.error}
+	<p class="field-error upload-error" role="alert">{form.upload.error}</p>
 {/if}
 
 <style>

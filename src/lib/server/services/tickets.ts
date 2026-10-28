@@ -255,7 +255,7 @@ async function notifyParties(
 	);
 	if (!ids.length) return;
 	const people = await db
-		.select({ id: users.id, email: users.email })
+		.select({ id: users.id, email: users.email, notifyEmail: users.notifyEmail })
 		.from(users)
 		.where(and(inArray(users.id, ids), eq(users.status, 'active')));
 	if (!people.length) return;
@@ -273,17 +273,19 @@ async function notifyParties(
 	);
 	// El correo no debe tumbar la acción: si falla, el aviso en la campana ya está.
 	await Promise.all(
-		people.map((p) =>
-			sendMail(
-				ticketMail({
-					to: p.email,
-					id: t.id,
-					title: t.title,
-					what,
-					url: `${config.authOrigin}${href}`
-				})
-			).catch(() => undefined)
-		)
+		people
+			.filter((p) => p.notifyEmail)
+			.map((p) =>
+				sendMail(
+					ticketMail({
+						to: p.email,
+						id: t.id,
+						title: t.title,
+						what,
+						url: `${config.authOrigin}${href}`
+					})
+				).catch(() => undefined)
+			)
 	);
 }
 

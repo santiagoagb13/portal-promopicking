@@ -1,4 +1,4 @@
-<!-- Administración › Ajustes (8.12): plazos por defecto de las fases y objetivo OTIF. -->
+<!-- Administración › Ajustes (8.12): datos de la empresa, plazos por defecto de las fases y objetivo OTIF. -->
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import Button from '$components/ui/Button.svelte';
@@ -15,6 +15,48 @@
 		async ({ update }) =>
 			update({ reset: false })}
 >
+	<section>
+		<h2>Datos de la empresa</h2>
+		<p class="hint">
+			Titular del portal: salen en el <a href="/aviso-legal">aviso legal y de privacidad</a>. Los
+			que falten aparecen allí como pendientes.
+		</p>
+		<div class="company grid">
+			<label class="field"
+				><span>Razón social</span><input
+					class="input"
+					name="companyName"
+					maxlength="160"
+					value={data.settings.company.name}
+				/></label
+			>
+			<label class="field"
+				><span>NIF</span><input
+					class="input"
+					name="companyTaxId"
+					maxlength="20"
+					value={data.settings.company.taxId}
+				/></label
+			>
+			<label class="field wide"
+				><span>Domicilio</span><input
+					class="input"
+					name="companyAddress"
+					maxlength="240"
+					value={data.settings.company.address}
+				/></label
+			>
+			<label class="field wide"
+				><span>Correo para privacidad</span><input
+					class="input"
+					type="email"
+					name="companyEmail"
+					maxlength="160"
+					value={data.settings.company.email}
+				/></label
+			>
+		</div>
+	</section>
 	<section>
 		<h2>Plazos de las fases</h2>
 		<p class="hint">
@@ -79,6 +121,12 @@
 	}
 	.otif {
 		max-width: 200px;
+	}
+	.company {
+		grid-template-columns: 2fr 1fr;
+	}
+	.company .wide {
+		grid-column: 1 / -1;
 	}
 	@media (max-width: 767px) {
 		.grid {

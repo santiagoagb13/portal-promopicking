@@ -3,6 +3,7 @@
 	import UserRound from '@lucide/svelte/icons/user-round';
 	import Bell from '@lucide/svelte/icons/bell';
 	import LogOut from '@lucide/svelte/icons/log-out';
+	import Info from '@lucide/svelte/icons/info';
 	import ThemeSwitch from '$components/shell/ThemeSwitch.svelte';
 	import { NAV } from '$lib/nav';
 
@@ -27,6 +28,11 @@
 	</li>
 	<li><a href="/cuenta"><UserRound size={20} strokeWidth={1.5} aria-hidden="true" />Cuenta</a></li>
 	<li class="row"><span>Tema</span><ThemeSwitch current={data.theme} /></li>
+	<li>
+		<a href="/aviso-legal"
+			><Info size={20} strokeWidth={1.5} aria-hidden="true" />Aviso legal y privacidad</a
+		>
+	</li>
 	<li>
 		<form method="POST" action="/salir">
 			<button type="submit"><LogOut size={20} strokeWidth={1.5} aria-hidden="true" />Salir</button>

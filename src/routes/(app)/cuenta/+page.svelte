@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import { invalidate } from '$app/navigation';
 	import { page } from '$app/state';
 	import KeyRound from '@lucide/svelte/icons/key-round';
@@ -11,7 +12,7 @@
 	import ConfirmDialog from '$components/ui/ConfirmDialog.svelte';
 	import { useToaster } from '$components/ui/toast.svelte';
 	import ThemeSwitch from '$components/shell/ThemeSwitch.svelte';
-	import { authClient, passkeyError } from '$lib/auth-client';
+	import { passkeyError } from '$lib/passkey-errors';
 	import { fmtDateTime } from '$lib/domain/dates';
 
 	let { data, form } = $props();
@@ -28,6 +29,8 @@
 	async function addPasskey() {
 		busy = true;
 		try {
+			// El cliente de WebAuthn solo se descarga al crear una passkey (presupuesto de JS, 9.2).
+			const { authClient } = await import('$lib/auth-client');
 			const res = await authClient.passkey.addPasskey();
 			if (res?.error) toaster.show(res.error.message ?? 'No se pudo crear', { tone: 'red' });
 			else {
@@ -58,6 +61,30 @@
 	<section>
 		<h2>Tema</h2>
 		<ThemeSwitch current={data.theme} labels />
+	</section>
+
+	<section>
+		<h2>Avisos por correo</h2>
+		<form
+			method="POST"
+			action="?/avisos"
+			class="notify"
+			use:enhance={() =>
+				async ({ update }) =>
+					update({ reset: false })}
+		>
+			<label class="opt"
+				><input type="radio" name="correo" value="si" checked={data.notifyEmail} /> Campana y correo</label
+			>
+			<label class="opt"
+				><input type="radio" name="correo" value="no" checked={!data.notifyEmail} /> Solo la campana</label
+			>
+			<Button type="submit">Guardar</Button>
+		</form>
+		<p class="muted">
+			Respuestas y cambios en tus registros de soporte. Los enlaces de acceso e invitación llegan
+			siempre por correo.
+		</p>
 	</section>
 
 	<section>
@@ -200,6 +227,18 @@
 </div>
 
 <style>
+	.notify {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 12px 20px;
+	}
+	.opt {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		min-height: 36px;
+	}
 	.sections {
 		display: grid;
 		gap: 32px;

@@ -33,6 +33,16 @@ const SHELL_ICONS = new RegExp(
 	`node_modules[\\\\/]@lucide[\\\\/]svelte[\\\\/]dist[\\\\/](Icon\\.svelte|context|defaultAttributes|icons[\\\\/](${SHELL_ICON_NAMES.join('|')})\\.(svelte|js))`
 );
 
+const FRAMEWORK =
+	/node_modules[\\/](svelte|@sveltejs[\\/]kit|devalue|esm-env|clsx|@sveltejs[\\/]acorn-typescript)[\\/]/;
+/**
+ * Lo que usan casi todas las rutas: carcasa, componentes base y dominio común. La tabla y el
+ * panel lateral van aparte, con las pantallas que los usan (medido en la fase 7: separar todo
+ * por pantalla sale peor; juntarlo todo engorda Aprobaciones, que no usa ninguno de los dos).
+ */
+const SHELL =
+	/src[\\/]lib[\\/](components[\\/](shell[\\/]|ui[\\/](?!DataTable|Drawer))|nav\.ts|i18n[\\/]|domain[\\/](dates|campaign)\.ts)/;
+
 export default defineConfig(({ mode }) => ({
 	plugins: [tailwindcss(), sveltekit()],
 	build: {
@@ -41,7 +51,15 @@ export default defineConfig(({ mode }) => ({
 				// Un solo fichero para los iconos de la carcasa (navegación, barra superior, avisos):
 				// decenas de módulos diminutos pesan más por separado. Los de cada pantalla van con ella,
 				// para que una pantalla nueva no engorde las demás.
-				advancedChunks: { groups: [{ name: 'iconos', test: SHELL_ICONS }] }
+				// El marco (Svelte, SvelteKit) y la carcasa en pocos ficheros: menos peticiones en
+				// la primera carga (9.2) y mejor compresión que decenas de trozos de 1 KB.
+				advancedChunks: {
+					groups: [
+						{ name: 'marco', test: FRAMEWORK, priority: 30 },
+						{ name: 'iconos', test: SHELL_ICONS, priority: 20 },
+						{ name: 'carcasa', test: SHELL, priority: 10 }
+					]
+				}
 			}
 		}
 	},

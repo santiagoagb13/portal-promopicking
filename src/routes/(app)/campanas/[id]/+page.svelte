@@ -1,6 +1,5 @@
 <!-- Detalle de campaña (8.4). -->
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import { page } from '$app/state';
 	import ChevronLeft from '@lucide/svelte/icons/chevron-left';
 	import Check from '@lucide/svelte/icons/check';
@@ -11,21 +10,21 @@
 	import ArchiveRestore from '@lucide/svelte/icons/archive-restore';
 	import Plus from '@lucide/svelte/icons/plus';
 	import Trash2 from '@lucide/svelte/icons/trash-2';
-	import Eye from '@lucide/svelte/icons/eye';
-	import Layers from '@lucide/svelte/icons/layers';
+	import FileCheck from '@lucide/svelte/icons/file-check';
+	import Package from '@lucide/svelte/icons/package';
 	import Button from '$components/ui/Button.svelte';
 	import Chip from '$components/ui/Chip.svelte';
 	import ConfirmDialog from '$components/ui/ConfirmDialog.svelte';
 	import DataTable from '$components/ui/DataTable.svelte';
-	import Drawer from '$components/ui/Drawer.svelte';
+	import type DrawerT from '$components/ui/Drawer.svelte';
 	import EmptyState from '$components/ui/EmptyState.svelte';
-	import { closeOnSuccess } from '$components/ui/forms';
 	import BrandChip from '$components/domain/BrandChip.svelte';
-	import CampaignForm from '$components/domain/CampaignForm.svelte';
+	import type CampaignFormT from '$components/domain/CampaignForm.svelte';
+	import type MilestonesFormT from '$components/domain/campaign/MilestonesForm.svelte';
+	import type SupportFormT from '$components/domain/campaign/SupportForm.svelte';
 	import ProgressBar from '$components/domain/ProgressBar.svelte';
 	import Semaphore from '$components/domain/Semaphore.svelte';
 	import {
-		MILESTONE_KEYS,
 		MILESTONE_LABEL,
 		SEMAPHORE_REASON,
 		STAGE_MILESTONE,
@@ -50,9 +49,9 @@
 	const c = $derived(data.campaign);
 	type Support = (typeof data.supports)[number];
 
-	let editDrawer: Drawer | undefined = $state();
-	let milestonesDrawer: Drawer | undefined = $state();
-	let supportDrawer: Drawer | undefined = $state();
+	let editDrawer: DrawerT | undefined = $state();
+	let milestonesDrawer: DrawerT | undefined = $state();
+	let supportDrawer: DrawerT | undefined = $state();
 	let dialogs: Record<string, ConfirmDialog | undefined> = $state({});
 	/** Soporte en edición; `null` = alta. */
 	let editing = $state<Support | null>(null);
@@ -73,18 +72,49 @@
 			editing = data.supports.find((s) => s.id === open.slice(8)) ?? null;
 	});
 
-	function openSupport(e: MouseEvent, s: Support | null) {
+	/*
+	 * Los formularios de calendario y de soporte se descargan al abrirlos (presupuesto de JS, 9.2).
+	 * Sin JS, `+page.ts` los trae cuando la URL los pide (`?abrir=hitos`, `?abrir=soporte-…`).
+	 */
+	let loadedMilestones = $state<typeof MilestonesFormT | null>(null);
+	let loadedSupport = $state<typeof SupportFormT | null>(null);
+	let loadedDrawer = $state<typeof DrawerT | null>(null);
+	const MilestonesForm = $derived(data.MilestonesForm ?? loadedMilestones);
+	const SupportForm = $derived(data.SupportForm ?? loadedSupport);
+	// El panel lateral solo hace falta con alguno de los tres formularios abierto.
+	const Drawer = $derived(data.Drawer ?? loadedDrawer);
+	async function drawer() {
+		loadedDrawer ??= (await import('$components/ui/Drawer.svelte')).default;
+	}
+
+	async function openSupport(e: MouseEvent, s: Support | null) {
 		e.preventDefault();
 		editing = s;
-		supportDrawer?.show();
+		await drawer();
+		loadedSupport ??= (await import('$components/domain/campaign/SupportForm.svelte')).default;
+		requestAnimationFrame(() => supportDrawer?.show());
+	}
+	async function openMilestones(e: MouseEvent) {
+		e.preventDefault();
+		await drawer();
+		loadedMilestones ??= (await import('$components/domain/campaign/MilestonesForm.svelte'))
+			.default;
+		requestAnimationFrame(() => milestonesDrawer?.show());
 	}
 	function openDialog(e: MouseEvent, key: string) {
 		e.preventDefault();
 		dialogs[key]?.show();
 	}
-	function openDrawer(e: MouseEvent, d: Drawer | undefined) {
+	/*
+	 * El formulario de edición solo se descarga al pulsar «Editar» (presupuesto de JS, 9.2).
+	 * Sin JS, el mismo botón lleva a /campanas/<id>/editar.
+	 */
+	let EditForm = $state<typeof CampaignFormT | null>(null);
+	async function openEdit(e: MouseEvent) {
 		e.preventDefault();
-		d?.show();
+		await drawer();
+		EditForm ??= (await import('$components/domain/CampaignForm.svelte')).default;
+		requestAnimationFrame(() => editDrawer?.show());
 	}
 
 	const supportColumns = $derived([
@@ -116,18 +146,18 @@
 		<div class="acts">
 			{#if !c.archived}
 				<Button
-					href="?abrir=editar"
+					href="/campanas/{c.id}/editar"
 					variant="ghost"
 					icon={Pencil}
 					label="Editar"
-					onclick={(e: MouseEvent) => openDrawer(e, editDrawer)}
+					onclick={openEdit}
 				/>
 				<Button
 					href="?abrir=hitos"
 					variant="ghost"
 					icon={CalendarClock}
 					label="Editar calendario"
-					onclick={(e: MouseEvent) => openDrawer(e, milestonesDrawer)}
+					onclick={openMilestones}
 				/>
 			{/if}
 			{#if data.canCreate}
@@ -255,7 +285,7 @@
 								<Button
 									href="/aprobaciones?soporte={s.id}"
 									variant="ghost"
-									icon={Eye}
+									icon={FileCheck}
 									label="Ver aprobación"
 								/>
 							{/if}
@@ -293,7 +323,7 @@
 				{/snippet}
 			</DataTable>
 		{:else}
-			<EmptyState icon={Layers} text="La campaña aún no tiene soportes." />
+			<EmptyState icon={Package} text="La campaña aún no tiene soportes." />
 		{/if}
 	</section>
 
@@ -367,167 +397,73 @@
 </div>
 
 {#if data.canEdit}
-	<Drawer
-		bind:this={editDrawer}
-		id="editar"
-		title="Editar campaña"
-		initiallyOpen={data.open === 'editar' || !!form?.edit}
-		closeHref="?"
-	>
-		<CampaignForm
-			edit
-			action="?/editar"
-			brands={[{ code: c.brandCode, label: c.brandShort, restaurantCount: c.restaurantCount }]}
-			owners={data.owners}
-			values={form?.edit?.values ?? {
-				brandCode: c.brandCode,
-				name: c.name,
-				inRestaurantOn: c.inRestaurantOn,
-				restaurantCount: c.restaurantCount,
-				planned: c.planned,
-				materials: c.materials,
-				notes: c.notes,
-				ownerUserId: c.ownerUserId
-			}}
-			error={form?.edit?.error}
-			onclose={() => editDrawer?.close()}
-		/>
-	</Drawer>
-
-	<Drawer
-		bind:this={milestonesDrawer}
-		id="hitos"
-		title="Calendario comprometido"
-		initiallyOpen={data.open === 'hitos' || !!form?.milestones}
-		closeHref="?"
-	>
-		<form
-			method="POST"
-			action="?/hitos"
-			class="form"
-			use:enhance={closeOnSuccess(() => milestonesDrawer?.close())}
+	{#if Drawer}
+		<Drawer
+			bind:this={editDrawer}
+			id="editar"
+			title="Editar campaña"
+			initiallyOpen={!!form?.edit && !!EditForm}
+			closeHref="?"
 		>
-			{#each MILESTONE_KEYS as k (k)}
-				<label class="field">
-					<span>{MILESTONE_LABEL[k]}</span>
-					<input
-						class="input"
-						type="date"
-						name={k}
-						required
-						value={due[k]?.dueOn ?? ''}
-						readonly={k === 'rte'}
-					/>
-				</label>
-			{/each}
-			{#if form?.milestones?.error}<p class="field-error" role="alert">
-					{form.milestones.error}
-				</p>{/if}
-			<div class="actions">
-				<Button type="button" onclick={() => milestonesDrawer?.close()}>Cancelar</Button>
-				<Button type="submit" variant="primary">Guardar</Button>
-			</div>
-		</form>
-	</Drawer>
+			{#if EditForm}<EditForm
+					edit
+					action="?/editar"
+					brands={[{ code: c.brandCode, label: c.brandShort, restaurantCount: c.restaurantCount }]}
+					owners={data.owners}
+					values={form?.edit?.values ?? {
+						brandCode: c.brandCode,
+						name: c.name,
+						inRestaurantOn: c.inRestaurantOn,
+						restaurantCount: c.restaurantCount,
+						planned: c.planned,
+						materials: c.materials,
+						notes: c.notes,
+						ownerUserId: c.ownerUserId
+					}}
+					error={form?.edit?.error}
+					onclose={() => editDrawer?.close()}
+				/>{/if}
+		</Drawer>
 
-	<Drawer
-		bind:this={supportDrawer}
-		id="soporte"
-		title={editing ? 'Editar soporte' : 'Nuevo soporte'}
-		initiallyOpen={(data.open ?? '').startsWith('soporte-') || !!form?.support?.values}
-		closeHref="?"
-	>
-		{#key editing?.id}
-			<form
-				method="POST"
-				action="?/soporte"
-				class="form"
-				use:enhance={closeOnSuccess(() => supportDrawer?.close())}
-			>
-				{#if editing}<input type="hidden" name="id" value={editing.id} />{/if}
-				<label class="field"
-					><span>Nombre</span><input
-						class="input"
-						name="name"
-						required
-						minlength="2"
-						maxlength="160"
-						value={supportValues.name ?? ''}
-					/></label
-				>
-				<div class="row2">
-					<label class="field"
-						><span>Versiones</span><input
-							class="input"
-							type="number"
-							name="versionsPlanned"
-							min="0"
-							required
-							value={supportValues.versionsPlanned ?? 0}
-						/></label
-					>
-					<label class="field"
-						><span>Tirada (uds)</span><input
-							class="input"
-							type="number"
-							name="runQty"
-							min="0"
-							required
-							value={supportValues.runQty ?? 0}
-						/></label
-					>
-				</div>
-				<div class="row2">
-					<label class="field"
-						><span>Uds por kit</span><input
-							class="input"
-							type="number"
-							name="perKitQty"
-							min="1"
-							value={supportValues.perKitQty ?? ''}
-						/></label
-					>
-					<label class="field">
-						<span>Fase</span>
-						<select class="input" name="stage" value={String(supportValues.stage ?? 0)}>
-							{#each STAGES as s, i (s)}<option value={String(i)}>{s}</option>{/each}
-						</select>
-					</label>
-				</div>
-				<label class="field"
-					><span>Empaquetado</span><input
-						class="input"
-						name="packaging"
-						maxlength="160"
-						value={supportValues.packaging ?? ''}
-					/></label
-				>
-				<label class="field"
-					><span>Responsable</span><input
-						class="input"
-						name="responsible"
-						maxlength="160"
-						value={supportValues.responsible ?? ''}
-					/></label
-				>
-				<label class="field"
-					><span>Notas</span><input
-						class="input"
-						name="notes"
-						maxlength="400"
-						value={supportValues.notes ?? ''}
-					/></label
-				>
-				{#if form?.support?.error && form?.support?.values}<p class="field-error" role="alert">
-						{form.support.error}
-					</p>{/if}
-				<div class="actions">
-					<Button type="button" onclick={() => supportDrawer?.close()}>Cancelar</Button>
-					<Button type="submit" variant="primary">{editing ? 'Guardar' : 'Añadir soporte'}</Button>
-				</div>
-			</form>
-		{/key}
-	</Drawer>
+		<Drawer
+			bind:this={milestonesDrawer}
+			id="hitos"
+			title="Calendario comprometido"
+			initiallyOpen={data.open === 'hitos' || !!form?.milestones}
+			closeHref="?"
+		>
+			{#if MilestonesForm}
+				<MilestonesForm
+					{due}
+					action="?abrir=hitos&/hitos"
+					error={form?.milestones?.error}
+					onsaved={() => milestonesDrawer?.close()}
+					onclose={() => milestonesDrawer?.close()}
+				/>
+			{/if}
+		</Drawer>
+
+		<Drawer
+			bind:this={supportDrawer}
+			id="soporte"
+			title={editing ? 'Editar soporte' : 'Nuevo soporte'}
+			initiallyOpen={(data.open ?? '').startsWith('soporte-') || !!form?.support?.values}
+			closeHref="?"
+		>
+			{#if SupportForm}
+				{#key editing?.id}
+					<SupportForm
+						editingId={editing?.id ?? null}
+						values={supportValues}
+						action="?abrir=soporte-{editing?.id ?? 'nuevo'}&/soporte"
+						error={form?.support?.values ? form.support.error : undefined}
+						onsaved={() => supportDrawer?.close()}
+						onclose={() => supportDrawer?.close()}
+					/>
+				{/key}
+			{/if}
+		</Drawer>
+	{/if}
 
 	{#if data.canCreate}
 		<ConfirmDialog

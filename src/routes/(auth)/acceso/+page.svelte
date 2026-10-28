@@ -69,3 +69,15 @@
 	{#if error}<p class="field-error" role="alert">{error}</p>{/if}
 	<button class="linkish" type="submit">Enviarme un enlace</button>
 </form>
+<p class="legal"><a href="/aviso-legal">Aviso legal y privacidad</a></p>
+
+<style>
+	.legal {
+		font-size: 12px;
+		color: var(--muted);
+		margin: 16px 0 0;
+	}
+	.legal a {
+		color: inherit;
+	}
+</style>

@@ -43,6 +43,8 @@ export const users = pgTable('users', {
 	status: userStatusEnum('status').notNull().default('active'),
 	/** Organización a la que pertenece (Alsea, Promopicking, Albatros, restaurante). Solo informativo. */
 	organization: text('organization'),
+	/** Avisos por correo (8.13): si es `false`, solo llegan a la campana. El acceso siempre llega. */
+	notifyEmail: boolean('notify_email').notNull().default(true),
 	createdAt: createdAt(),
 	updatedAt: ts('updated_at').notNull().defaultNow(),
 	lastSeenAt: ts('last_seen_at')

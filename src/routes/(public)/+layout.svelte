@@ -1,4 +1,4 @@
-<!-- Páginas públicas (sin sesión ni carcasa): la landing del QR de versión. -->
+<!-- Páginas públicas (sin sesión ni carcasa): la landing del QR de versión y el aviso legal. -->
 <script lang="ts">
 	let { children } = $props();
 </script>

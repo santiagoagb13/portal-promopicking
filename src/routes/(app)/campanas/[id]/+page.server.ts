@@ -80,7 +80,10 @@ export const actions: Actions = {
 		const r = await run('milestones', () =>
 			updateMilestones(locals.user!, params.id, parsed.data, meta(request, getClientAddress()))
 		);
-		return r.ok ? { toast: 'Calendario guardado' } : r.failure;
+		if (!r.ok) return r.failure;
+		// Sin JS la acción lleva `?abrir=hitos`: al guardar se vuelve al detalle con el panel cerrado.
+		if (!request.headers.has('x-sveltekit-action')) redirect(303, `/campanas/${params.id}`);
+		return { toast: 'Calendario guardado' };
 	},
 	duplicar: async ({ request, locals, params, getClientAddress }) => {
 		const parsed = duplicateInput.safeParse(Object.fromEntries(await request.formData()));
@@ -127,7 +130,9 @@ export const actions: Actions = {
 				meta(request, getClientAddress())
 			)
 		);
-		return r.ok ? { toast: supportId ? 'Soporte guardado' : 'Soporte añadido' } : r.failure;
+		if (!r.ok) return r.failure;
+		if (!request.headers.has('x-sveltekit-action')) redirect(303, `/campanas/${params.id}`);
+		return { toast: supportId ? 'Soporte guardado' : 'Soporte añadido' };
 	},
 	borrarSoporte: async ({ request, locals, params, getClientAddress }) => {
 		const id = z

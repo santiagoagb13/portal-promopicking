@@ -4,6 +4,7 @@
 	import Bell from '@lucide/svelte/icons/bell';
 	import UserRound from '@lucide/svelte/icons/user-round';
 	import LogOut from '@lucide/svelte/icons/log-out';
+	import Info from '@lucide/svelte/icons/info';
 	import type { Theme } from '$lib/schemas/auth';
 	import ThemeSwitch from './ThemeSwitch.svelte';
 	import UpdateNotice from './UpdateNotice.svelte';
@@ -68,6 +69,9 @@
 			><UserRound size={16} strokeWidth={1.5} aria-hidden="true" />Cuenta</a
 		>
 		<div class="item theme"><span>Tema</span><ThemeSwitch current={theme} /></div>
+		<a href="/aviso-legal" class="item"
+			><Info size={16} strokeWidth={1.5} aria-hidden="true" />Aviso legal y privacidad</a
+		>
 		<form method="POST" action="/salir">
 			<button type="submit" class="item"
 				><LogOut size={16} strokeWidth={1.5} aria-hidden="true" />Salir</button

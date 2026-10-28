@@ -85,7 +85,15 @@
 	</figure>
 {/snippet}
 
-<div class="stage z{zoom}" class:compare={compare && prevPage}>
+<!-- Enfocable: con zoom se desplaza, y con teclado también tiene que poder recorrerse. -->
+<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+<div
+	class="stage z{zoom}"
+	class:compare={compare && prevPage}
+	role="region"
+	aria-label="Arte final {code}"
+	tabindex="0"
+>
 	{#if !page}
 		<p class="none">Esta versión aún no tiene páginas convertidas.</p>
 	{:else if compare && prevPage && prev}

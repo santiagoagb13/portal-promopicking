@@ -61,5 +61,11 @@ export const settingsInput = z.object({
 			MILESTONE_KEYS.map((k) => [k, z.coerce.number().int().min(0).max(365)])
 		) as Record<(typeof MILESTONE_KEYS)[number], z.ZodNumber>
 	),
-	otifTarget: z.coerce.number().min(50).max(100)
+	otifTarget: z.coerce.number().min(50).max(100),
+	company: z.object({
+		name: z.string().trim().max(160),
+		taxId: z.string().trim().max(20),
+		address: z.string().trim().max(240),
+		email: z.union([z.literal(''), z.email().max(160)])
+	})
 });
