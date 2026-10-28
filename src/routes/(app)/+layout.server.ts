@@ -6,10 +6,10 @@ import { ROLE_LABEL } from '$lib/i18n/es';
 import { sectionAction } from '$lib/server/auth/guards';
 import { db, tables } from '$lib/server/db';
 import { campaignScope } from '$lib/server/services/campaigns';
+import { openTicketCount } from '$lib/server/services/tickets';
 import type { LayoutServerLoad } from './$types';
 
-const { notifications, supportVersions, supports, campaigns, tickets, brands, restaurants } =
-	tables;
+const { notifications, supportVersions, supports, campaigns, brands, restaurants } = tables;
 
 function initials(name: string) {
 	return name
@@ -49,11 +49,7 @@ export const load: LayoutServerLoad = async ({ locals, url, depends }) => {
 						)
 					)
 			: [{ n: 0 }],
-		db
-			.select({ n: count() })
-			.from(tickets)
-			.innerJoin(campaigns, eq(campaigns.id, tickets.campaignId))
-			.where(and(eq(tickets.type, 'incident'), ne(tickets.state, 'closed'), scope)),
+		openTicketCount(user, 'incident').then((n) => [{ n }]),
 		user.role === 'manager'
 			? db
 					.select({ name: restaurants.name })

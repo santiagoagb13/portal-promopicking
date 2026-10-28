@@ -42,6 +42,7 @@ export type Action =
 	| 'master.validate'
 	| 'ticket.view'
 	| 'ticket.respond'
+	| 'ticket.manage'
 	| 'user.invite'
 	| 'user.changeRole'
 	| 'audit.view'
@@ -54,8 +55,9 @@ export type Resource = {
 	/** Restaurantes que reciben la campaña (kits); vacío o ausente = aún sin reparto. */
 	restaurantIds?: string[];
 	scanStep?: ScanStep;
-	/** Ticket: quién lo abrió. */
+	/** Ticket: quién lo abrió y quién es responsable. */
 	openedBy?: string | null;
+	assignedTo?: string | null;
 	/** Invitación o cambio de rol: rol destino y marcas de los restaurantes del ámbito destino. */
 	targetRole?: Role;
 	targetBrands?: string[];
@@ -153,12 +155,16 @@ export function can(actor: Actor | null | undefined, action: Action, r?: Resourc
 
 		case 'ticket.respond':
 			if (internal) return true;
+			if (r?.assignedTo && r.assignedTo === actor.id) return true;
 			if (role === 'production') return r?.openedBy === undefined || r.openedBy === actor.id;
 			if (role === 'brand')
 				return (
 					r?.openedBy === undefined || r.openedBy === actor.id || inBrands(actor, r?.brandCode)
 				);
 			return false;
+
+		case 'ticket.manage':
+			return internal;
 
 		case 'user.invite':
 		case 'user.changeRole':

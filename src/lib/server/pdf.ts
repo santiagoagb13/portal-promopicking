@@ -96,8 +96,10 @@ type CanvasFactory = {
 /* ---------- Acta de aprobación (8.5) ---------- */
 
 /** Las fuentes estándar de PDF solo codifican WinAnsi: se sustituye lo que no cabe. */
-function safe(s: string): string {
+export function safe(s: string): string {
 	return s
+		.replace(/[\u00A0\u202F]/g, ' ')
+		.replace(/≤/g, '<=')
 		.replace(/[→⟶]/g, '->')
 		.replace(/[“”«»]/g, '"')
 		.replace(/[‘’]/g, "'")

@@ -5,6 +5,7 @@
 	import Check from '@lucide/svelte/icons/check';
 	import X from '@lucide/svelte/icons/x';
 	import Truck from '@lucide/svelte/icons/truck';
+	import LifeBuoy from '@lucide/svelte/icons/life-buoy';
 	import Button from '$components/ui/Button.svelte';
 	import Chip from '$components/ui/Chip.svelte';
 	import ConfirmDialog from '$components/ui/ConfirmDialog.svelte';
@@ -50,6 +51,10 @@
 	<h2 class="mono">{o.id}</h2>
 	<Chip tone={ORDER_TONE[o.state]}>{ORDER_STATE_LABEL[o.state]}</Chip>
 	{#if o.source === 'qr'}<Chip tone="outline">Desde QR</Chip>{/if}
+	<div class="spacer"></div>
+	<Button href="/soporte?nuevo=1&pedido={o.id}&restaurante={o.restaurantId}" icon={LifeBuoy}
+		>Abrir consulta</Button
+	>
 </div>
 
 {#if form?.error}<p class="field-error" role="alert">{form.error}</p>{/if}
@@ -188,6 +193,9 @@
 		gap: 10px;
 		margin-bottom: 16px;
 		flex-wrap: wrap;
+	}
+	.spacer {
+		flex: 1;
 	}
 	h2 {
 		font-size: 18px;

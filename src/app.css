@@ -15,6 +15,12 @@
 	--muted: #6b6b6b;
 	--line: #e6e6e6;
 	--line-soft: #f2f2f2;
+	/* Paleta categórica de los gráficos (8.9), validada en claro y en oscuro: orden fijo. */
+	--series-1: #2a78d6;
+	--series-2: #eb6834;
+	--series-3: #1baf7a;
+	--series-4: #eda100;
+	--series-5: #e87ba4;
 	/* El acento es la tinta: negro en claro, blanco en oscuro (7.5, regla 6). */
 	--primary: #111111;
 	--on-primary: #ffffff;
@@ -55,6 +61,11 @@
 		--muted: #9a9a9a;
 		--line: #262626;
 		--line-soft: #1c1c1c;
+		--series-1: #3987e5;
+		--series-2: #d95926;
+		--series-3: #199e70;
+		--series-4: #c98500;
+		--series-5: #d55181;
 		--primary: #f2f2f2;
 		--on-primary: #0c0c0c;
 		--green: #3fab70;
@@ -76,6 +87,11 @@
 	--muted: #9a9a9a;
 	--line: #262626;
 	--line-soft: #1c1c1c;
+	--series-1: #3987e5;
+	--series-2: #d95926;
+	--series-3: #199e70;
+	--series-4: #c98500;
+	--series-5: #d55181;
 	--primary: #f2f2f2;
 	--on-primary: #0c0c0c;
 	--green: #3fab70;

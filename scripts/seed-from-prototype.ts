@@ -697,6 +697,7 @@ async function seed(p: PrototypeData) {
 
 	await seedArtwork(p);
 	await seedQr();
+	await seedReportHistory(p);
 
 	// Invitación pendiente: se borra cualquier cuenta o invitación anterior de ese correo y se envía otra.
 	await db.delete(T.users).where(eq(T.users.email, SEED_INVITATION.email));
@@ -716,6 +717,78 @@ async function seed(p: PrototypeData) {
 		{ sendMail: !process.env.VERCEL_ENV }
 	);
 	return { token };
+}
+
+type PrototypeReports = {
+	otif: number[];
+	consumo: Record<string, number[]>;
+	incidencias: { name: string; value: number }[];
+	aprobacion: { name: string; value: number }[];
+};
+
+/** Reparte `total` en partes enteras proporcionales a `weights` (mayor resto). */
+function apportion(total: number, weights: number[]): number[] {
+	const sum = weights.reduce((a, b) => a + b, 0) || 1;
+	const raw = weights.map((w) => (total * w) / sum);
+	const out = raw.map(Math.floor);
+	const order = raw.map((r, i) => [r - Math.floor(r), i] as const).sort((a, b) => b[0] - a[0]);
+	const left = total - out.reduce((a, b) => a + b, 0);
+	for (let k = 0; k < left; k++) out[order[k]![1]]! += 1;
+	return out;
+}
+
+/**
+ * Histórico de informes (8.9): los 12 meses del prototipo hasta el mes actual, por marca. Las
+ * cifras globales del prototipo (9.812 bultos, 108 incidencias, 312 pedidos por 14.870 €, OTIF
+ * mensual, consumo por marca y días de aprobación) se reparten de forma proporcional al consumo.
+ * El informe usa estos meses solo hasta el primero que mide el portal.
+ */
+async function seedReportHistory(p: PrototypeData) {
+	const r = p.reports as PrototypeReports;
+	const [y, m] = p.today.slice(0, 7).split('-').map(Number) as [number, number];
+	const months = Array.from({ length: 12 }, (_, i) => {
+		const d = new Date(Date.UTC(y, m - 12 + i, 1));
+		return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}`;
+	});
+	const codes = Object.keys(r.consumo);
+	const cells = months.flatMap((month, i) =>
+		codes.map((b) => ({ month, b, w: r.consumo[b]![i]! }))
+	);
+	const weights = cells.map((c) => c.w);
+	const parcels = apportion(9812, weights);
+	const incidents = apportion(108, parcels);
+	const orders = apportion(312, weights);
+	const cents = apportion(1_487_000, weights);
+	const approvalAvg: Record<string, number> = {
+		FH: r.aprobacion[0]!.value,
+		VIPS: r.aprobacion[1]!.value,
+		GINOS: r.aprobacion[2]!.value
+	};
+	const approvalsPerMonth: Record<string, number> = { FH: 5, VIPS: 3, GINOS: 2 };
+	const kindWeights = r.incidencias.map((k) => k.value);
+	const rows = cells.map((c, k) => ({
+		month: c.month,
+		brandCode: c.b,
+		parcels: parcels[k]!,
+		parcelsOk: Math.round((parcels[k]! * r.otif[months.indexOf(c.month)]!) / 100),
+		incidents: incidents[k]!,
+		pieces: c.w * 1000,
+		orders: orders[k]!,
+		orderCents: cents[k]!,
+		approvals: approvalsPerMonth[c.b] ?? 2,
+		approvalDays: (approvalsPerMonth[c.b] ?? 2) * (approvalAvg[c.b] ?? 2)
+	}));
+	const kindRows = cells.flatMap((c, k) =>
+		apportion(incidents[k]!, kindWeights)
+			.map((n, j) => ({ month: c.month, brandCode: c.b, kind: r.incidencias[j]!.name, n }))
+			.filter((x) => x.n > 0)
+	);
+	await db.transaction(async (tx) => {
+		await tx.delete(T.reportHistoryIncidents);
+		await tx.delete(T.reportHistory);
+		await tx.insert(T.reportHistory).values(rows);
+		if (kindRows.length) await tx.insert(T.reportHistoryIncidents).values(kindRows);
+	});
 }
 
 /**

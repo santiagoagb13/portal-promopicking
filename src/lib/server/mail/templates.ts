@@ -64,3 +64,31 @@ Caduca en 10 minutos y solo sirve una vez. Si no lo has pedido, ignora este corr
 		)
 	};
 }
+
+export function ticketMail(p: {
+	to: string;
+	id: string;
+	title: string;
+	what: string;
+	url: string;
+}): MailMessage {
+	const subject = `${p.id} · ${p.what}`;
+	const text = `${p.id} · ${p.title}
+
+${p.what[0]!.toUpperCase()}${p.what.slice(1)}.
+
+Ábrelo en el portal:
+${p.url}`;
+	return {
+		to: p.to,
+		subject,
+		text,
+		tag: 'ticket',
+		html: layout(
+			subject,
+			`<p style="margin:0">${esc(p.title)}</p>`,
+			{ label: 'Abrir en el portal', url: p.url },
+			'Recibes este correo porque abriste el registro o eres su responsable.'
+		)
+	};
+}

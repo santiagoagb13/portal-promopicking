@@ -10,6 +10,7 @@ import {
 	bigint,
 	boolean,
 	date,
+	doublePrecision,
 	index,
 	integer,
 	jsonb,
@@ -656,11 +657,17 @@ export const tickets = pgTable(
 		openedBy: text('opened_by').references(() => users.id, { onDelete: 'set null' }),
 		openedByLabel: text('opened_by_label'),
 		openedAt: ts('opened_at').notNull(),
-		closedAt: ts('closed_at')
+		closedAt: ts('closed_at'),
+		/** Responsable (Promopicking o Albatros). */
+		assignedTo: text('assigned_to').references(() => users.id, { onDelete: 'set null' }),
+		/** Pedido vinculado (el kit se enlaza desde `kits.incident_ticket_id`). */
+		orderId: text('order_id').references(() => orders.id, { onDelete: 'set null' }),
+		updatedAt: ts('updated_at')
 	},
 	(t) => [
 		index('tickets_state_opened_idx').on(t.state, t.openedAt),
-		index('tickets_campaign_idx').on(t.campaignId)
+		index('tickets_campaign_idx').on(t.campaignId),
+		index('tickets_restaurant_idx').on(t.restaurantId)
 	]
 );
 
@@ -674,10 +681,50 @@ export const ticketUpdates = pgTable(
 		at: ts('at').notNull(),
 		userId: text('user_id').references(() => users.id, { onDelete: 'set null' }),
 		authorLabel: text('author_label'),
+		/** `reply` (respuesta) o un cambio registrado en el hilo: `state`, `assign`, `severity`. */
+		kind: text('kind').notNull().default('reply'),
 		text: text('text').notNull(),
 		photoKey: text('photo_key')
 	},
 	(t) => [index('ticket_updates_ticket_idx').on(t.ticketId, t.at)]
+);
+
+/* ---------- Informes ---------- */
+
+/**
+ * Histórico mensual por marca anterior al portal (8.9): lo que había en las hojas de seguimiento.
+ * Los meses con actividad en el portal se calculan de las tablas vivas; estos solo rellenan atrás.
+ */
+export const reportHistory = pgTable(
+	'report_history',
+	{
+		month: text('month').notNull(),
+		brandCode: text('brand_code')
+			.notNull()
+			.references(() => brands.code),
+		parcels: integer('parcels').notNull().default(0),
+		parcelsOk: integer('parcels_ok').notNull().default(0),
+		incidents: integer('incidents').notNull().default(0),
+		pieces: integer('pieces').notNull().default(0),
+		orders: integer('orders').notNull().default(0),
+		orderCents: integer('order_cents').notNull().default(0),
+		approvals: integer('approvals').notNull().default(0),
+		approvalDays: doublePrecision('approval_days').notNull().default(0)
+	},
+	(t) => [primaryKey({ columns: [t.month, t.brandCode] })]
+);
+
+export const reportHistoryIncidents = pgTable(
+	'report_history_incidents',
+	{
+		month: text('month').notNull(),
+		brandCode: text('brand_code')
+			.notNull()
+			.references(() => brands.code),
+		kind: text('kind').notNull(),
+		n: integer('n').notNull()
+	},
+	(t) => [primaryKey({ columns: [t.month, t.brandCode, t.kind] })]
 );
 
 /* ---------- Notificaciones ---------- */
