@@ -1,0 +1,14 @@
+node_modules
+.svelte-kit
+build
+.vercel
+.storage
+.mail
+test-results
+playwright-report
+tests/e2e/.auth
+.env
+.env.*
+!.env.example
+docker/.env
+docker/copias

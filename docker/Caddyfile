@@ -1,0 +1,23 @@
+# Caddy delante del portal: HTTPS automático (Let's Encrypt), HTTP/3 y compresión.
+# Las cabeceras de seguridad (CSP, HSTS, etc.) las pone la propia aplicación.
+{
+	email {$ACME_EMAIL:admin@localhost}
+}
+
+{$PORTAL_DOMAIN} {
+	encode zstd gzip
+	# Subidas de PDF de hasta 50 MB (más margen del multipart).
+	request_body {
+		max_size 60MB
+	}
+	reverse_proxy app:3000 {
+		health_uri /salud
+	}
+	header -Server
+	log {
+		output file /data/access.log {
+			roll_size 20MiB
+			roll_keep 10
+		}
+	}
+}

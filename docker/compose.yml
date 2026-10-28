@@ -1,0 +1,85 @@
+# Portal de servicio Promopicking en un VPS (fase 8, plan 11.2): app + Postgres 16 + Caddy (TLS).
+# Uso (en el servidor, desde la carpeta docker/ con su .env):  docker compose up -d --build
+# Ficheros: en disco (volumen `ficheros`) o en el almacenamiento S3 del proveedor (STORAGE_PROVIDER=s3).
+name: portal
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: portal-promopicking:${PORTAL_VERSION:-local}
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://portal:${POSTGRES_PASSWORD}@db:5432/portal
+      AUTH_ORIGIN: https://${PORTAL_DOMAIN}
+      BODY_SIZE_LIMIT: 60M
+      ADDRESS_HEADER: X-Forwarded-For
+      XFF_DEPTH: 1
+      PROTOCOL_HEADER: X-Forwarded-Proto
+      HOST_HEADER: X-Forwarded-Host
+    volumes:
+      - ficheros:/data/ficheros
+    depends_on:
+      db:
+        condition: service_healthy
+    expose:
+      - '3000'
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: portal
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: portal
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U portal -d portal']
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+      - '443:443/udp'
+    environment:
+      PORTAL_DOMAIN: ${PORTAL_DOMAIN}
+      ACME_EMAIL: ${ACME_EMAIL}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - app
+
+  # Seed, primer administrador y otras tareas puntuales:
+  #   docker compose --profile herramientas run --rm herramientas invitar-admin -- correo "Nombre"
+  herramientas:
+    profiles: [herramientas]
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: herramientas
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://portal:${POSTGRES_PASSWORD}@db:5432/portal
+      AUTH_ORIGIN: https://${PORTAL_DOMAIN}
+      STORAGE_LOCAL_DIR: /data/ficheros
+    volumes:
+      - ficheros:/data/ficheros
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres:
+  ficheros:
+  caddy-data:
+  caddy-config:

@@ -20,3 +20,7 @@ playwright-report/
 tests/e2e/.auth/
 tests/e2e/capturas/
 .storage/
+
+# VPS (fase 8): secretos y copias locales
+docker/.env
+docker/copias/
