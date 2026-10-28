@@ -57,6 +57,13 @@
       "when": 1793156786601,
       "tag": "0007_fase_7",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1793157862187,
+      "tag": "0008_modo_pruebas",
+      "breakpoints": true
     }
   ]
 }

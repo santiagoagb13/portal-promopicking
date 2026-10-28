@@ -9,6 +9,7 @@ import type { ImportDiff } from '../../domain/master';
 import {
 	bigint,
 	boolean,
+	customType,
 	date,
 	doublePrecision,
 	index,
@@ -25,6 +26,7 @@ import {
 } from 'drizzle-orm/pg-core';
 
 const ts = (name: string) => timestamp(name, { withTimezone: true, mode: 'date' });
+const bytea = customType<{ data: Buffer; driverData: Buffer }>({ dataType: () => 'bytea' });
 const createdAt = () => ts('created_at').notNull().defaultNow();
 
 export const roleEnum = pgEnum('role', ['admin', 'ops', 'production', 'brand', 'manager']);
@@ -690,6 +692,20 @@ export const ticketUpdates = pgTable(
 	},
 	(t) => [index('ticket_updates_ticket_idx').on(t.ticketId, t.at)]
 );
+
+/* ---------- Ficheros en la base de datos ---------- */
+
+/**
+ * Almacenamiento `STORAGE_PROVIDER=database`: los ficheros en Postgres. Solo para el modo de
+ * pruebas en Vercel, donde no hay disco persistente y no se quiere contratar S3 (ADR 0012).
+ */
+export const storedFiles = pgTable('stored_files', {
+	key: text('key').primaryKey(),
+	contentType: text('content_type').notNull(),
+	size: integer('size').notNull(),
+	body: bytea('body').notNull(),
+	createdAt: createdAt()
+});
 
 /* ---------- Informes ---------- */
 

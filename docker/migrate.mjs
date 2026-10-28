@@ -9,6 +9,8 @@ import pg from 'pg';
 const url = process.env.DATABASE_URL;
 if (!url) throw new Error('Falta DATABASE_URL');
 const pool = new pg.Pool({ connectionString: url, max: 1 });
-await migrate(drizzle(pool), { migrationsFolder: new URL('./migrations', import.meta.url).pathname });
+await migrate(drizzle(pool), {
+	migrationsFolder: new URL('./migrations', import.meta.url).pathname
+});
 await pool.end();
 console.info('Migraciones aplicadas');

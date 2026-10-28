@@ -6,6 +6,7 @@
  * Los ficheros nunca son públicos: se leen y se suben con URL firmadas que caducan.
  */
 import { serverEnv } from '../config';
+import { databaseStorage } from './database';
 import { localStorage } from './local';
 import { s3Storage } from './s3';
 
@@ -27,12 +28,18 @@ export interface FileStorage {
 
 let instance: FileStorage | undefined;
 
+/** Proveedor de ficheros: el de STORAGE_PROVIDER; si falta, la base de datos en Vercel (sin disco) y disco fuera. */
+export function storageProvider(): string {
+	return serverEnv('STORAGE_PROVIDER') || (serverEnv('VERCEL') ? 'database' : 'local');
+}
+
 export function fileStorage(): FileStorage {
 	if (instance) return instance;
-	const provider = serverEnv('STORAGE_PROVIDER') || 'local';
+	const provider = storageProvider();
 	if (provider === 's3') instance = s3Storage();
 	else if (provider === 'local') instance = localStorage();
-	else throw new Error(`STORAGE_PROVIDER desconocido: ${provider} (local | s3)`);
+	else if (provider === 'database') instance = databaseStorage();
+	else throw new Error(`STORAGE_PROVIDER desconocido: ${provider} (local | s3 | database)`);
 	return instance;
 }
 

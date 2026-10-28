@@ -5,6 +5,8 @@ import { can, visibleBrands } from '$lib/permissions';
 import { ROLE_LABEL } from '$lib/i18n/es';
 import { sectionAction } from '$lib/server/auth/guards';
 import { db, tables } from '$lib/server/db';
+import { DEMO_PROFILES } from '$lib/server/auth/demo';
+import { config } from '$lib/server/config';
 import { campaignScope } from '$lib/server/services/campaigns';
 import { openTicketCount } from '$lib/server/services/tickets';
 import type { LayoutServerLoad } from './$types';
@@ -96,6 +98,7 @@ export const load: LayoutServerLoad = async ({ locals, url, depends }) => {
 		tabs: tabs.map((t) => t.href),
 		more: more.map((t) => t.href),
 		counts: { pending: pending[0]?.n ?? 0, incidents: incidents[0]?.n ?? 0 },
-		unread: unread[0]?.n ?? 0
+		unread: unread[0]?.n ?? 0,
+		demo: config.demo ? { profiles: DEMO_PROFILES } : null
 	};
 };

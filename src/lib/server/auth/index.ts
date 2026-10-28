@@ -13,6 +13,7 @@ import { and, eq } from 'drizzle-orm';
 import { getRequestEvent } from '$app/server';
 import { acceptName } from '$lib/schemas/invitation';
 import { audit } from '../audit';
+import { modoPruebas } from './demo';
 import { deviceLabel } from './device';
 export { deviceLabel } from './device';
 import { config } from '../config';
@@ -218,6 +219,7 @@ function createAuth() {
 					await audit({ userId: u.id, action: 'auth.magic_link_sent', ...meta() });
 				}
 			}),
+			modoPruebas(),
 			sveltekitCookies(getRequestEvent)
 		]
 	});

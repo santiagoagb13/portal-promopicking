@@ -1,6 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { serverEnv } from '$lib/server/config';
-import { contentTypeOf, fileStorage, isSafeKey } from '$lib/server/storage';
+import { contentTypeOf, fileStorage, isSafeKey, storageProvider } from '$lib/server/storage';
 import { verify } from '$lib/server/storage/signing';
 import type { RequestHandler } from './$types';
 
@@ -9,7 +8,7 @@ import type { RequestHandler } from './$types';
  * hooks.server.ts). Con `STORAGE_PROVIDER=s3` las URL firmadas van directamente al proveedor.
  */
 function check(params: { key: string }, url: URL, parts: string[]) {
-	if ((serverEnv('STORAGE_PROVIDER') || 'local') !== 'local') error(404, 'No encontrado');
+	if (storageProvider() === 's3') error(404, 'No encontrado');
 	if (!isSafeKey(params.key)) error(400, 'Clave no válida');
 	const exp = Number(url.searchParams.get('exp'));
 	if (!exp || exp < Date.now() / 1000) error(403, 'Enlace caducado');

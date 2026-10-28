@@ -42,6 +42,13 @@ export function localStorage(): FileStorage {
 		async delete(key) {
 			await rm(pathOf(key), { force: true });
 		},
+		...appUrls()
+	};
+}
+
+/** URL de lectura y subida a través de la aplicación (`/archivos/<clave>`), firmadas y con caducidad. */
+export function appUrls(): Pick<FileStorage, 'readUrl' | 'uploadUrl'> {
+	return {
 		async readUrl(key, opts = {}) {
 			const exp = String(Math.floor(Date.now() / 1000) + (opts.expiresIn ?? 600));
 			const name = opts.filename ?? '';

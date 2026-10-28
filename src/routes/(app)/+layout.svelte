@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import DemoBanner from '$components/shell/DemoBanner.svelte';
 	import Sidebar from '$components/shell/Sidebar.svelte';
 	import TabBar from '$components/shell/TabBar.svelte';
 	import TopBar from '$components/shell/TopBar.svelte';
@@ -12,6 +13,7 @@
 
 <Sidebar {items} counts={data.counts} user={data.user} />
 <div class="main">
+	{#if data.demo}<DemoBanner profiles={data.demo.profiles} current={data.user.id} />{/if}
 	<TopBar title={page.data.title ?? ''} unread={data.unread} theme={data.theme} user={data.user} />
 	<main class="content" id="contenido">
 		{@render children()}

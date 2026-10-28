@@ -26,7 +26,8 @@
 		"seed:extract": "TSX_TSCONFIG_PATH=scripts/tsconfig.json node --env-file-if-exists=.env --import tsx scripts/seed-from-prototype.ts --solo-extraer",
 		"icons": "node --env-file-if-exists=.env --import tsx scripts/generate-icons.ts",
 		"test:integration": "vitest run --project integration",
-		"vercel-build": "npm run db:migrate && if [ \"$VERCEL_ENV\" = \"preview\" ]; then npm run db:seed; fi && npm run build",
+		"vercel-build": "npm run db:migrate && if [ \"$VERCEL_ENV\" = \"preview\" ] || [ \"$PORTAL_DEMO\" = \"1\" ]; then npm run db:seed; fi && npm run build",
+		"test:demo": "playwright test -c playwright.demo.config.ts",
 		"build:node": "ADAPTER=node vite build",
 		"start:node": "node build",
 		"invitar-admin": "TSX_TSCONFIG_PATH=scripts/tsconfig.json node --env-file-if-exists=.env --import tsx scripts/invitar-admin.ts"

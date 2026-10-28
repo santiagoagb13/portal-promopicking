@@ -45,6 +45,9 @@ export type RenderedPage = {
 export async function renderPages(
 	bytes: Uint8Array
 ): Promise<{ pageCount: number; pages: RenderedPage[] }> {
+	// pdf.js carga @napi-rs/canvas con un `require` que el empaquetador de Vercel (nft) no puede
+	// seguir: importarlo aquí con nombre fijo hace que el módulo y su binario entren en la función.
+	await import('@napi-rs/canvas');
 	const { getDocument } = await import('pdfjs-dist/legacy/build/pdf.mjs');
 	const task = getDocument({
 		data: new Uint8Array(bytes),

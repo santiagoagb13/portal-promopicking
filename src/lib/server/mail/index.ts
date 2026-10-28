@@ -28,6 +28,13 @@ export const devTransport: MailTransport = {
 	}
 };
 
+/** Modo pruebas: solo una línea en el registro, sin enlaces (nadie entra por correo en la demo). */
+export const consoleTransport: MailTransport = {
+	async send(message) {
+		console.info(`[correo · modo pruebas] Para: ${message.to} · ${message.subject}`);
+	}
+};
+
 /** Resend por su API HTTP (sin SDK). Requiere RESEND_API_KEY y un MAIL_FROM de un dominio verificado. */
 export const resendTransport: MailTransport = {
 	async send(message) {
@@ -75,6 +82,8 @@ export function mailTransport(): MailTransport {
 		case 'smtp':
 			return smtpTransport;
 		default:
+			// Modo pruebas sin proveedor: los correos solo se registran (no hay disco en Vercel).
+			if (config.demo) return consoleTransport;
 			// En producción nunca se escriben enlaces de acceso en los registros: sin proveedor, falla.
 			if (config.production) throw new Error('Falta MAIL_PROVIDER (resend o smtp) en producción');
 			return devTransport;

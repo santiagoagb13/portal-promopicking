@@ -73,7 +73,7 @@ test.describe('Panel de campañas', () => {
 			/^\s*Aprobaciones\s*13\s*$/,
 			/^\s*Kits\s*$/,
 			/^\s*Soporte\s*1\s*$/,
-			/^\s*Más secciones\s*$/
+			/^\s*Más\ssecciones\s*$/
 		]);
 	});
 
